@@ -13,7 +13,7 @@ namespace BoardGame.UnitClasses
     {
         //Attack & Health start values
         private const double InitialAttackLevel = 0;
-        private const double InitialHealthLevel = 50;
+        private const double InitialHealthLevel = 10;
 
         //Unit constructor
         public AlliancePriest(double col, double row)
@@ -21,6 +21,7 @@ namespace BoardGame.UnitClasses
             this.Type = UnitTypes.Priest;
             this.AttackLevel = InitialAttackLevel;
             this.HealthLevel = InitialHealthLevel;
+            this.CounterAttackLevel = InitialAttackLevel / 2;
             this.CurrentPosition = new Point(col, row);
 
             this.SmallImage = new Image();
@@ -31,6 +32,7 @@ namespace BoardGame.UnitClasses
             path = System.IO.Path.GetFullPath(@"..\..\Resources\Alliance\Frames\priest_big.png");
             this.BigImage.Source = new BitmapImage(new Uri(path, UriKind.Absolute));
         }
+
         public override bool IsMoveable(Point destination)
         {
             return false;

@@ -12,8 +12,8 @@ namespace BoardGame.UnitClasses
     class AllianceSquire : RaceAlliance
     {
         //Attack & Health start values
-        private const double InitialAttackLevel = 20;
-        private const double InitialHealthLevel = 50;
+        private const double InitialAttackLevel = 2;
+        private const double InitialHealthLevel = 4;
 
        
         //Unit constructor
@@ -22,6 +22,7 @@ namespace BoardGame.UnitClasses
             this.Type = UnitTypes.Squire;
             this.AttackLevel = InitialAttackLevel;
             this.HealthLevel = InitialHealthLevel;
+            this.CounterAttackLevel = InitialAttackLevel / 2;
             this.CurrentPosition = new Point(col, row);
 
             this.SmallImage = new Image();

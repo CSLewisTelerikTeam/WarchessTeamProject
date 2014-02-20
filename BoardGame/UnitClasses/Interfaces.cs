@@ -17,7 +17,7 @@ namespace BoardGame.UnitClasses
 
     interface IAttacking
     {
-        void Attack(Unit objectToAttack);
+        void Attack(Unit targetUnit);
     }
 
     interface IHealing

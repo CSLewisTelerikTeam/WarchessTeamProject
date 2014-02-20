@@ -22,7 +22,7 @@ namespace OOPGameWoWChess
             LoadBackgroundMusic();
             InitializeUnits();
         }
-        //Some comment
+        
         private bool isMouseCapture;
         private double mouseXOffset;
         private double mouseYOffset;
@@ -216,6 +216,7 @@ namespace OOPGameWoWChess
                 allianceUnit.SmallImage.MouseLeftButtonUp += new MouseButtonEventHandler(Image_MouseLeftButtonUp);
                 allianceUnit.SmallImage.MouseEnter += new MouseEventHandler(Image_MouseEnter);
                 allianceUnit.SmallImage.MouseLeave += new MouseEventHandler(Image_MouseLeave);
+                allianceUnit.SmallImage.MouseRightButtonDown += new MouseButtonEventHandler(Image_MouseRightButtonDown);
 
                 if (i >= 0 && i < 8)
                 {
@@ -252,6 +253,7 @@ namespace OOPGameWoWChess
                 hordeUnit.SmallImage.MouseLeftButtonUp += new MouseButtonEventHandler(Image_MouseLeftButtonUp);
                 hordeUnit.SmallImage.MouseEnter += new MouseEventHandler(Image_MouseEnter);
                 hordeUnit.SmallImage.MouseLeave += new MouseEventHandler(Image_MouseLeave);
+                hordeUnit.SmallImage.MouseRightButtonDown += new MouseButtonEventHandler(Image_MouseRightButtonDown);
 
                 if (i >= 0 && i < 8)
                 {
@@ -322,6 +324,32 @@ namespace OOPGameWoWChess
             //    }
             //}
 
+        }
+
+        private void Image_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (!isSomeUnitSelected)
+            {
+                return;
+            }
+
+            Image image = (Image)sender;
+            Border border = (Border)image.Parent;
+            Grid grid = (Grid)border.Parent;
+
+            Unit targetUnit = GetUnitOnPosition(e.GetPosition(grid), grid);
+
+            if (SelectedUnit.GetType().BaseType.Name != targetUnit.GetType().BaseType.Name)
+            {
+                SelectedUnit.Attack(targetUnit);                    
+            }
+            else
+            {
+                return;
+            }
+            
+            
+            
         }
        
         ////Unit attack event

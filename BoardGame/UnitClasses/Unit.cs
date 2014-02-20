@@ -10,12 +10,11 @@ namespace BoardGame.UnitClasses
     //Abstract class Unit, parent for both races and all units. 
     //Unit class can't make any instances
 
-    public abstract class Unit : IMoveable
+    public abstract class Unit : IMoveable, IAttacking
     {
         //Private Fields 
         private double healthLevel;
-        private double attackLevel;
-        private double counterAttackLevel;
+        private double attackLevel;        
         private Image smallImage;
         private Image bigImage;
 
@@ -33,6 +32,16 @@ namespace BoardGame.UnitClasses
             get { return this.attackLevel; }
             set { this.attackLevel = value; }
         }
+
+        public double CounterAttackLevel { get; set; }
+
+        public int Level { get; set; }
+
+        public int Wins { get; set; }
+
+        public int Loses { get; set; }
+
+        public bool IsAlive { get; set; }
 
         public Point CurrentPosition { get; set; }
         public bool IsSelected { get; set; }
@@ -61,5 +70,34 @@ namespace BoardGame.UnitClasses
         }
 
         public abstract bool IsMoveable(Point destination);
+
+        public void Attack(Unit targetUnit)
+        {  
+            //Check if the aggresssor could reach the target
+            if (this.IsMoveable(targetUnit.CurrentPosition))
+            {
+                targetUnit.HealthLevel -= this.AttackLevel;
+                this.HealthLevel -= targetUnit.CounterAttackLevel;
+
+                if (this.HealthLevel <=0 && targetUnit.HealthLevel <=0)
+                {
+                    this.IsAlive = false;
+                    targetUnit.IsAlive = false;
+                    return;                        
+                }
+
+                if (targetUnit.HealthLevel <= 0)
+                {
+                    this.Level++;
+                }
+
+                if (this.HealthLevel <= 0)
+                {
+                    targetUnit.Level++;
+                }
+            }  
+            
+        }
+        
     }
 }

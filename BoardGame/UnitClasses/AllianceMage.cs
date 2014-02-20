@@ -12,8 +12,8 @@ namespace BoardGame.UnitClasses
     class AllianceMage :RaceAlliance, IMoveable
     {
         //Attack & Health start values
-        private const double InitialAttackLevel = 30;
-        private const double InitialHealthLevel = 60;
+        private const double InitialAttackLevel = 3;
+        private const double InitialHealthLevel = 7;
 
         //Unit constructor
         public AllianceMage(double col, double row)
@@ -21,6 +21,7 @@ namespace BoardGame.UnitClasses
             this.Type = UnitTypes.Mage;
             this.AttackLevel = InitialAttackLevel;
             this.HealthLevel = InitialHealthLevel;
+            this.CounterAttackLevel = InitialAttackLevel / 2;
             this.CurrentPosition = new Point(col, row);
 
             this.SmallImage = new Image();
@@ -54,5 +55,10 @@ namespace BoardGame.UnitClasses
 
             return false;
         }
+
+        //public override void Attack(Unit objectToAttack)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

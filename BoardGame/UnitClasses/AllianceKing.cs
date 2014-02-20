@@ -13,8 +13,8 @@ namespace BoardGame.UnitClasses
     class AllianceKing : RaceAlliance, IMoveable
     {
         //Attack & Health start values
-        private const double InitialAttackLevel = 40;
-        private const double InitialHealthLevel = 100;
+        private const double InitialAttackLevel = 5;
+        private const double InitialHealthLevel = 10;
 
         //Unit constructor
         public AllianceKing(double col, double row)
@@ -22,6 +22,7 @@ namespace BoardGame.UnitClasses
             this.Type = UnitTypes.King;
             this.AttackLevel = InitialAttackLevel;
             this.HealthLevel = InitialHealthLevel;
+            this.CounterAttackLevel = InitialAttackLevel / 2;
             this.CurrentPosition = new Point(col, row);
 
             this.SmallImage = new Image();
@@ -256,5 +257,10 @@ namespace BoardGame.UnitClasses
 
             return false;
         }
+
+        //public override void Attack(Unit objectToAttack)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

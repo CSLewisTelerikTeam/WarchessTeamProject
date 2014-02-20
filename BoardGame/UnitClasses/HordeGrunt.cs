@@ -9,8 +9,8 @@ namespace BoardGame.UnitClasses
     class HordeGrunt : RaceHorde
     {
         //Attack & Health start values
-        private const double InitialAttackLevel = 20;
-        private const double InitialHealthLevel = 50;
+        private const double InitialAttackLevel = 2;
+        private const double InitialHealthLevel = 4;
 
         //Unit constructor
         public HordeGrunt(double col, double row)
@@ -18,6 +18,7 @@ namespace BoardGame.UnitClasses
             this.Type = UnitTypes.Grunt;
             this.AttackLevel = InitialAttackLevel;
             this.HealthLevel = InitialHealthLevel;
+            this.CounterAttackLevel = InitialAttackLevel / 2;
             this.CurrentPosition = new Point(col, row);
 
             this.SmallImage = new Image();

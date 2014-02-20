@@ -63,6 +63,7 @@
                 <Image MouseLeftButtonDown="Image_MouseLeftButtonDown" 
                        MouseMove="Image_MouseMove" 
                        MouseLeftButtonUp="Image_MouseLeftButtonUp"
+                       MouseRightButtonDown="Image_MouseRightButtonDown"
                        MouseEnter="Image_MouseEnter"
                        MouseLeave="Image_MouseLeave">
                 </Image>

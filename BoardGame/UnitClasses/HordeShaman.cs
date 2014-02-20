@@ -10,7 +10,7 @@ namespace BoardGame.UnitClasses
     {
         //Attack & Health start values
         private const double InitialAttackLevel = 0;
-        private const double InitialHealthLevel = 50;
+        private const double InitialHealthLevel = 10;
 
         //Unit constructor
         public HordeShaman(double col, double row)
@@ -18,6 +18,7 @@ namespace BoardGame.UnitClasses
             this.Type = UnitTypes.Shaman;
             this.AttackLevel = InitialAttackLevel;
             this.HealthLevel = InitialHealthLevel;
+            this.CounterAttackLevel = InitialAttackLevel / 2;
             this.CurrentPosition = new Point(col, row);
 
             this.SmallImage = new Image();
