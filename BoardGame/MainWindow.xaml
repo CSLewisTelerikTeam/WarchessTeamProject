@@ -456,13 +456,13 @@
                 <StackPanel Name="HoveredUnitInfo">
                     <Image Name="BigCardImage" Width="250"></Image>
                     <StackPanel Name="Stats">
-                        <TextBlock Name="Health"
+                         <TextBlock Name="Damage"
                                HorizontalAlignment="Center"
                                FontFamily="Cooper Black" 
                                Foreground="White"
                                FontWeight="Bold" 
                                FontSize="50"></TextBlock>
-                        <TextBlock Name="Damage"
+                        <TextBlock Name="Health"
                                HorizontalAlignment="Center"
                                FontFamily="Cooper Black" 
                                Foreground="White"

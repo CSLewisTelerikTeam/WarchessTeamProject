@@ -12,8 +12,8 @@ namespace BoardGame.UnitClasses
     class AllianceMage :RaceAlliance, IMoveable
     {
         //Attack & Health start values
-        private const double InitialAttackLevel = 3;
-        private const double InitialHealthLevel = 7;
+        public const int InitialAttackLevel = 4;
+        public const int InitialHealthLevel = 6;
 
         //Unit constructor
         public AllianceMage(double col, double row)

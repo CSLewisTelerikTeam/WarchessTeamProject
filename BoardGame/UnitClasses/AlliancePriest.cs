@@ -12,8 +12,8 @@ namespace BoardGame.UnitClasses
     class AlliancePriest : RaceAlliance, IHealing
     {
         //Attack & Health start values
-        private const double InitialAttackLevel = 0;
-        private const double InitialHealthLevel = 10;
+        public const int InitialAttackLevel = 0;
+        public const int InitialHealthLevel = 12;
 
         //Unit constructor
         public AlliancePriest(double col, double row)
@@ -41,15 +41,24 @@ namespace BoardGame.UnitClasses
         public void Heal(Unit objectToHeal)
         {
             //Healing method. "objectToHeal" is the unit that will be healed.
-            if (this.HealthLevel > 0 )
+            if (this.HealthLevel > 0)
             {
                 //Increase target unit's health level
-                objectToHeal.HealthLevel++;
+                //if the priest has 1 health, he cant restore 2 health
+                if (this.HealthLevel == 1)
+                {
+                    objectToHeal.HealthLevel++;
+                    this.HealthLevel -= 1;
+                }
 
-                //Decrease Priest's health level
-                this.HealthLevel--;
-
-                if (HealthLevel == 0)
+                else
+                {
+                    objectToHeal.HealthLevel += 2;
+                    this.HealthLevel -= 2;
+                }
+                
+                //check if the priest is dead
+                if (this.HealthLevel <= 0)
                 {
                     this.IsAlive = false;
                 }

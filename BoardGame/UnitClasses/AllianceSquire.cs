@@ -12,8 +12,8 @@ namespace BoardGame.UnitClasses
     class AllianceSquire : RaceAlliance
     {
         //Attack & Health start values
-        private const double InitialAttackLevel = 2;
-        private const double InitialHealthLevel = 4;
+        public const int InitialAttackLevel = 4;
+        public const int InitialHealthLevel = 4;
 
        
         //Unit constructor

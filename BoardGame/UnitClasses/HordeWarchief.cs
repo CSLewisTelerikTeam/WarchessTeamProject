@@ -9,8 +9,8 @@ namespace BoardGame.UnitClasses
     class HordeWarchief : RaceHorde
     {
         //Attack & Health start values
-        private const double InitialAttackLevel = 5;
-        private const double InitialHealthLevel = 10;
+        public const int InitialAttackLevel = 8;
+        public const int InitialHealthLevel = 10;
 
         //Unit constructor
         public HordeWarchief(double col, double row)

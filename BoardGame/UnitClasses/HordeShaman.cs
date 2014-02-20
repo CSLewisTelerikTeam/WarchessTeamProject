@@ -9,8 +9,8 @@ namespace BoardGame.UnitClasses
     class HordeShaman : RaceHorde, IHealing
     {
         //Attack & Health start values
-        private const double InitialAttackLevel = 0;
-        private const double InitialHealthLevel = 10;
+        public const int InitialAttackLevel = 0;
+        public const int InitialHealthLevel = 12;
 
         //Unit constructor
         public HordeShaman(double col, double row)
@@ -40,12 +40,21 @@ namespace BoardGame.UnitClasses
             if (this.HealthLevel > 0)
             {
                 //Increase target unit's health level
-                objectToHeal.HealthLevel++;
+                //if the priest has 1 health, he cant restore 2 health
+                if (this.HealthLevel == 1)
+                {
+                    objectToHeal.HealthLevel++;
+                    this.HealthLevel -= 1;
+                }
 
-                //Decrease Priest's health level
-                this.HealthLevel--;
+                else
+                {
+                    objectToHeal.HealthLevel += 2;
+                    this.HealthLevel -= 2;
+                }
 
-                if (HealthLevel == 0)
+                //check if the priest is dead
+                if (this.HealthLevel <= 0)
                 {
                     this.IsAlive = false;
                 }

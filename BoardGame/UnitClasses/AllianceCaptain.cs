@@ -13,8 +13,8 @@ namespace BoardGame.UnitClasses
     class AllianceCaptain : RaceAlliance, IMoveable
     {        
         //Attack & Health start values
-        private const int InitialAttackLevel = 3;
-        private const int InitialHealthLevel = 8;
+        public const int InitialAttackLevel = 6;
+        public const int InitialHealthLevel = 6;
        
         //Unit constructor
         public AllianceCaptain(double col, double row)

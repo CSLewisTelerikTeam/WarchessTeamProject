@@ -9,8 +9,8 @@ namespace BoardGame.UnitClasses
     class AllianceWarGolem : RaceAlliance, IMoveable
     {
         //Attack & Health start values
-        private const double InitialAttackLevel = 4;
-        private const double InitialHealthLevel = 8;
+        public const int InitialAttackLevel = 6;
+        public const int InitialHealthLevel = 8;
 
         //Unit constructor
         public AllianceWarGolem(double col, double row)

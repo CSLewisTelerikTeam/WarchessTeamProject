@@ -12,8 +12,8 @@ namespace BoardGame.UnitClasses
     class HordeCommander : RaceHorde
     {
         //Attack & Health start values
-        private const double InitialAttackLevel = 3;
-        private const double InitialHealthLevel = 8;
+        public const int InitialAttackLevel = 6;
+        public const int InitialHealthLevel = 6;
 
         //Unit constructor
         public HordeCommander(double col, double row)
