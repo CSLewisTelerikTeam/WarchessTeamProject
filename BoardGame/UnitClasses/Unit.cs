@@ -37,9 +37,7 @@ namespace BoardGame.UnitClasses
 
         public int Level { get; set; }
 
-        public int Wins { get; set; }
-
-        public int Loses { get; set; }
+        public int Wins { get; set; }        
 
         public bool IsAlive { get; set; }
 
