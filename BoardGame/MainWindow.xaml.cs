@@ -342,11 +342,7 @@ namespace OOPGameWoWChess
             if (SelectedUnit.GetType().BaseType.Name != targetUnit.GetType().BaseType.Name)
             {
                 SelectedUnit.Attack(targetUnit);                    
-            }
-            else
-            {
-                return;
-            }
+            }         
             
             
             
