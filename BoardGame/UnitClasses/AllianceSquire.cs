@@ -36,14 +36,16 @@ namespace BoardGame.UnitClasses
 
         public override bool IsMoveable(Point destination)
         {
-            //Check if the destination cell is not busy of Alliance unit
-            foreach (var unit in InitializedTeams.AllianceTeam)
-            {
-                if (destination.X == unit.CurrentPosition.X && destination.Y == unit.CurrentPosition.Y)
-                {
-                    return false;
-                }
-            }
+            //Check if the destination cell is not busy of unit            
+
+            //for (int i = 0; i < InitializedTeams.TeamsCount; i++)
+            //{
+            //    if ((destination.X == InitializedTeams.AllianceTeam[i].CurrentPosition.X && destination.Y == InitializedTeams.AllianceTeam[i].CurrentPosition.Y) ||
+            //        (destination.X == InitializedTeams.HordeTeam[i].CurrentPosition.X && destination.Y == InitializedTeams.HordeTeam[i].CurrentPosition.Y))
+            //    {
+            //        return false;
+            //    }
+            //}
 
             double deltaCol = destination.X - this.CurrentPosition.X;
             double deltaRow = destination.Y - this.CurrentPosition.Y;
@@ -55,5 +57,7 @@ namespace BoardGame.UnitClasses
             }
             return true;
         }
+
+
     }
 }

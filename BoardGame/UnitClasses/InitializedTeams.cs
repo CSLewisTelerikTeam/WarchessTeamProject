@@ -8,6 +8,8 @@ namespace BoardGame.UnitClasses
 {
     class InitializedTeams
     {
+        public const int TeamsCount = 16;
+
         //Alliance playing units. These instances will be used in the game.
         public static List<RaceAlliance> AllianceTeam;
 

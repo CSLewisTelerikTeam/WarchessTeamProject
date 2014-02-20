@@ -257,10 +257,6 @@ namespace BoardGame.UnitClasses
 
             return false;
         }
-
-        //public override void Attack(Unit objectToAttack)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        
     }
 }

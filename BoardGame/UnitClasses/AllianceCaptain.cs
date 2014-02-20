@@ -38,13 +38,13 @@ namespace BoardGame.UnitClasses
         public override bool IsMoveable(Point destination)
         {
             //Check if the destination cell is not busy of Alliance unit
-            foreach (var unit in InitializedTeams.AllianceTeam)
-            {
-                if (destination.X == unit.CurrentPosition.X && destination.Y == unit.CurrentPosition.Y)
-                {
-                    return false;
-                }
-            }
+            //foreach (var unit in InitializedTeams.AllianceTeam)
+            //{
+            //    if (destination.X == unit.CurrentPosition.X && destination.Y == unit.CurrentPosition.Y)
+            //    {
+            //        return false;
+            //    }
+            //}
 
             double deltaCol = destination.X - this.CurrentPosition.X;
             double deltaRow = destination.Y - this.CurrentPosition.Y;
@@ -55,7 +55,7 @@ namespace BoardGame.UnitClasses
                 double currentRow = this.CurrentPosition.Y;
                 double currentCol = this.CurrentPosition.X;
 
-                for (int i = 0; i < Math.Abs(deltaRow); i++)
+                for (int i = 0; i < Math.Abs(deltaRow) -1; i++)
                 {
                     if (deltaRow < 0 && deltaCol < 0)
                     {
@@ -155,10 +155,6 @@ namespace BoardGame.UnitClasses
 
             return false;
         }
-
-        //public override void Attack(Unit objectToAttack)
-        //{
-        //    throw new NotImplementedException();
-        //}
+                
     }
 }

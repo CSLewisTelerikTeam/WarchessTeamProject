@@ -6,7 +6,7 @@ using System.Windows.Media.Imaging;
 
 namespace BoardGame.UnitClasses
 {
-    class HordeShaman : RaceHorde
+    class HordeShaman : RaceHorde, IHealing
     {
         //Attack & Health start values
         private const double InitialAttackLevel = 0;
@@ -32,6 +32,24 @@ namespace BoardGame.UnitClasses
         public override bool IsMoveable(Point destination)
         {
             return false;
+        }
+
+        public void Heal(Unit objectToHeal)
+        {
+            //Healing method. "objectToHeal" is the unit that will be healed.
+            if (this.HealthLevel > 0)
+            {
+                //Increase target unit's health level
+                objectToHeal.HealthLevel++;
+
+                //Decrease Priest's health level
+                this.HealthLevel--;
+
+                if (HealthLevel == 0)
+                {
+                    this.IsAlive = false;
+                }
+            }
         }
     }
 }

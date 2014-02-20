@@ -345,6 +345,8 @@ namespace OOPGameWoWChess
                 return;
             }
 
+
+
             Image image = (Image)sender;
             Border border = (Border)image.Parent;
             Grid grid = (Grid)border.Parent;
@@ -353,10 +355,17 @@ namespace OOPGameWoWChess
 
             if (SelectedUnit.GetType().BaseType.Name != targetUnit.GetType().BaseType.Name)
             {
-                SelectedUnit.Attack(targetUnit);                    
-            }         
-            
-            
+                SelectedUnit.Attack(targetUnit);
+            }
+            else if(SelectedUnit.Type == UnitTypes.Shaman)
+            {
+                (SelectedUnit as HordeShaman).Heal(targetUnit);
+            }
+            else if (SelectedUnit.Type == UnitTypes.Priest)
+            {
+                (SelectedUnit as AlliancePriest).Heal(targetUnit);
+            }
+                       
             
         }
        
