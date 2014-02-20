@@ -32,6 +32,7 @@ namespace OOPGameWoWChess
         public static Unit SelectedUnit;
         private bool isSomeUnitSelected;
         private Border selectedBorder;
+        private static bool HordeTurn = true;
         
         private void Image_MouseEnter(object sender, MouseEventArgs e)
         {
@@ -180,6 +181,33 @@ namespace OOPGameWoWChess
 
             image.RenderTransform = translateTransform;
         }
+        private void Image_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (!isSomeUnitSelected)
+            {
+                return;
+            }
+
+            Image image = (Image)sender;
+            Border border = (Border)image.Parent;
+            Grid grid = (Grid)border.Parent;
+
+            Unit targetUnit = GetUnitOnPosition(e.GetPosition(grid), grid);
+
+            if (SelectedUnit.GetType().BaseType.Name != targetUnit.GetType().BaseType.Name)
+            {
+                SelectedUnit.Attack(targetUnit);
+            }
+            else if (SelectedUnit.Type == UnitTypes.Shaman)
+            {
+                (SelectedUnit as HordeShaman).Heal(targetUnit);
+            }
+            else if (SelectedUnit.Type == UnitTypes.Priest)
+            {
+                (SelectedUnit as AlliancePriest).Heal(targetUnit);
+            }
+
+        }
         private Unit GetUnitOnPosition(Point position, Grid grid)
         {
             Point coordinates;
@@ -305,40 +333,6 @@ namespace OOPGameWoWChess
             backgroundMusic.Position = TimeSpan.Zero;
             backgroundMusic.Play();
         }   
-
-        private void Image_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (!isSomeUnitSelected)
-            {
-                return;
-            }
-
-            Image image = (Image)sender;
-            Border border = (Border)image.Parent;
-            Grid grid = (Grid)border.Parent;
-
-            Unit targetUnit = GetUnitOnPosition(e.GetPosition(grid), grid);
-
-            if (SelectedUnit.GetType().BaseType.Name != targetUnit.GetType().BaseType.Name)
-            {
-                SelectedUnit.Attack(targetUnit);
-            }
-            else if(SelectedUnit.Type == UnitTypes.Shaman)
-            {
-                (SelectedUnit as HordeShaman).Heal(targetUnit);
-            }
-            else if (SelectedUnit.Type == UnitTypes.Priest)
-            {
-                (SelectedUnit as AlliancePriest).Heal(targetUnit);
-            }
-
-            for (int i = 0; i < Playfield.Children.Count; i++)
-            {
-                Playfield.Children[i] = null;
-            }
-        }
-       
-        
         
     }
 }

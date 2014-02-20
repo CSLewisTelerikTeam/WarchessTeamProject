@@ -97,19 +97,26 @@ namespace BoardGame.UnitClasses
 
                 if (this.HealthLevel <=0 && targetUnit.HealthLevel <=0)
                 {
-                    this.IsAlive = false;
-                    targetUnit.IsAlive = false;
+                    targetUnit.SmallImage.Visibility = Visibility.Hidden;
+                    targetUnit.CurrentPosition = new Point(-1, -1);
+
+                    this.SmallImage.Visibility = Visibility.Hidden;
+                    this.CurrentPosition = new Point(-1, -1);
                     return;                        
                 }
 
                 if (targetUnit.HealthLevel <= 0)
                 {
                     this.Level++;
+                    targetUnit.SmallImage.Visibility = Visibility.Hidden;
+                    targetUnit.CurrentPosition = new Point(-1, -1);
                 }
 
                 if (this.HealthLevel <= 0)
                 {
                     targetUnit.Level++;
+                    this.SmallImage.Visibility = Visibility.Hidden;
+                    this.CurrentPosition = new Point(-1, -1);
                 }
                 
             }
