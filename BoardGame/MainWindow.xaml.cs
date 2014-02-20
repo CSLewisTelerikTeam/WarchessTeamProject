@@ -22,7 +22,7 @@ namespace OOPGameWoWChess
             LoadBackgroundMusic();
             InitializeUnits();
         }
-
+        //Some comment
         private bool isMouseCapture;
         private double mouseXOffset;
         private double mouseYOffset;
