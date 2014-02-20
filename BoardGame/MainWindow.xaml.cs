@@ -35,6 +35,19 @@ namespace OOPGameWoWChess
         
         private void Image_MouseEnter(object sender, MouseEventArgs e)
         {
+            //Get the hovered unit
+            Image image = (Image)sender;
+            Border border = (Border)image.Parent;
+            Grid grid = (Grid)border.Parent;
+
+            Unit HoveredUnit = GetUnitOnPosition(e.GetPosition(grid), grid);
+
+            this.Health.Text = "Health: " + HoveredUnit.HealthLevel.ToString();
+            this.Damage.Text = "Attack: " + HoveredUnit.AttackLevel.ToString();
+            this.Level.Text = "Level: " + HoveredUnit.Level.ToString();
+            this.Wins.Text = "Wins: " + HoveredUnit.Wins.ToString();
+            this.Loses.Text = "Loses: " + HoveredUnit.Loses.ToString();
+
             Image img = new Image();
 
             string smallImgSource = (sender as Image).Source.ToString();
@@ -43,7 +56,6 @@ namespace OOPGameWoWChess
 
             img.Source = new BitmapImage(new Uri(bigImgSource, UriKind.Absolute));
 
-            this.BigCardImage.Width = 250;
             this.BigCardImage.Source = img.Source;
         }
         private void Image_MouseLeave(object sender, MouseEventArgs e)
