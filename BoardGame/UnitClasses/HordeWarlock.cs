@@ -29,17 +29,14 @@ namespace BoardGame.UnitClasses
             path = System.IO.Path.GetFullPath(@"..\..\Resources\Horde\Frames\warlock_big.png");
             this.BigImage.Source = new BitmapImage(new Uri(path, UriKind.Absolute));
         }
-        public override bool IsMoveable(Point destination)
-        {
-            //Check if the destination cell is not busy of Alliance unit
-            foreach (var unit in InitializedTeams.HordeTeam)
-            {
-                if (destination.X == unit.CurrentPosition.X && destination.Y == unit.CurrentPosition.Y)
-                {
-                    return false;
-                }
-            }
 
+        public override bool IsClearWay(Point destination)
+        {
+            return true;
+        }
+
+        public override bool IsCorrectMove(Point destination)
+        {
             int deltaRow = (int)Math.Abs(destination.Y - this.CurrentPosition.Y);
             int deltaCol = (int)Math.Abs(destination.X - this.CurrentPosition.X);
 

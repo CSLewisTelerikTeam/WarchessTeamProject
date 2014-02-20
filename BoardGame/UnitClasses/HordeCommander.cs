@@ -33,19 +33,22 @@ namespace BoardGame.UnitClasses
             this.BigImage.Source = new BitmapImage(new Uri(path, UriKind.Absolute));
         }
 
-        public override bool IsMoveable(Point destination)
+        public override bool IsCorrectMove(Point destination)
         {
-            //Check if the destination cell is not busy of Alliance unit
-            foreach (var unit in InitializedTeams.HordeTeam)
-            {
-                if (destination.X == unit.CurrentPosition.X && destination.Y == unit.CurrentPosition.Y)
-                {
-                    return false;
-                }
-            }
-
-            double deltaRow = destination.Y - this.CurrentPosition.Y;
             double deltaCol = destination.X - this.CurrentPosition.X;
+            double deltaRow = destination.Y - this.CurrentPosition.Y;
+
+            if (Math.Abs(deltaRow) == Math.Abs(deltaCol))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public override bool IsClearWay(Point destination)
+        {
+            double deltaCol = destination.X - this.CurrentPosition.X;
+            double deltaRow = destination.Y - this.CurrentPosition.Y;
 
             // Check diagonal line if it's clear to move
             if (Math.Abs(deltaRow) == Math.Abs(deltaCol))
@@ -53,7 +56,7 @@ namespace BoardGame.UnitClasses
                 double currentRow = this.CurrentPosition.Y;
                 double currentCol = this.CurrentPosition.X;
 
-                for (int i = 0; i < Math.Abs(deltaRow); i++)
+                for (int i = 0; i < Math.Abs(deltaRow) - 1; i++)
                 {
                     if (deltaRow < 0 && deltaCol < 0)
                     {

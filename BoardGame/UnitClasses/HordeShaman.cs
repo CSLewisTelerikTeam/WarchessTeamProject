@@ -29,7 +29,12 @@ namespace BoardGame.UnitClasses
             path = System.IO.Path.GetFullPath(@"..\..\Resources\Horde\Frames\shaman_big.png");
             this.BigImage.Source = new BitmapImage(new Uri(path, UriKind.Absolute));
         }
-        public override bool IsMoveable(Point destination)
+        public override bool IsClearWay(Point destination)
+        {
+            return false;
+        }
+
+        public override bool IsCorrectMove(Point destination)
         {
             return false;
         }

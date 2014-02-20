@@ -29,21 +29,16 @@ namespace BoardGame.UnitClasses
             path = System.IO.Path.GetFullPath(@"..\..\Resources\Horde\Frames\grunt_big.png");
             this.BigImage.Source = new BitmapImage(new Uri(path, UriKind.Absolute));
         }
-        public override bool IsMoveable(Point destination)
+
+        public override bool IsClearWay(Point destination)
         {
-            //Check if the destination cell is not busy of unit            
+            return true;
+        }
 
-            //for (int i = 0; i < InitializedTeams.TeamsCount; i++)
-            //{
-            //    if ((destination.X == InitializedTeams.AllianceTeam[i].CurrentPosition.X && destination.Y == InitializedTeams.AllianceTeam[i].CurrentPosition.Y) ||
-            //        (destination.X == InitializedTeams.HordeTeam[i].CurrentPosition.X && destination.Y == InitializedTeams.HordeTeam[i].CurrentPosition.Y))
-            //    {
-            //        return false;
-            //    }
-            //}
-
-            double deltaRow = destination.Y - this.CurrentPosition.Y;
+        public override bool IsCorrectMove(Point destination)
+        {
             double deltaCol = destination.X - this.CurrentPosition.X;
+            double deltaRow = destination.Y - this.CurrentPosition.Y;
 
             //invalid move
             if (Math.Abs(deltaCol) > 1 || Math.Abs(deltaRow) > 1)

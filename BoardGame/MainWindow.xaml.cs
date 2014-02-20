@@ -149,7 +149,9 @@ namespace OOPGameWoWChess
             coordinates.X = (int)SelectedUnit.CurrentPosition.X + coordinates.X;
             coordinates.Y = (int)SelectedUnit.CurrentPosition.Y + coordinates.Y;
 
-            if (SelectedUnit.IsMoveable(new Point(coordinates.X, coordinates.Y)))
+            if (SelectedUnit.IsClearWay(new Point(coordinates.X, coordinates.Y))
+                && SelectedUnit.IsCorrectMove(new Point(coordinates.X, coordinates.Y))
+                && SelectedUnit.IsSomeoneAtThisPosition(new Point(coordinates.X, coordinates.Y)))
             {
                 Grid.SetRow(border, (int)coordinates.Y);
                 Grid.SetColumn(border, (int)coordinates.X);
@@ -302,41 +304,7 @@ namespace OOPGameWoWChess
         {
             backgroundMusic.Position = TimeSpan.Zero;
             backgroundMusic.Play();
-        }
-
-
-        //Yanko's work ====================================================================================================
-        
-        //private static bool HordeTurn = true;
-        private void Attack(Unit aggressor, Unit target)
-        {
-            //string race;
-            //int unitIndex;
-            //Position targetPosition = new Position(target.RowPosition, target.ColPosition);
-
-            //if (aggressor.UnitRace != target.UnitRace)
-            //{
-            //    if (aggressor.UnitRace == UnitRaceType.alliance)
-            //    {
-            //        //Check if the aggresssor could reach the target
-            //        if (IsMoveable((aggressor as RaceAlliance).Type.ToString(), targetPosition, out unitIndex, out race))
-            //        {
-            //            target.HealthLevel -= aggressor.AttackLevel;
-            //            aggressor.HealthLevel -= target.CounterAttackLevel;
-            //        }
-            //    }
-            //    else if (aggressor.UnitRace == UnitRaceType.horde)
-            //    {
-            //        //Check if the aggresssor could reach the target
-            //        if (IsMoveable((aggressor as RaceHorde).Type.ToString(), targetPosition, out unitIndex, out race))
-            //        {
-            //            target.HealthLevel -= aggressor.AttackLevel;
-            //            aggressor.HealthLevel -= target.CounterAttackLevel;
-            //        }
-            //    }
-            //}
-
-        }
+        }   
 
         private void Image_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -344,8 +312,6 @@ namespace OOPGameWoWChess
             {
                 return;
             }
-
-
 
             Image image = (Image)sender;
             Border border = (Border)image.Parent;
@@ -365,29 +331,14 @@ namespace OOPGameWoWChess
             {
                 (SelectedUnit as AlliancePriest).Heal(targetUnit);
             }
-                       
-            
+
+            for (int i = 0; i < Playfield.Children.Count; i++)
+            {
+                Playfield.Children[i] = null;
+            }
         }
        
-        ////Unit attack event
-        //private void Unit_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
-        //{
-        //    Unit aggressor = CheckForSelectedEnemy();
-
-        //    for (int i = 0; i < UnitsPerTeam; i++)
-        //    {
-        //        if (InitializedTeams.AllianceTeam[i].Type.ToString() == (sender as Image).Name)
-        //        {
-        //            Attack(aggressor, InitializedTeams.AllianceTeam[i]);
-        //            break;
-        //        }
-        //        if (InitializedTeams.HordeTeam[i].Type.ToString() == (sender as Image).Name)
-        //        {
-        //            Attack(aggressor, InitializedTeams.HordeTeam[i]);
-        //            break;
-        //        }
-
-        //    }
+        
         
     }
 }

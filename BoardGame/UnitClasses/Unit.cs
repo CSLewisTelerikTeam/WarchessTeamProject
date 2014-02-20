@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using OOPGameWoWChess;
 
 namespace BoardGame.UnitClasses
 {
@@ -69,12 +70,27 @@ namespace BoardGame.UnitClasses
             }
         }
 
-        public abstract bool IsMoveable(Point destination);
+        public abstract bool IsCorrectMove(Point destination);
+
+        public abstract bool IsClearWay(Point destination);
+
+        public bool IsSomeoneAtThisPosition(Point destination)
+        {
+            for (int i = 0; i < InitializedTeams.TeamsCount; i++)
+            {
+                if ((destination.X == InitializedTeams.AllianceTeam[i].CurrentPosition.X && destination.Y == InitializedTeams.AllianceTeam[i].CurrentPosition.Y) ||
+                    (destination.X == InitializedTeams.HordeTeam[i].CurrentPosition.X && destination.Y == InitializedTeams.HordeTeam[i].CurrentPosition.Y))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
 
         public void Attack(Unit targetUnit)
         {  
             //Check if the aggresssor could reach the target
-            if (this.IsMoveable(targetUnit.CurrentPosition))
+            if (this.IsCorrectMove(targetUnit.CurrentPosition) && this.IsClearWay(targetUnit.CurrentPosition))
             {
                 targetUnit.HealthLevel -= this.AttackLevel;
                 this.HealthLevel -= targetUnit.CounterAttackLevel;
@@ -95,11 +111,11 @@ namespace BoardGame.UnitClasses
                 {
                     targetUnit.Level++;
                 }
-
                 
-            }  
-            
+            }
+
         }
+        
         
     }
 }

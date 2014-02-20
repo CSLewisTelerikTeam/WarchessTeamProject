@@ -30,17 +30,8 @@ namespace BoardGame.UnitClasses
             this.BigImage.Source = new BitmapImage(new Uri(path, UriKind.Absolute));
         }
 
-        public override bool IsMoveable(Point destination)
+        public override bool IsClearWay(Point destination)
         {
-            //Check if the destination cell is not busy of Alliance unit
-            foreach (var unit in InitializedTeams.HordeTeam)
-            {
-                if (destination.X == unit.CurrentPosition.X && destination.Y == unit.CurrentPosition.Y)
-                {
-                    return false;
-                }
-            }
-
             double deltaRow = destination.Y - this.CurrentPosition.Y;
             double deltaCol = destination.X - this.CurrentPosition.X;
 
@@ -49,7 +40,7 @@ namespace BoardGame.UnitClasses
             {
                 if (deltaCol > 0)
                 {
-                    for (double currentCol = this.CurrentPosition.X + 1; currentCol <= destination.X; currentCol++)
+                    for (double currentCol = this.CurrentPosition.X; currentCol < destination.X; currentCol++)
                     {
                         foreach (var unit in InitializedTeams.AllianceTeam)
                         {
@@ -73,7 +64,7 @@ namespace BoardGame.UnitClasses
 
                 if (deltaCol < 0)
                 {
-                    for (double currentCol = this.CurrentPosition.X - 1; currentCol >= destination.X; currentCol--)
+                    for (double currentCol = this.CurrentPosition.X; currentCol > destination.X; currentCol--)
                     {
                         foreach (var unit in InitializedTeams.AllianceTeam)
                         {
@@ -101,7 +92,7 @@ namespace BoardGame.UnitClasses
             {
                 if (deltaRow > 0)
                 {
-                    for (double currentRow = this.CurrentPosition.Y + 1; currentRow <= destination.Y; currentRow++)
+                    for (double currentRow = this.CurrentPosition.Y + 1; currentRow < destination.Y; currentRow++)
                     {
                         foreach (var unit in InitializedTeams.AllianceTeam)
                         {
@@ -125,7 +116,7 @@ namespace BoardGame.UnitClasses
 
                 if (deltaRow < 0)
                 {
-                    for (double currentRow = this.CurrentPosition.Y - 1; currentRow >= destination.Y; currentRow--)
+                    for (double currentRow = this.CurrentPosition.Y - 1; currentRow > destination.Y; currentRow--)
                     {
                         foreach (var unit in InitializedTeams.AllianceTeam)
                         {
@@ -154,7 +145,7 @@ namespace BoardGame.UnitClasses
                 double currentRow = this.CurrentPosition.Y;
                 double currentCol = this.CurrentPosition.X;
 
-                for (int i = 0; i < Math.Abs(deltaRow); i++)
+                for (int i = 0; i < Math.Abs(deltaRow) - 1; i++)
                 {
                     if (deltaRow < 0 && deltaCol < 0)
                     {
@@ -252,6 +243,30 @@ namespace BoardGame.UnitClasses
             }
 
             return false;
+        }
+
+        public override bool IsCorrectMove(Point destination)
+        {
+            double deltaRow = destination.Y - this.CurrentPosition.Y;
+            double deltaCol = destination.X - this.CurrentPosition.X;
+
+            if (deltaRow == 0 && deltaCol != 0)
+            {
+                return true;
+            }
+            else if (deltaRow != 0 && deltaCol == 0)
+            {
+                return true;
+            }
+            else if (Math.Abs(deltaRow) == Math.Abs(deltaCol))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
         }
     }
 }

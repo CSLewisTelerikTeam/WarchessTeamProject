@@ -29,7 +29,7 @@ namespace BoardGame.UnitClasses
             path = System.IO.Path.GetFullPath(@"..\..\Resources\Horde\Frames\demolisher_big.png");
             this.BigImage.Source = new BitmapImage(new Uri(path, UriKind.Absolute));
         }
-        public override bool IsMoveable(Point destination)
+        public override bool IsClearWay(Point destination)
         {
             //Check if the destination cell is not busy of Alliance unit
             foreach (var unit in InitializedTeams.HordeTeam)
@@ -123,6 +123,11 @@ namespace BoardGame.UnitClasses
                 return true;
             }
 
+            return false;
+        }
+
+        public override bool IsCorrectMove(Point destination)
+        {
             return false;
         }
     }

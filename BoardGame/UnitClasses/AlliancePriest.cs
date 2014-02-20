@@ -33,7 +33,12 @@ namespace BoardGame.UnitClasses
             this.BigImage.Source = new BitmapImage(new Uri(path, UriKind.Absolute));
         }
 
-        public override bool IsMoveable(Point destination)
+        public override bool IsClearWay(Point destination)
+        {
+            return false;
+        }
+
+        public override bool IsCorrectMove(Point destination)
         {
             return false;
         }
