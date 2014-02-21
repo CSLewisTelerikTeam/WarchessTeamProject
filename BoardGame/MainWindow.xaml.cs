@@ -246,9 +246,8 @@ namespace OOPGameWoWChess
                         (Playfield.Children[i] as Border).BorderBrush = Brushes.LightCyan;
                         (Playfield.Children[i] as Border).BorderThickness = new Thickness(5);
                     } 
-                }
-                
-            }
+                }                
+            }            
         }
         private void DownLightPossibleMoves()
         {
