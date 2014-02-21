@@ -16,14 +16,10 @@ namespace BoardGame.UnitClasses
         public const int InitialHealthLevel = 12;
 
         //Unit constructor
-        public AlliancePriest(double col, double row)
+        public AlliancePriest(Point currentPosition)
+            : base(UnitTypes.Priest, InitialHealthLevel, InitialAttackLevel, InitialAttackLevel / 2,
+                       0, true, currentPosition, false)
         {
-            this.Type = UnitTypes.Priest;
-            this.AttackLevel = InitialAttackLevel;
-            this.HealthLevel = InitialHealthLevel;
-            this.CounterAttackLevel = InitialAttackLevel / 2;
-            this.CurrentPosition = new Point(col, row);
-
             this.SmallImage = new Image();
             this.BigImage = new Image();
 
@@ -31,6 +27,27 @@ namespace BoardGame.UnitClasses
             this.SmallImage.Source = new BitmapImage(new Uri(path, UriKind.Absolute));
             path = System.IO.Path.GetFullPath(@"..\..\Resources\Alliance\Frames\priest_big.png");
             this.BigImage.Source = new BitmapImage(new Uri(path, UriKind.Absolute));
+        }
+
+        public override void PlayAttackSound()
+        {
+            var path = System.IO.Path.GetFullPath(@"..\..\Resources\Unit_Sounds\Alliance\Priest_Spell.mp3");
+            playSound.Open(new Uri(path));
+            playSound.Play();
+        }
+
+        public override void PlaySelectSound()
+        {
+            var path = System.IO.Path.GetFullPath(@"..\..\Resources\Unit_Sounds\Alliance\Priest_Select.mp3");
+            playSound.Open(new Uri(path));
+            playSound.Play();
+        }
+
+        public override void PlayDieSound()
+        {
+            var path = System.IO.Path.GetFullPath(@"..\..\Resources\Unit_Sounds\Alliance\Priest_Death.mp3");
+            playSound.Open(new Uri(path));
+            playSound.Play();
         }
 
         public override bool IsClearWay(Point destination)

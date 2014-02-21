@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace BoardGame.UnitClasses
 {
@@ -15,24 +16,40 @@ namespace BoardGame.UnitClasses
         //Attack & Health start values
         public const int InitialAttackLevel = 6;
         public const int InitialHealthLevel = 6;
-       
-        //Unit constructor
-        public AllianceCaptain(double col, double row)
-        {
-            this.Type = UnitTypes.Captain;
-            this.AttackLevel = InitialAttackLevel;
-            this.HealthLevel = InitialHealthLevel;
-            this.CounterAttackLevel = InitialAttackLevel / 2;
-            
-            this.CurrentPosition = new Point(col, row);
 
+        
+
+        //Unit constructor
+        public AllianceCaptain(Point currentPosition) 
+                : base(UnitTypes.Captain, InitialHealthLevel, InitialAttackLevel, InitialAttackLevel / 2,
+                       0, true, currentPosition, false)
+        {
             this.SmallImage = new Image();
             this.BigImage = new Image();
-
             var path = System.IO.Path.GetFullPath(@"..\..\Resources\Alliance\Frames\captain_small.png");
             this.SmallImage.Source = new BitmapImage(new Uri(path, UriKind.Absolute));
             path = System.IO.Path.GetFullPath(@"..\..\Resources\Alliance\Frames\captain_big.png");
             this.BigImage.Source = new BitmapImage(new Uri(path, UriKind.Absolute));
+        }
+        public override void PlayAttackSound()
+        {
+            var path = System.IO.Path.GetFullPath(@"..\..\Resources\Unit_Sounds\Alliance\Captain_Attack.mp3");
+            playSound.Open(new Uri(path));
+            playSound.Play();
+        }
+
+        public override void PlaySelectSound()
+        {
+            var path = System.IO.Path.GetFullPath(@"..\..\Resources\Unit_Sounds\Alliance\Captain_Select.mp3");
+            playSound.Open(new Uri(path));
+            playSound.Play();
+        }
+
+        public override void PlayDieSound()
+        {
+            var path = System.IO.Path.GetFullPath(@"..\..\Resources\Unit_Sounds\Alliance\Captain_Death.mp3");
+            playSound.Open(new Uri(path));
+            playSound.Play();
         }
 
         public override bool IsCorrectMove(Point destination)

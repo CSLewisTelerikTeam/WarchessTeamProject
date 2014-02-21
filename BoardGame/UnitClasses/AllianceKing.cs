@@ -17,14 +17,10 @@ namespace BoardGame.UnitClasses
         public const int InitialHealthLevel = 10;
 
         //Unit constructor
-        public AllianceKing(double col, double row)
+        public AllianceKing(Point currentPosition)
+            : base(UnitTypes.King, InitialHealthLevel, InitialAttackLevel, InitialAttackLevel / 2,
+                       0, true, currentPosition, false)
         {
-            this.Type = UnitTypes.King;
-            this.AttackLevel = InitialAttackLevel;
-            this.HealthLevel = InitialHealthLevel;
-            this.CounterAttackLevel = InitialAttackLevel / 2;
-            this.CurrentPosition = new Point(col, row);
-
             this.SmallImage = new Image();
             this.BigImage = new Image();
 
@@ -34,6 +30,27 @@ namespace BoardGame.UnitClasses
             this.BigImage.Source = new BitmapImage(new Uri(path, UriKind.Absolute));
         }
 
+        public override void PlayAttackSound()
+        {
+            var path = System.IO.Path.GetFullPath(@"..\..\Resources\Unit_Sounds\Alliance\King_Attack.mp3");
+            playSound.Open(new Uri(path));
+            playSound.Play();
+        }
+
+        public override void PlaySelectSound()
+        {
+            var path = System.IO.Path.GetFullPath(@"..\..\Resources\Unit_Sounds\Alliance\King_Select.mp3");
+            playSound.Open(new Uri(path));
+            playSound.Play();
+        }
+
+        public override void PlayDieSound()
+        {
+            var path = System.IO.Path.GetFullPath(@"..\..\Resources\Unit_Sounds\Alliance\King_Death.mp3");
+            playSound.Open(new Uri(path));
+            playSound.Play();
+        }
+        
         public override bool IsClearWay(Point destination)
         {
             double deltaRow = destination.Y - this.CurrentPosition.Y;

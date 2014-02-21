@@ -13,14 +13,10 @@ namespace BoardGame.UnitClasses
         public const int InitialHealthLevel = 8;
 
         //Unit constructor
-        public HordeDemolisher(double col, double row)
+        public HordeDemolisher(Point currentPosition)
+            : base(UnitTypes.Demolisher, InitialHealthLevel, InitialAttackLevel, InitialAttackLevel / 2,
+                       0, true, currentPosition, false)
         {
-            this.Type = UnitTypes.Demolisher;
-            this.AttackLevel = InitialAttackLevel;
-            this.HealthLevel = InitialHealthLevel;
-            this.CounterAttackLevel = InitialAttackLevel / 2;
-            this.CurrentPosition = new Point(col, row);
-
             this.SmallImage = new Image();
             this.BigImage = new Image();
 
@@ -28,6 +24,27 @@ namespace BoardGame.UnitClasses
             this.SmallImage.Source = new BitmapImage(new Uri(path, UriKind.Absolute));
             path = System.IO.Path.GetFullPath(@"..\..\Resources\Horde\Frames\demolisher_big.png");
             this.BigImage.Source = new BitmapImage(new Uri(path, UriKind.Absolute));
+        }
+
+        public override void PlayAttackSound()
+        {
+            var path = System.IO.Path.GetFullPath(@"..\..\Resources\Unit_Sounds\Horde\Demolisher_Attack.mp3");
+            playSound.Open(new Uri(path));
+            playSound.Play();
+        }
+
+        public override void PlaySelectSound()
+        {
+            var path = System.IO.Path.GetFullPath(@"..\..\Resources\Unit_Sounds\Horde\Demolisher_Select.mp3");
+            playSound.Open(new Uri(path));
+            playSound.Play();
+        }
+
+        public override void PlayDieSound()
+        {
+            var path = System.IO.Path.GetFullPath(@"..\..\Resources\Unit_Sounds\Horde\Demolisher_Death.mp3");
+            playSound.Open(new Uri(path));
+            playSound.Play();
         }
 
         public override bool IsClearWay(Point destination)

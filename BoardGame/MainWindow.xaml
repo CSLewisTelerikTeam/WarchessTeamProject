@@ -475,29 +475,13 @@
                                Foreground="White"
                                FontWeight="Bold" 
                                FontSize="50"></TextBlock>
-                        <Grid 
-                               HorizontalAlignment="Center">
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
 
-                            <TextBlock Grid.Column="0"
-                                   Name="Wins"
-                                   FontFamily="Cooper Black" 
-                                   Foreground="White"
-                                   FontWeight="Bold" 
-                                   FontSize="25" Margin="0 0 10 0"></TextBlock>
-                            <TextBlock Grid.Column="1"
-                                   Name="Loses"
+                        <TextBlock Grid.Column="1"
+                                   Name="RaceTurn"
                                    FontFamily="Cooper Black" 
                                    Foreground="White"
                                    FontWeight="Bold" 
                                    FontSize="25"></TextBlock>
-                        </Grid>
                     </StackPanel>
                 </StackPanel>
             </Canvas>

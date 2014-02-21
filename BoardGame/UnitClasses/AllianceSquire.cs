@@ -15,16 +15,11 @@ namespace BoardGame.UnitClasses
         public const int InitialAttackLevel = 4;
         public const int InitialHealthLevel = 4;
 
-       
         //Unit constructor
-        public AllianceSquire(double col, double row)
+        public AllianceSquire(Point currentPosition)
+            : base(UnitTypes.Squire, InitialHealthLevel, InitialAttackLevel, InitialAttackLevel / 2,
+                       0, true, currentPosition, false)
         {
-            this.Type = UnitTypes.Squire;
-            this.AttackLevel = InitialAttackLevel;
-            this.HealthLevel = InitialHealthLevel;
-            this.CounterAttackLevel = InitialAttackLevel / 2;
-            this.CurrentPosition = new Point(col, row);
-
             this.SmallImage = new Image();
             this.BigImage = new Image();
 
@@ -32,6 +27,27 @@ namespace BoardGame.UnitClasses
             this.SmallImage.Source = new BitmapImage(new Uri(path, UriKind.Absolute));
             path = System.IO.Path.GetFullPath(@"..\..\Resources\Alliance\Frames\squire_big.png");
             this.BigImage.Source = new BitmapImage(new Uri(path, UriKind.Absolute));
+        }
+
+        public override void PlayAttackSound()
+        {
+            var path = System.IO.Path.GetFullPath(@"..\..\Resources\Unit_Sounds\Alliance\Squire_Attack.mp3");
+            playSound.Open(new Uri(path));
+            playSound.Play();
+        }
+
+        public override void PlaySelectSound()
+        {
+            var path = System.IO.Path.GetFullPath(@"..\..\Resources\Unit_Sounds\Alliance\Squire_Select.mp3");
+            playSound.Open(new Uri(path));
+            playSound.Play();
+        }
+
+        public override void PlayDieSound()
+        {
+            var path = System.IO.Path.GetFullPath(@"..\..\Resources\Unit_Sounds\Alliance\Squire_Death.mp3");
+            playSound.Open(new Uri(path));
+            playSound.Play();
         }
 
         public override bool IsClearWay(Point destination)

@@ -26,4 +26,13 @@ namespace BoardGame.UnitClasses
     {
         void Heal(Unit objectToHeal);
     }
+
+    interface ISound
+    {
+        void PlayAttackSound();
+        void PlaySelectSound();
+        void PlayDieSound();
+    }
+
+    //TODO IBonus
 }

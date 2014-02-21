@@ -32,7 +32,7 @@ namespace OOPGameWoWChess
         public static Unit SelectedUnit;
         private bool isSomeUnitSelected;
         private Border selectedBorder;
-        private static bool HordeTurn = true;
+        private static bool HordeTurn = false;
         
         private void Image_MouseEnter(object sender, MouseEventArgs e)
         {
@@ -46,8 +46,6 @@ namespace OOPGameWoWChess
             this.Health.Text = "Health: " + HoveredUnit.HealthLevel.ToString();
             this.Damage.Text = "Attack: " + HoveredUnit.AttackLevel.ToString();
             this.Level.Text = "Level: " + HoveredUnit.Level.ToString();
-            this.Wins.Text = "Wins: " + HoveredUnit.Wins.ToString();
-            this.Loses.Text = "Loses: " + HoveredUnit.Loses.ToString();
 
             Image img = new Image();
 
@@ -69,12 +67,18 @@ namespace OOPGameWoWChess
             Border border = (Border)image.Parent;
             Grid grid = (Grid)border.Parent;
 
+            SelectedUnit = GetUnitOnPosition(e.GetPosition(grid), grid);
+
+            RaceTypes RaceTurn = HordeTurn ? RaceTypes.Horde : RaceTypes.Alliance;
+
+            if (SelectedUnit.Race != RaceTurn)
+            {
+                return;
+            }
+
             if (isSomeUnitSelected && (selectedBorder != border))
             {
-                selectedBorder.BorderThickness = new Thickness(0, 0, 0, 0);
-                selectedBorder.BorderBrush = Brushes.Transparent;
-                var path = System.IO.Path.GetFullPath(@"..\..\Resources\Other_graphics\empty_cell.png");
-                selectedBorder.Background = new ImageBrush(new BitmapImage(new Uri(path, UriKind.Absolute)));
+                DeselectUnit();
             }
 
             selectedBorder = border;
@@ -83,13 +87,12 @@ namespace OOPGameWoWChess
             isMouseCapture = true;
             mouseXOffset = e.GetPosition(border).X;
             mouseYOffset = e.GetPosition(border).Y;
-                        
-            SelectedUnit = GetUnitOnPosition(e.GetPosition(grid), grid);
 
             if (SelectedUnit != null)
             {
                 SelectedUnit.IsSelected = true;
                 isSomeUnitSelected = true;
+                SelectedUnit.PlaySelectSound();
             }
 
             //Mark the selected item
@@ -160,15 +163,9 @@ namespace OOPGameWoWChess
                 //Change the selected unit current position if the unit can move on that position
                 SelectedUnit.CurrentPosition = new Point(coordinates.X, coordinates.Y);
 
-                //Unmark the selected item
-                selectedBorder.BorderThickness = new Thickness(0, 0, 0, 0);
-                selectedBorder.BorderBrush = Brushes.Transparent;
-                var path = System.IO.Path.GetFullPath(@"..\..\Resources\Other_graphics\empty_cell.png");
-                selectedBorder.Background = new ImageBrush(new BitmapImage(new Uri(path, UriKind.Absolute)));
+                DeselectUnit();
 
-                //Deselect the selected unit
-                SelectedUnit.IsSelected = false;
-                isSomeUnitSelected = false;
+                ChangeTurn();
             }
 
             translateTransform = new TranslateTransform();
@@ -207,6 +204,28 @@ namespace OOPGameWoWChess
                 (SelectedUnit as AlliancePriest).Heal(targetUnit);
             }
 
+            DeselectUnit();
+
+            ChangeTurn();
+        }
+        
+        private void DeselectUnit()
+        {
+            //Unmark the selected item
+            selectedBorder.BorderThickness = new Thickness(0, 0, 0, 0);
+            selectedBorder.BorderBrush = Brushes.Transparent;
+            //var path = System.IO.Path.GetFullPath(@"..\..\Resources\Other_graphics\empty_cell.png");
+            //selectedBorder.Background = new ImageBrush(new BitmapImage(new Uri(path, UriKind.Absolute)));
+            selectedBorder.Background = null;
+
+            //Deselect the selected unit
+            SelectedUnit.IsSelected = false;
+            isSomeUnitSelected = false;
+        }
+        private void ChangeTurn()
+        {
+            HordeTurn = !HordeTurn;
+            this.RaceTurn.Text = HordeTurn ? "Horde on turn" : "Alliance on turn";
         }
         private Unit GetUnitOnPosition(Point position, Grid grid)
         {
@@ -239,12 +258,14 @@ namespace OOPGameWoWChess
             myBrush.ImageSource = new BitmapImage(new Uri(path, UriKind.Absolute));
             this.Background = myBrush;
 
-            path = System.IO.Path.GetFullPath(@"..\..\Resources\Other_graphics\empty_cell.png");
+            this.RaceTurn.Text = HordeTurn ? "Horde on turn" : "Alliance on turn";
 
-            foreach (var child in this.Playfield.Children)
-            {
-                (child as Border).Background = new ImageBrush(new BitmapImage(new Uri(path, UriKind.Absolute)));
-            }
+            //path = System.IO.Path.GetFullPath(@"..\..\Resources\Other_graphics\empty_cell.png");
+
+            //foreach (var child in this.Playfield.Children)
+            //{
+            //    (child as Border).Background = new ImageBrush(new BitmapImage(new Uri(path, UriKind.Absolute)));
+            //}
 
             //Implement the intialization logic for the backgrounds on each field
            
