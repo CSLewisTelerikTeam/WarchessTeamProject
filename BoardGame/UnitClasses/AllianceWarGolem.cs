@@ -3,6 +3,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+using OOPGameWoWChess;
 
 namespace BoardGame.UnitClasses
 {
@@ -52,8 +53,7 @@ namespace BoardGame.UnitClasses
 
             double deltaRow = destination.Y - this.CurrentPosition.Y;
             double deltaCol = destination.X - this.CurrentPosition.X;
-
-            
+                        
             if (deltaCol == 0)
             {
                 double currentRow = this.CurrentPosition.Y;
@@ -63,7 +63,7 @@ namespace BoardGame.UnitClasses
                 {
                     if (deltaRow < 0)
                     {
-                        currentRow--;
+                        currentRow--;                        
                     }
                     else
                     {

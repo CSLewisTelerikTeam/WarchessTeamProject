@@ -32,7 +32,7 @@ namespace OOPGameWoWChess
         public static Unit SelectedUnit;
         private bool isSomeUnitSelected;
         private Border selectedBorder;
-        private static bool HordeTurn = false;
+        private static bool HordeTurn = true;
         
         private void Image_MouseEnter(object sender, MouseEventArgs e)
         {
@@ -56,10 +56,15 @@ namespace OOPGameWoWChess
             img.Source = new BitmapImage(new Uri(bigImgSource, UriKind.Absolute));
 
             this.BigCardImage.Source = img.Source;
-        }
+
+            //Mark enemy's cell border in red 
+            HighLightPossibleEnemy(sender, HoveredUnit);
+        }        
+
         private void Image_MouseLeave(object sender, MouseEventArgs e)
         {
             this.BigCardImage.Source = null;
+            ((sender as Image).Parent as Border).Background = Brushes.Transparent;
         }
         private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -176,7 +181,7 @@ namespace OOPGameWoWChess
             mouseXOffset = 0;
             mouseYOffset = 0;
 
-            image.RenderTransform = translateTransform;
+            image.RenderTransform = translateTransform;            
         }
         private void Image_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -190,10 +195,11 @@ namespace OOPGameWoWChess
             Grid grid = (Grid)border.Parent;
 
             Unit targetUnit = GetUnitOnPosition(e.GetPosition(grid), grid);
+            bool successAttack = false;
 
             if (SelectedUnit.GetType().BaseType.Name != targetUnit.GetType().BaseType.Name)
             {
-                SelectedUnit.Attack(targetUnit);
+                SelectedUnit.Attack(targetUnit, out successAttack);
             }
             else if (SelectedUnit.Type == UnitTypes.Shaman)
             {
@@ -204,11 +210,25 @@ namespace OOPGameWoWChess
                 (SelectedUnit as AlliancePriest).Heal(targetUnit);
             }
 
-            DeselectUnit();
-
-            ChangeTurn();
+            if (successAttack)
+            {
+                DeselectUnit();
+                ChangeTurn();
+            }
+            
         }
-        
+
+        private static void HighLightPossibleEnemy(object sender, Unit HoveredUnit)
+        {
+            if (SelectedUnit != null &&
+                ((SelectedUnit.Race == RaceTypes.Horde && HordeTurn) || (SelectedUnit.Race == RaceTypes.Alliance && !HordeTurn))
+                && (SelectedUnit.Race != HoveredUnit.Race)
+                && SelectedUnit.IsCorrectMove(HoveredUnit.CurrentPosition)
+                && SelectedUnit.IsClearWay(HoveredUnit.CurrentPosition))
+            {
+                ((sender as Image).Parent as Border).Background = Brushes.Red;
+            }
+        }        
         private void DeselectUnit()
         {
             //Unmark the selected item
@@ -282,7 +302,7 @@ namespace OOPGameWoWChess
                 allianceUnit.SmallImage.MouseLeftButtonUp += new MouseButtonEventHandler(Image_MouseLeftButtonUp);
                 allianceUnit.SmallImage.MouseEnter += new MouseEventHandler(Image_MouseEnter);
                 allianceUnit.SmallImage.MouseLeave += new MouseEventHandler(Image_MouseLeave);
-                allianceUnit.SmallImage.MouseRightButtonDown += new MouseButtonEventHandler(Image_MouseRightButtonDown);
+                allianceUnit.SmallImage.MouseRightButtonDown += new MouseButtonEventHandler(Image_MouseRightButtonDown);                
 
                 if (i >= 0 && i < 8)
                 {

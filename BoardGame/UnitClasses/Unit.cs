@@ -96,19 +96,20 @@ namespace BoardGame.UnitClasses
             }
             return true;
         }
-        public void Attack(Unit targetUnit)
-        {  
+        public void Attack(Unit targetUnit, out bool successAttack)
+        {
+            successAttack = false;
             //Check if the aggresssor could reach the target
             if (this.IsCorrectMove(targetUnit.CurrentPosition) && this.IsClearWay(targetUnit.CurrentPosition))
             {
+                successAttack = true;
                 targetUnit.HealthLevel -= this.AttackLevel;
                 this.PlayAttackSound();
 
                 if (targetUnit.IsCorrectMove(this.CurrentPosition))
                 {                    
                     this.HealthLevel -= targetUnit.CounterAttackLevel;                    
-                }
-                
+                }                
 
                 if (this.HealthLevel <=0 && targetUnit.HealthLevel <=0)
                 {
