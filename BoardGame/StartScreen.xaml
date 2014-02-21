@@ -3,23 +3,23 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="StartScreen" Width="1024" Height="768"
         WindowStyle="None" WindowState="Maximized">
-    
+
     <Canvas>
-        <Border Canvas.Left="1000" Canvas.Top="50" Width="260" Height="70"
+        <Border Canvas.Left="700" Canvas.Top="10" Width="260" Height="70"
                 Name="Play" MouseEnter="Border_MouseEnter" 
                 MouseLeave="Border_MouseLeave">
             <Image Width="260" Height="70">
             </Image>
         </Border>
 
-        <Border Canvas.Left="1000" Canvas.Top="130" Width="260" Height="70"
+        <Border Canvas.Left="700" Canvas.Top="90" Width="260" Height="70"
                 Name="Instructions"  MouseEnter="Border_MouseEnter"
                 MouseLeave="Border_MouseLeave">
             <Image>
             </Image>
         </Border>
 
-        <Border Canvas.Left="1000" Canvas.Top="210" Width="260" Height="70"
+        <Border Canvas.Left="700" Canvas.Top="170" Width="260" Height="70"
                 Name="Exit" MouseEnter="Border_MouseEnter"
                 MouseLeave="Border_MouseLeave">
             <Image>

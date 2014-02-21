@@ -246,6 +246,7 @@ namespace OOPGameWoWChess
                 (child as Border).Background = new ImageBrush(new BitmapImage(new Uri(path, UriKind.Absolute)));
             }
 
+            //Implement the intialization logic for the backgrounds on each field
            
         }
         private void InitializeUnits()

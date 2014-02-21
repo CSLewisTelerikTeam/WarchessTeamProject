@@ -102,10 +102,13 @@ namespace BoardGame.UnitClasses
 
                 if (this.HealthLevel <=0 && targetUnit.HealthLevel <=0)
                 {
-                    targetUnit.SmallImage.Visibility = Visibility.Hidden;
+                    targetUnit.SmallImage.Source = null;
+                    (targetUnit.SmallImage.Parent as Border).Background = null;
+
                     targetUnit.CurrentPosition = new Point(-1, -1);
 
-                    this.SmallImage.Visibility = Visibility.Hidden;
+                    this.SmallImage.Source = null;
+                    (targetUnit.SmallImage.Parent as Border).Background = null;
                     this.CurrentPosition = new Point(-1, -1);
                     return;                        
                 }
@@ -113,7 +116,10 @@ namespace BoardGame.UnitClasses
                 if (targetUnit.HealthLevel <= 0)
                 {
                     this.Level++;
-                    targetUnit.SmallImage.Visibility = Visibility.Hidden;
+
+                    targetUnit.SmallImage.Source = null;
+                    (targetUnit.SmallImage.Parent as Border).Background = null;
+
                     targetUnit.CurrentPosition = new Point(-1, -1);
                     
                 }
@@ -121,7 +127,10 @@ namespace BoardGame.UnitClasses
                 if (this.HealthLevel <= 0)
                 {
                     targetUnit.Level++;
-                    this.SmallImage.Visibility = Visibility.Hidden;
+
+                    targetUnit.SmallImage.Source = null;
+                    (targetUnit.SmallImage.Parent as Border).Background = null;
+
                     this.CurrentPosition = new Point(-1, -1);
                 }
                 
