@@ -93,7 +93,12 @@ namespace BoardGame.UnitClasses
             if (this.IsCorrectMove(targetUnit.CurrentPosition) && this.IsClearWay(targetUnit.CurrentPosition))
             {
                 targetUnit.HealthLevel -= this.AttackLevel;
-                this.HealthLevel -= targetUnit.CounterAttackLevel;
+
+                if (targetUnit.IsCorrectMove(this.CurrentPosition))
+                {                    
+                    this.HealthLevel -= targetUnit.CounterAttackLevel;                    
+                }
+                
 
                 if (this.HealthLevel <=0 && targetUnit.HealthLevel <=0)
                 {
