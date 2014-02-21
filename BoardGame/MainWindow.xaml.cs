@@ -239,12 +239,14 @@ namespace OOPGameWoWChess
             myBrush.ImageSource = new BitmapImage(new Uri(path, UriKind.Absolute));
             this.Background = myBrush;
 
-            //path = System.IO.Path.GetFullPath(@"..\..\Resources\Other_graphics\empty_cell.png");
+            path = System.IO.Path.GetFullPath(@"..\..\Resources\Other_graphics\empty_cell.png");
 
-            //foreach (var child in this.Playfield.Children)
-            //{
-            //    (child as Border).Background = new ImageBrush(new BitmapImage(new Uri(path, UriKind.Absolute)));
-            //}
+            foreach (var child in this.Playfield.Children)
+            {
+                (child as Border).Background = new ImageBrush(new BitmapImage(new Uri(path, UriKind.Absolute)));
+            }
+
+           
         }
         private void InitializeUnits()
         {

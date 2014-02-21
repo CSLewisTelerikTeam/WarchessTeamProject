@@ -44,7 +44,7 @@ namespace BoardGame.UnitClasses
             {
                 if (deltaCol > 0)
                 {
-                    for (double currentCol = this.CurrentPosition.X; currentCol < destination.X; currentCol++)
+                    for (double currentCol = this.CurrentPosition.X + 1; currentCol < destination.X; currentCol++)
                     {
                         foreach (var unit in InitializedTeams.AllianceTeam)
                         {
@@ -68,7 +68,7 @@ namespace BoardGame.UnitClasses
 
                 if (deltaCol < 0)
                 {
-                    for (double currentCol = this.CurrentPosition.X; currentCol > destination.X; currentCol--)
+                    for (double currentCol = this.CurrentPosition.X -1; currentCol > destination.X; currentCol--)
                     {
                         foreach (var unit in InitializedTeams.AllianceTeam)
                         {

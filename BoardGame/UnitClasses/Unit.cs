@@ -110,6 +110,7 @@ namespace BoardGame.UnitClasses
                     this.Level++;
                     targetUnit.SmallImage.Visibility = Visibility.Hidden;
                     targetUnit.CurrentPosition = new Point(-1, -1);
+                    
                 }
 
                 if (this.HealthLevel <= 0)
