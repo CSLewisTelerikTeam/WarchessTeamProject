@@ -10,8 +10,8 @@ namespace BoardGame.UnitClasses
 {
     //Abstract class Unit, parent for both races and all units. 
     //Unit class can't make any instances
+    //Some comments added
     //Some other comment
-
     public abstract class Unit : IMoveable, IAttacking
     {
         //Private Fields 
