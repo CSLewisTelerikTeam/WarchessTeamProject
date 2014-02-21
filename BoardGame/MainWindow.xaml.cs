@@ -65,6 +65,7 @@ namespace OOPGameWoWChess
         {
             this.BigCardImage.Source = null;
             ((sender as Image).Parent as Border).Background = Brushes.Transparent;
+            DownLightPossibleMoves();
         }
         private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -113,6 +114,8 @@ namespace OOPGameWoWChess
                 border.BorderBrush = Brushes.Crimson;
                 border.Background = Brushes.LightCoral;
             }
+
+            HighLightPossibleMoves();
         }
         private void Image_MouseMove(object sender, MouseEventArgs e)
         {
@@ -218,7 +221,7 @@ namespace OOPGameWoWChess
             
         }
 
-        private static void HighLightPossibleEnemy(object sender, Unit HoveredUnit)
+        private void HighLightPossibleEnemy(object sender, Unit HoveredUnit)
         {
             if (SelectedUnit != null &&
                 ((SelectedUnit.Race == RaceTypes.Horde && HordeTurn) || (SelectedUnit.Race == RaceTypes.Alliance && !HordeTurn))
@@ -227,8 +230,36 @@ namespace OOPGameWoWChess
                 && SelectedUnit.IsClearWay(HoveredUnit.CurrentPosition))
             {
                 ((sender as Image).Parent as Border).Background = Brushes.Red;
+            }            
+        }
+        private void HighLightPossibleMoves()
+        {
+            for (int i = 0; i < Playfield.Children.Count; i++)
+            {
+                if (Playfield.Children[i] as Border != null)
+                {
+                    int row = (int)Playfield.Children[i].GetValue(Grid.RowProperty);
+                    int col = (int)Playfield.Children[i].GetValue(Grid.ColumnProperty);
+                    if (SelectedUnit.IsCorrectMove(new Point(col, row)) && SelectedUnit.IsClearWay(new Point(col, row))
+                        && SelectedUnit.IsSomeoneAtThisPosition(new Point(col, row)))
+                    {                        
+                        (Playfield.Children[i] as Border).BorderBrush = Brushes.LightCyan;
+                        (Playfield.Children[i] as Border).BorderThickness = new Thickness(5);
+                    } 
+                }
+                
             }
-        }        
+        }
+        private void DownLightPossibleMoves()
+        {
+            for (int i = 0; i < Playfield.Children.Count; i++)
+            {
+                if (Playfield.Children[i] as Border != null)
+                {
+                    (Playfield.Children[i] as Border).BorderBrush = Brushes.Transparent;
+                }
+            }
+        }
         private void DeselectUnit()
         {
             //Unmark the selected item
