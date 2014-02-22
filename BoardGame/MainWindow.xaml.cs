@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using BoardGame.SecretFieldClasses;
 using BoardGame.UnitClasses;
 using BoardGame;
 
@@ -21,10 +22,11 @@ namespace OOPGameWoWChess
             LoadBackgroundImage();
             LoadBackgroundMusic();
             InitializeUnits();
-
-            GenerateSecret();
+            InitializeSecret();
+            SetTurn();
+            SecretField.GenerateSecret(this, secret);
         }
-        
+          
         private bool isMouseCapture;
         private double mouseXOffset;
         private double mouseYOffset;
@@ -32,6 +34,7 @@ namespace OOPGameWoWChess
         private MediaPlayer backgroundMusic = new MediaPlayer();
 
         public static Unit SelectedUnit;
+        public static SecretField secret;
         private bool isSomeUnitSelected;
         private Border selectedBorder;
         private static bool HordeTurn = true;
@@ -43,29 +46,51 @@ namespace OOPGameWoWChess
             Border border = (Border)image.Parent;
             Grid grid = (Grid)border.Parent;
 
-            Unit HoveredUnit = GetUnitOnMousePosition(e.GetPosition(grid), grid);
+            Point coordinates;
 
-            this.Health.Text = "Health: " + HoveredUnit.HealthLevel.ToString();
-            this.Damage.Text = "Attack: " + HoveredUnit.AttackLevel.ToString();
-            this.Level.Text = "Level: " + HoveredUnit.Level.ToString();
+            grid.GetRowColumn(e.GetPosition(grid), out coordinates);
 
-            Image img = new Image();
+            if (secret.CurrentPosition == coordinates)
+            {
+                SetRightSidebarImage(sender);
+            }
 
-            string smallImgSource = (sender as Image).Source.ToString();
+            //Get the hovered image and change the right sidebar image            
+            Unit hoveredUnit = GetUnitOnMousePosition(e.GetPosition(grid), grid);
 
-            string bigImgSource = smallImgSource.Replace("small", "big");
-
-            img.Source = new BitmapImage(new Uri(bigImgSource, UriKind.Absolute));
-
-            this.BigCardImage.Source = img.Source;
-
+            if (hoveredUnit != null)
+            {
+                SetRightSidebarImage(sender);
+                SetRightSidebarStats(hoveredUnit);
+            }
+            else
+            {
+            }
+            
             //Mark enemy's cell border in red 
-            HighLightPossibleEnemy(sender, HoveredUnit);
+            HighLightPossibleEnemy(sender, hoveredUnit);
         }
 
         private void Image_MouseLeave(object sender, MouseEventArgs e)
         {
-            this.BigCardImage.Source = null;
+            if (SelectedUnit != null)
+            {
+                this.BigCardImage.Source = SelectedUnit.BigImage.Source;
+
+                this.Health.Text = "Health: " + SelectedUnit.HealthLevel.ToString();
+                this.Damage.Text = "Attack: " + SelectedUnit.AttackLevel.ToString();
+                this.Defence.Text = "Defence: " + SelectedUnit.CounterAttackLevel.ToString();
+                this.Level.Text = "Level: " + SelectedUnit.Level.ToString();
+            }
+            else
+            {
+                this.BigCardImage.Source = null;
+
+                this.Health.Text = "";
+                this.Damage.Text = "";
+                this.Defence.Text = "";
+                this.Level.Text = "";
+            }
             
             DownLightPossibleMoves();
         }
@@ -82,6 +107,7 @@ namespace OOPGameWoWChess
 
             if (SelectedUnit.Race != RaceTurn)
             {
+                SelectedUnit = null;
                 return;
             }
 
@@ -101,6 +127,12 @@ namespace OOPGameWoWChess
             {
                 SelectedUnit.IsSelected = true;
                 isSomeUnitSelected = true;
+
+                //Get the hovered image and change the right sidebar image            
+                Unit hoveredUnit = GetUnitOnMousePosition(e.GetPosition(grid), grid);
+                SetRightSidebarImage(sender);
+                SetRightSidebarStats(hoveredUnit);
+
                 SelectedUnit.PlaySelectSound();
             }
 
@@ -159,30 +191,42 @@ namespace OOPGameWoWChess
 
             Point coordinates;
 
-            //Get the new position it row and col
-            grid.GetDynamicRowColumn(e.GetPosition(border), SelectedUnit.CurrentPosition, out coordinates);
-
-            //The selected unit current position + calculated coordinates
-            coordinates.X = (int)SelectedUnit.CurrentPosition.X + coordinates.X;
-            coordinates.Y = (int)SelectedUnit.CurrentPosition.Y + coordinates.Y;
-
-            if (SelectedUnit.IsClearWay(new Point(coordinates.X, coordinates.Y)) &&
-                SelectedUnit.IsCorrectMove(new Point(coordinates.X, coordinates.Y)) &&
-                SelectedUnit.IsSomeoneAtThisPosition(new Point(coordinates.X, coordinates.Y)))
+            if (SelectedUnit != null)
             {
-                Grid.SetRow(border, (int)coordinates.Y);
-                Grid.SetColumn(border, (int)coordinates.X);
+                //Get the new position it row and col
+                grid.GetDynamicRowColumn(e.GetPosition(border), SelectedUnit.CurrentPosition, out coordinates);
 
-                //Change the selected unit current position if the unit can move on that position
-                SelectedUnit.CurrentPosition = new Point(coordinates.X, coordinates.Y);
+                //The selected unit current position + calculated coordinates
+                coordinates.X = (int)SelectedUnit.CurrentPosition.X + coordinates.X;
+                coordinates.Y = (int)SelectedUnit.CurrentPosition.Y + coordinates.Y;
 
-                DeselectUnit();
+                if (SelectedUnit.IsClearWay(new Point(coordinates.X, coordinates.Y)) &&
+                    SelectedUnit.IsCorrectMove(new Point(coordinates.X, coordinates.Y)) &&
+                    SelectedUnit.IsSomeoneAtThisPosition(new Point(coordinates.X, coordinates.Y)))
+                {
+                    Grid.SetRow(border, (int)coordinates.Y);
+                    Grid.SetColumn(border, (int)coordinates.X);
 
-                DownLightPossibleMoves();
+                    //Change the selected unit current position if the unit can move on that position
+                    SelectedUnit.CurrentPosition = new Point(coordinates.X, coordinates.Y);
 
-                ChangeTurn();
+                    //Open the secret field if the coordinates matches
+                    if (secret.CurrentPosition == SelectedUnit.CurrentPosition)
+                    {
+                        secret.OpenSecret(SelectedUnit);
+                        SecretField.GenerateSecret(this, secret);
+                    }
+
+                    DeselectUnit();
+
+                    DownLightPossibleMoves();
+
+                    SetTurn();
+
+                    SelectedUnit = null;
+                }
             }
-
+            
             translateTransform = new TranslateTransform();
 
             translateTransform.X = 0;
@@ -224,7 +268,7 @@ namespace OOPGameWoWChess
             if (successAttack)
             {
                 DeselectUnit();
-                ChangeTurn();
+                SetTurn();
             }
         }
 
@@ -284,10 +328,38 @@ namespace OOPGameWoWChess
             isSomeUnitSelected = false;
         }
 
-        private void ChangeTurn()
+        private void SetTurn()
         {
             HordeTurn = !HordeTurn;
-            this.RaceTurn.Text = HordeTurn ? "Horde on turn" : "Alliance on turn";
+
+            var allianceLogoPath = System.IO.Path.GetFullPath(@"..\..\Resources\Alliance\alliance_turn.png");
+            var hordeLogoPath = System.IO.Path.GetFullPath(@"..\..\Resources\Horde\horde_turn.png");
+
+            BitmapImage allianceLogo = new BitmapImage(new Uri(allianceLogoPath, UriKind.Absolute));
+            BitmapImage hordeLogo = new BitmapImage(new Uri(hordeLogoPath, UriKind.Absolute));
+
+            this.RaceTurn.Source = HordeTurn ? hordeLogo : allianceLogo;
+        }
+
+        public void SetRightSidebarStats(Unit hoveredUnit)
+        {
+            this.Health.Text = "Health: " + hoveredUnit.HealthLevel.ToString();
+            this.Damage.Text = "Attack: " + hoveredUnit.AttackLevel.ToString();
+            this.Defence.Text = "Defence: " + hoveredUnit.CounterAttackLevel.ToString();
+            this.Level.Text = "Level: " + hoveredUnit.Level.ToString();
+        }
+
+        public void SetRightSidebarImage(object sender)
+        {
+            Image img = new Image();
+
+            string smallImgSource = (sender as Image).Source.ToString();
+
+            string bigImgSource = smallImgSource.Replace("small", "big");
+
+            img.Source = new BitmapImage(new Uri(bigImgSource, UriKind.Absolute));
+
+            this.BigCardImage.Source = img.Source;
         }
 
         private Unit GetUnitOnMousePosition(Point position, Grid grid)
@@ -315,7 +387,7 @@ namespace OOPGameWoWChess
             return null;
         }
 
-        private Unit GetUnitOnPosition(Point position)
+        public static Unit GetUnitOnPosition(Point position)
         {
             foreach (var alliance in InitializedTeams.AllianceTeam)
             {
@@ -334,38 +406,6 @@ namespace OOPGameWoWChess
             }
 
             return null;
-        }
-
-        private void GenerateSecret()
-        {
-            Random rnd = new Random();
-
-            int col = rnd.Next(7);
-            int row = rnd.Next(7);
-
-            //Implement the code below with class SecretField
-            
-            var path = System.IO.Path.GetFullPath(@"..\..\Resources\Other_graphics\secret_field.png");
-            Border brd = this.SecretField;
-            (brd.Child as Image).Source = new BitmapImage(new Uri(path, UriKind.Absolute));
-
-            while (true)
-            {
-                Unit randomUnit = GetUnitOnPosition(new Point(col, row));
-
-                if (randomUnit == null)
-                {
-                    Grid.SetRow(brd, row);
-                    Grid.SetColumn(brd, col);
-
-                    break;
-
-                    //Let the field to save the secret on this position
-                }
-
-                col = rnd.Next(7);
-                row = rnd.Next(7);
-            }
         }
 
         private void LoadBackgroundImage()
@@ -459,9 +499,11 @@ namespace OOPGameWoWChess
             unitField.Child = (InitializedTeams.HordeTeam[14]).SmallImage;
             unitField = (Border)this.Playfield.FindName("Unit04");
             unitField.Child = (InitializedTeams.HordeTeam[15]).SmallImage;
-
-
-            this.RaceTurn.Text = HordeTurn ? "Horde on turn" : "Alliance on turn";
+        }
+        
+        private void InitializeSecret()
+        {
+            secret = SecretField.GetRandomSecret();
         }
 
         private void LoadBackgroundMusic()

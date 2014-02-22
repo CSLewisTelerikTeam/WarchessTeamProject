@@ -33,6 +33,4 @@ namespace BoardGame.UnitClasses
         void PlaySelectSound();
         void PlayDieSound();
     }
-
-    //TODO IBonus
 }

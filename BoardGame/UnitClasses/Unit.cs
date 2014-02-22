@@ -26,13 +26,11 @@ namespace BoardGame.UnitClasses
         //Properties over private fields, in case need of data validation
         public UnitTypes Type { get; set; }
         public RaceTypes Race { get; set; }
-
         public double HealthLevel
         {
             get {return this.healthLevel;}
             set {this.healthLevel = value; }
         }
-
         public double AttackLevel
         {
             get { return this.attackLevel; }
