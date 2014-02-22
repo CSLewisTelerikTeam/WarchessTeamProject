@@ -16,9 +16,8 @@ namespace BoardGame.UnitClasses
         public const int InitialHealthLevel = 12;
 
         //Unit constructor
-        public AlliancePriest(Point currentPosition)
-            : base(UnitTypes.Priest, InitialHealthLevel, InitialAttackLevel, InitialAttackLevel / 2,
-                       0, true, currentPosition, false)
+        public AlliancePriest(Point currentPosition) : base(UnitTypes.Priest, InitialHealthLevel, InitialAttackLevel, InitialAttackLevel / 2,
+        0, true, currentPosition, false)
         {
             this.SmallImage = new Image();
             this.BigImage = new Image();
@@ -69,10 +68,13 @@ namespace BoardGame.UnitClasses
                 //if the priest has 1 health, he cant restore 2 health
                 if (this.HealthLevel == 1)
                 {
+                    //if (objectToHeal.HealthLevel + 1 >= objectToHeal.InitialHealthLevel)
+                    //{
+                    //    objectToHeal = objectToHeal.InitialHealth;
+                    //}
                     objectToHeal.HealthLevel++;
                     this.HealthLevel -= 1;
                 }
-
                 else
                 {
                     objectToHeal.HealthLevel += 2;
@@ -83,6 +85,9 @@ namespace BoardGame.UnitClasses
                 if (this.HealthLevel <= 0)
                 {
                     this.IsAlive = false;
+                    this.SmallImage.Source = new BitmapImage();
+                    (this.SmallImage.Parent as Border).Background = null;
+                    this.CurrentPosition = new Point(-1, -1);
                 }
             }
         }

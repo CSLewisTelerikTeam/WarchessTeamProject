@@ -252,6 +252,11 @@ namespace OOPGameWoWChess
             Unit targetUnit = GetUnitOnMousePosition(e.GetPosition(grid), grid);
             bool successAttack = false;
 
+            if (SelectedUnit == null)
+            {
+                return;
+            }
+           
             if (SelectedUnit.GetType().BaseType.Name != targetUnit.GetType().BaseType.Name)
             {
                 SelectedUnit.Attack(targetUnit, out successAttack);
@@ -259,10 +264,14 @@ namespace OOPGameWoWChess
             else if (SelectedUnit.Type == UnitTypes.Shaman)
             {
                 (SelectedUnit as HordeShaman).Heal(targetUnit);
+                DeselectUnit();
+                SetTurn();
             }
             else if (SelectedUnit.Type == UnitTypes.Priest)
             {
                 (SelectedUnit as AlliancePriest).Heal(targetUnit);
+                DeselectUnit();
+                SetTurn();
             }
 
             if (successAttack)

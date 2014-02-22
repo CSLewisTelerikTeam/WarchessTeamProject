@@ -117,7 +117,6 @@ namespace BoardGame.UnitClasses
 
                     targetUnit.SmallImage.Source = new BitmapImage();
                     (targetUnit.SmallImage.Parent as Border).Background = null;
-
                     targetUnit.CurrentPosition = new Point(-1, -1);
 
                     this.SmallImage.Source = new BitmapImage();

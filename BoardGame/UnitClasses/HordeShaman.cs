@@ -80,6 +80,9 @@ namespace BoardGame.UnitClasses
                 if (this.HealthLevel <= 0)
                 {
                     this.IsAlive = false;
+                    this.SmallImage.Source = new BitmapImage();
+                    (this.SmallImage.Parent as Border).Background = null;
+                    this.CurrentPosition = new Point(-1, -1);
                 }
             }
         }
