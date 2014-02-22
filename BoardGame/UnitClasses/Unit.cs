@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using OOPGameWoWChess;
+using System.Windows.Media.Imaging;
 
 namespace BoardGame.UnitClasses
 {
@@ -116,12 +117,12 @@ namespace BoardGame.UnitClasses
                     this.PlayDieSound();
                     targetUnit.PlayDieSound();
 
-                    targetUnit.SmallImage.Source = null;
+                    targetUnit.SmallImage.Source = new BitmapImage();
                     (targetUnit.SmallImage.Parent as Border).Background = null;
 
                     targetUnit.CurrentPosition = new Point(-1, -1);
 
-                    this.SmallImage.Source = null;
+                    this.SmallImage.Source = new BitmapImage();
                     (targetUnit.SmallImage.Parent as Border).Background = null;
                     this.CurrentPosition = new Point(-1, -1);
                     return;                        
@@ -133,11 +134,10 @@ namespace BoardGame.UnitClasses
 
                     this.Level++;
 
-                    targetUnit.SmallImage.Source = null;
+                    targetUnit.SmallImage.Source = new BitmapImage();
                     (targetUnit.SmallImage.Parent as Border).Background = null;
 
                     targetUnit.CurrentPosition = new Point(-1, -1);
-                    
                 }
 
                 if (this.HealthLevel <= 0)
@@ -146,8 +146,8 @@ namespace BoardGame.UnitClasses
 
                     targetUnit.Level++;
 
-                    targetUnit.SmallImage.Source = null;
-                    (targetUnit.SmallImage.Parent as Border).Background = null;
+                    this.SmallImage.Source = new BitmapImage();
+                    (this.SmallImage.Parent as Border).Background = null;
 
                     this.CurrentPosition = new Point(-1, -1);
                 }

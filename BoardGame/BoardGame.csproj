@@ -192,6 +192,10 @@
   <ItemGroup>
     <Content Include="Resources\Background_music\background_music.mp3" />
     <Content Include="Resources\Background_music\start_menu_music.mp3" />
+    <Resource Include="Resources\Other_graphics\backtomenu_hover.png" />
+    <Resource Include="Resources\Other_graphics\backtomenu_unhover.png" />
+    <Resource Include="Resources\Other_graphics\Instructions.png" />
+    <Resource Include="Resources\Other_graphics\secret_field.png" />
     <Content Include="Resources\Unit_Sounds\Alliance\Captain_Attack.mp3" />
     <Content Include="Resources\Unit_Sounds\Alliance\Captain_Death.mp3" />
     <Content Include="Resources\Unit_Sounds\Alliance\Captain_Select.mp3" />
@@ -238,7 +242,6 @@
     <Resource Include="Resources\Other_graphics\button_newgame_hover.png" />
     <Resource Include="Resources\Other_graphics\empty_cell.png" />
     <Resource Include="Resources\Other_graphics\horde_template_square.png" />
-    <Resource Include="Resources\Other_graphics\random_bonus.png" />
     <Resource Include="Resources\Other_graphics\start_screen.png" />
     <Resource Include="Resources\Other_graphics\start_screen_examplebuttons.png" />
     <Resource Include="Resources\Other_graphics\unused_at_the_moment\background-game.png" />

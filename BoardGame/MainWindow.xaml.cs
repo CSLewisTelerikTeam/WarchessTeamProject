@@ -21,6 +21,8 @@ namespace OOPGameWoWChess
             LoadBackgroundImage();
             LoadBackgroundMusic();
             InitializeUnits();
+
+            GenerateSecret();
         }
         
         private bool isMouseCapture;
@@ -41,7 +43,7 @@ namespace OOPGameWoWChess
             Border border = (Border)image.Parent;
             Grid grid = (Grid)border.Parent;
 
-            Unit HoveredUnit = GetUnitOnPosition(e.GetPosition(grid), grid);
+            Unit HoveredUnit = GetUnitOnMousePosition(e.GetPosition(grid), grid);
 
             this.Health.Text = "Health: " + HoveredUnit.HealthLevel.ToString();
             this.Damage.Text = "Attack: " + HoveredUnit.AttackLevel.ToString();
@@ -59,21 +61,22 @@ namespace OOPGameWoWChess
 
             //Mark enemy's cell border in red 
             HighLightPossibleEnemy(sender, HoveredUnit);
-        }        
+        }
 
         private void Image_MouseLeave(object sender, MouseEventArgs e)
         {
             this.BigCardImage.Source = null;
-            ((sender as Image).Parent as Border).Background = Brushes.Transparent;
+            
             DownLightPossibleMoves();
         }
+
         private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             Image image = (Image)sender;
             Border border = (Border)image.Parent;
             Grid grid = (Grid)border.Parent;
 
-            SelectedUnit = GetUnitOnPosition(e.GetPosition(grid), grid);
+            SelectedUnit = GetUnitOnMousePosition(e.GetPosition(grid), grid);
 
             RaceTypes RaceTurn = HordeTurn ? RaceTypes.Horde : RaceTypes.Alliance;
 
@@ -117,6 +120,7 @@ namespace OOPGameWoWChess
 
             HighLightPossibleMoves();
         }
+
         private void Image_MouseMove(object sender, MouseEventArgs e)
         {
             if (!isSomeUnitSelected)
@@ -138,6 +142,7 @@ namespace OOPGameWoWChess
                 image.RenderTransform = translateTransform;
             }
         }
+
         private void Image_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             if (translateTransform == null)
@@ -161,9 +166,9 @@ namespace OOPGameWoWChess
             coordinates.X = (int)SelectedUnit.CurrentPosition.X + coordinates.X;
             coordinates.Y = (int)SelectedUnit.CurrentPosition.Y + coordinates.Y;
 
-            if (SelectedUnit.IsClearWay(new Point(coordinates.X, coordinates.Y))
-                && SelectedUnit.IsCorrectMove(new Point(coordinates.X, coordinates.Y))
-                && SelectedUnit.IsSomeoneAtThisPosition(new Point(coordinates.X, coordinates.Y)))
+            if (SelectedUnit.IsClearWay(new Point(coordinates.X, coordinates.Y)) &&
+                SelectedUnit.IsCorrectMove(new Point(coordinates.X, coordinates.Y)) &&
+                SelectedUnit.IsSomeoneAtThisPosition(new Point(coordinates.X, coordinates.Y)))
             {
                 Grid.SetRow(border, (int)coordinates.Y);
                 Grid.SetColumn(border, (int)coordinates.X);
@@ -172,6 +177,8 @@ namespace OOPGameWoWChess
                 SelectedUnit.CurrentPosition = new Point(coordinates.X, coordinates.Y);
 
                 DeselectUnit();
+
+                DownLightPossibleMoves();
 
                 ChangeTurn();
             }
@@ -186,6 +193,7 @@ namespace OOPGameWoWChess
 
             image.RenderTransform = translateTransform;            
         }
+
         private void Image_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (!isSomeUnitSelected)
@@ -197,7 +205,7 @@ namespace OOPGameWoWChess
             Border border = (Border)image.Parent;
             Grid grid = (Grid)border.Parent;
 
-            Unit targetUnit = GetUnitOnPosition(e.GetPosition(grid), grid);
+            Unit targetUnit = GetUnitOnMousePosition(e.GetPosition(grid), grid);
             bool successAttack = false;
 
             if (SelectedUnit.GetType().BaseType.Name != targetUnit.GetType().BaseType.Name)
@@ -218,20 +226,21 @@ namespace OOPGameWoWChess
                 DeselectUnit();
                 ChangeTurn();
             }
-            
         }
 
         private void HighLightPossibleEnemy(object sender, Unit HoveredUnit)
         {
             if (SelectedUnit != null &&
-                ((SelectedUnit.Race == RaceTypes.Horde && HordeTurn) || (SelectedUnit.Race == RaceTypes.Alliance && !HordeTurn))
-                && (SelectedUnit.Race != HoveredUnit.Race)
-                && SelectedUnit.IsCorrectMove(HoveredUnit.CurrentPosition)
-                && SelectedUnit.IsClearWay(HoveredUnit.CurrentPosition))
+                ((SelectedUnit.Race == RaceTypes.Horde && HordeTurn) || (SelectedUnit.Race == RaceTypes.Alliance && !HordeTurn)) &&
+                (SelectedUnit.Race != HoveredUnit.Race) &&
+                SelectedUnit.IsCorrectMove(HoveredUnit.CurrentPosition) &&
+                SelectedUnit.IsClearWay(HoveredUnit.CurrentPosition))
             {
-                ((sender as Image).Parent as Border).Background = Brushes.Red;
-            }            
+                ((sender as Image).Parent as Border).BorderBrush = Brushes.Red;
+                ((sender as Image).Parent as Border).BorderThickness = new Thickness(2);
+            }
         }
+
         private void HighLightPossibleMoves()
         {
             for (int i = 0; i < Playfield.Children.Count; i++)
@@ -240,15 +249,16 @@ namespace OOPGameWoWChess
                 {
                     int row = (int)Playfield.Children[i].GetValue(Grid.RowProperty);
                     int col = (int)Playfield.Children[i].GetValue(Grid.ColumnProperty);
-                    if (SelectedUnit.IsCorrectMove(new Point(col, row)) && SelectedUnit.IsClearWay(new Point(col, row))
-                        && SelectedUnit.IsSomeoneAtThisPosition(new Point(col, row)))
-                    {                        
-                        (Playfield.Children[i] as Border).BorderBrush = Brushes.LightCyan;
-                        (Playfield.Children[i] as Border).BorderThickness = new Thickness(5);
-                    } 
-                }                
-            }            
+                    if (SelectedUnit.IsCorrectMove(new Point(col, row)) && SelectedUnit.IsClearWay(new Point(col, row)) &&
+                        SelectedUnit.IsSomeoneAtThisPosition(new Point(col, row)))
+                    { 
+                        (Playfield.Children[i] as Border).BorderBrush = Brushes.LightGreen;
+                        (Playfield.Children[i] as Border).BorderThickness = new Thickness(2);
+                    }
+                }
+            }
         }
+
         private void DownLightPossibleMoves()
         {
             for (int i = 0; i < Playfield.Children.Count; i++)
@@ -259,6 +269,7 @@ namespace OOPGameWoWChess
                 }
             }
         }
+
         private void DeselectUnit()
         {
             //Unmark the selected item
@@ -272,12 +283,14 @@ namespace OOPGameWoWChess
             SelectedUnit.IsSelected = false;
             isSomeUnitSelected = false;
         }
+
         private void ChangeTurn()
         {
             HordeTurn = !HordeTurn;
             this.RaceTurn.Text = HordeTurn ? "Horde on turn" : "Alliance on turn";
         }
-        private Unit GetUnitOnPosition(Point position, Grid grid)
+
+        private Unit GetUnitOnMousePosition(Point position, Grid grid)
         {
             Point coordinates;
 
@@ -301,25 +314,77 @@ namespace OOPGameWoWChess
 
             return null;
         }
+
+        private Unit GetUnitOnPosition(Point position)
+        {
+            foreach (var alliance in InitializedTeams.AllianceTeam)
+            {
+                if (alliance.CurrentPosition == position)
+                {
+                    return alliance;
+                }
+            }
+
+            foreach (var horde in InitializedTeams.HordeTeam)
+            {
+                if (horde.CurrentPosition == position)
+                {
+                    return horde;
+                }
+            }
+
+            return null;
+        }
+
+        private void GenerateSecret()
+        {
+            Random rnd = new Random();
+
+            int col = rnd.Next(7);
+            int row = rnd.Next(7);
+
+            //Implement the code below with class SecretField
+            
+            var path = System.IO.Path.GetFullPath(@"..\..\Resources\Other_graphics\secret_field.png");
+            Border brd = this.SecretField;
+            (brd.Child as Image).Source = new BitmapImage(new Uri(path, UriKind.Absolute));
+
+            while (true)
+            {
+                Unit randomUnit = GetUnitOnPosition(new Point(col, row));
+
+                if (randomUnit == null)
+                {
+                    Grid.SetRow(brd, row);
+                    Grid.SetColumn(brd, col);
+
+                    break;
+
+                    //Let the field to save the secret on this position
+                }
+
+                col = rnd.Next(7);
+                row = rnd.Next(7);
+            }
+        }
+
         private void LoadBackgroundImage()
         {
             ImageBrush myBrush = new ImageBrush();
             var path = System.IO.Path.GetFullPath(@"..\..\Resources\Other_graphics\background_image.png");
             myBrush.ImageSource = new BitmapImage(new Uri(path, UriKind.Absolute));
             this.Background = myBrush;
+            
+            path = System.IO.Path.GetFullPath(@"..\..\Resources\Other_graphics\empty_cell.png");
 
-            this.RaceTurn.Text = HordeTurn ? "Horde on turn" : "Alliance on turn";
-
-            //path = System.IO.Path.GetFullPath(@"..\..\Resources\Other_graphics\empty_cell.png");
-
-            //foreach (var child in this.Playfield.Children)
-            //{
-            //    (child as Border).Background = new ImageBrush(new BitmapImage(new Uri(path, UriKind.Absolute)));
-            //}
-
-            //Implement the intialization logic for the backgrounds on each field
-           
+            foreach (var child in this.Playfield.Children)
+            {
+                (child as Border).BorderThickness = new Thickness(2);
+                (child as Border).BorderBrush = null;
+                (child as Border).Background = new ImageBrush(new BitmapImage(new Uri(path, UriKind.Absolute)));
+            }
         }
+
         private void InitializeUnits()
         {
             //Alliance initialization
@@ -394,7 +459,11 @@ namespace OOPGameWoWChess
             unitField.Child = (InitializedTeams.HordeTeam[14]).SmallImage;
             unitField = (Border)this.Playfield.FindName("Unit04");
             unitField.Child = (InitializedTeams.HordeTeam[15]).SmallImage;
+
+
+            this.RaceTurn.Text = HordeTurn ? "Horde on turn" : "Alliance on turn";
         }
+
         private void LoadBackgroundMusic()
         {
             var path = System.IO.Path.GetFullPath(@"..\..\Resources\Background_music\background_music.mp3");
@@ -402,11 +471,11 @@ namespace OOPGameWoWChess
             backgroundMusic.MediaEnded += new EventHandler(Media_Ended);
             backgroundMusic.Play();
         }
+
         private void Media_Ended(object sender, EventArgs e)
         {
             backgroundMusic.Position = TimeSpan.Zero;
             backgroundMusic.Play();
-        }   
-        
+        }
     }
 }
