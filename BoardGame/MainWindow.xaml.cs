@@ -23,8 +23,8 @@ namespace OOPGameWoWChess
             LoadBackgroundMusic();
             InitializeUnits();
             InitializeSecret();
-            SetTurn();
             SecretField.GenerateSecret(this, secret);
+            SetTurn();
         }
           
         private bool isMouseCapture;

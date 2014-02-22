@@ -40,10 +40,9 @@
             </Grid.ColumnDefinitions>
             
             <Border Grid.Row="0" Grid.Column="0" 
-                    Name="Secret" 
-                    MouseEnter="Image_MouseEnter" 
-                    MouseLeave="Image_MouseLeave">
-                <Image></Image>
+                    Name="Secret">
+                <Image MouseEnter="Image_MouseEnter" 
+                       MouseLeave="Image_MouseLeave"></Image>
             </Border>
 
             <Border Grid.Row="0" Grid.Column="0" 

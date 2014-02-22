@@ -6,55 +6,20 @@
 
     <Canvas>
         <Border Canvas.Left="700" Canvas.Top="10" Width="260" Height="70"
-                Name="Play" MouseEnter="Border_MouseEnter" 
-                MouseLeave="Border_MouseLeave">
-            <Image Width="260" Height="70">
-            </Image>
+                Name="Play">
+            <Image></Image>
         </Border>
 
         <Border Canvas.Left="700" Canvas.Top="90" Width="260" Height="70"
-                Name="Instructions"  MouseEnter="Border_MouseEnter"
-                MouseLeave="Border_MouseLeave">
+                Name="Instructions">
             <Image>
             </Image>
         </Border>
 
         <Border Canvas.Left="700" Canvas.Top="170" Width="260" Height="70"
-                Name="Exit" MouseEnter="Border_MouseEnter"
-                MouseLeave="Border_MouseLeave">
+                Name="Exit">
             <Image>
             </Image>
         </Border>
-
     </Canvas>
-    <!--<Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <Border Grid.Row="0" Grid.Column="0"
-            Name="Play">
-            <Image MouseEnter="Image_MouseEnter"
-                   MouseLeave="Image_MouseLeave">
-            </Image>
-        </Border>
-
-        <Border Grid.Row="1" Grid.Column="0"
-            Name="Instructions">
-            <Image MouseEnter="Image_MouseEnter"
-                   MouseLeave="Image_MouseLeave">
-            </Image>
-        </Border>
-
-        <Border Grid.Row="2" Grid.Column="0"
-            Name="Exit">
-            <Image MouseEnter="Image_MouseEnter"
-                   MouseLeave="Image_MouseLeave">
-            </Image>
-        </Border>
-    </Grid>-->
 </Window>

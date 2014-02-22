@@ -1,0 +1,13 @@
+﻿<Window x:Class="BoardGame.Instructions"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Instructions" Width="1024" Height="768"
+        WindowStyle="None" WindowState="Maximized">
+    
+    <Canvas>
+        <Border Canvas.Left="50" Canvas.Top="10" Width="260" Height="70"
+                Name="Back">
+            <Image></Image>
+        </Border>
+    </Canvas>
+</Window>
