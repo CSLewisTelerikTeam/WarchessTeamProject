@@ -128,13 +128,17 @@ namespace BoardGame.UnitClasses
                 if (targetUnit.HealthLevel <= 0)
                 {
                     targetUnit.PlayDieSound();
-
+                    targetUnit.IsAlive = false;
                     this.Level++;
 
                     targetUnit.SmallImage.Source = new BitmapImage();
                     (targetUnit.SmallImage.Parent as Border).Background = null;
-
+                    
+                    this.CurrentPosition = targetUnit.CurrentPosition;
                     targetUnit.CurrentPosition = new Point(-1, -1);
+
+                    Grid.SetRow(this.SmallImage.Parent as Border, (int)this.CurrentPosition.Y);
+                    Grid.SetColumn(this.SmallImage.Parent as Border, (int)this.CurrentPosition.X);
                 }
 
                 if (this.HealthLevel <= 0)
