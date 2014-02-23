@@ -66,9 +66,17 @@ namespace OOPGameWoWChess
             else
             {
             }
-            
-            //Mark enemy's cell border in red 
-            HighLightPossibleEnemy(sender, hoveredUnit);
+
+            if (SelectedUnit != null && (SelectedUnit.Type == UnitTypes.Priest || SelectedUnit.Type == UnitTypes.Shaman))
+            {
+                //Mark object's cell border in blue 
+                HighLightPossibleObjectToHeal(sender, hoveredUnit);
+            }
+            else
+            {
+                //Mark enemy's cell border in red 
+                HighLightPossibleEnemy(sender, hoveredUnit);
+            }
         }
 
         private void Image_MouseLeave(object sender, MouseEventArgs e)
@@ -246,6 +254,7 @@ namespace OOPGameWoWChess
 
             Unit targetUnit = GetUnitOnMousePosition(e.GetPosition(grid), grid);
             bool successAttack = false;
+            bool successHeal;
 
             if (SelectedUnit == null)
             {
@@ -258,15 +267,21 @@ namespace OOPGameWoWChess
             }
             else if (SelectedUnit.Type == UnitTypes.Shaman)
             {
-                (SelectedUnit as HordeShaman).Heal(targetUnit);
-                DeselectUnit();
-                SetTurn();
+                (SelectedUnit as HordeShaman).Heal(targetUnit, out successHeal);
+                if (successHeal)
+                {
+                    DeselectUnit();
+                    SetTurn();
+                }
             }
             else if (SelectedUnit.Type == UnitTypes.Priest)
             {
-                (SelectedUnit as AlliancePriest).Heal(targetUnit);
-                DeselectUnit();
-                SetTurn();
+                (SelectedUnit as AlliancePriest).Heal(targetUnit, out successHeal);
+                if (successHeal)
+                {
+                    DeselectUnit();
+                    SetTurn();
+                }
             }
 
             if (successAttack)
@@ -285,6 +300,15 @@ namespace OOPGameWoWChess
                 SelectedUnit.IsClearWay(HoveredUnit.CurrentPosition))
             {
                 ((sender as Image).Parent as Border).BorderBrush = Brushes.Red;
+                ((sender as Image).Parent as Border).BorderThickness = new Thickness(2);
+            }
+        }
+
+        private void HighLightPossibleObjectToHeal(object sender, Unit HoveredUnit)
+        {
+            if ((SelectedUnit.Race == HoveredUnit.Race) && HoveredUnit.HealthLevel < HoveredUnit.MaxHealthLevel)
+            {
+                ((sender as Image).Parent as Border).BorderBrush = Brushes.DeepSkyBlue;
                 ((sender as Image).Parent as Border).BorderThickness = new Thickness(2);
             }
         }

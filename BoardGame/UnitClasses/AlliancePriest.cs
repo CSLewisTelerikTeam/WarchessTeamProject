@@ -57,8 +57,9 @@ namespace BoardGame.UnitClasses
             return false;
         }
                 
-        public void Heal(Unit objectToHeal)
+        public void Heal(Unit objectToHeal, out bool healSuccess)
         {
+            healSuccess = true;
             //Healing method. "objectToHeal" is the unit that will be healed.
             if (this.HealthLevel > 0)
             {
@@ -68,6 +69,7 @@ namespace BoardGame.UnitClasses
                 {
                     if (objectToHeal.HealthLevel == objectToHeal.MaxHealthLevel)
                     {
+                        healSuccess = false;
                         return;
                     }
 
@@ -86,6 +88,7 @@ namespace BoardGame.UnitClasses
                 {
                     if (objectToHeal.HealthLevel == objectToHeal.MaxHealthLevel)
                     {
+                        healSuccess = false;
                         return;
                     }
 

@@ -24,7 +24,7 @@ namespace BoardGame.UnitClasses
 
     interface IHealing
     {
-        void Heal(Unit objectToHeal);
+        void Heal(Unit objectToHeal, out bool successHeal);
     }
 
     interface ISound
