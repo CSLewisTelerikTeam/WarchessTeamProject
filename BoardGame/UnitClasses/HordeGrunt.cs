@@ -1,11 +1,10 @@
-﻿using System;
-using System.Linq;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media.Imaging;
-
-namespace BoardGame.UnitClasses
+﻿namespace BoardGame.UnitClasses
 {
+    using System;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Media.Imaging;
+    
     class HordeGrunt : RaceHorde
     {
         //Attack & Health start values
@@ -13,9 +12,8 @@ namespace BoardGame.UnitClasses
         private const int Health = 4;
 
         //Unit constructor
-        public HordeGrunt(Point currentPosition)
-            : base(UnitTypes.Grunt, Health, Attack,
-                       0, true, currentPosition, false)
+        public HordeGrunt(Point currentPosition) : base(UnitTypes.Grunt, Health, Attack,
+        0, true, currentPosition, false)
         {
             this.SmallImage = new Image();
             this.BigImage = new Image();

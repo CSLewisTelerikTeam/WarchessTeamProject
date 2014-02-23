@@ -1,21 +1,19 @@
-﻿using System;
-using System.Linq;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media.Imaging;
-
-namespace BoardGame.UnitClasses
+﻿namespace BoardGame.UnitClasses
 {
+    using System;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Media.Imaging;
+
     class AllianceCaptain : RaceAlliance, IMoveable
-    {        
+    {
         //Attack & Health start values
         private const int Attack = 6;
         private const int Health = 6;
 
         //Unit constructor
-        public AllianceCaptain(Point currentPosition) 
-                : base(UnitTypes.Captain, Health, Attack,
-                       0, true, currentPosition, false)
+        public AllianceCaptain(Point currentPosition) : base(UnitTypes.Captain, Health, Attack,
+        0, true, currentPosition, false)
         {
             this.SmallImage = new Image();
             this.BigImage = new Image();
@@ -24,6 +22,7 @@ namespace BoardGame.UnitClasses
             path = System.IO.Path.GetFullPath(@"..\..\Resources\Alliance\Frames\captain_big.png");
             this.BigImage.Source = new BitmapImage(new Uri(path, UriKind.Absolute));
         }
+
         public override void PlayAttackSound()
         {
             var path = System.IO.Path.GetFullPath(@"..\..\Resources\Unit_Sounds\Alliance\Captain_Attack.mp3");
@@ -54,7 +53,7 @@ namespace BoardGame.UnitClasses
             {
                 return true;
             }
-            return false;            
+            return false;
         }
 
         public override bool IsClearWay(Point destination)
@@ -68,7 +67,7 @@ namespace BoardGame.UnitClasses
                 double currentRow = this.CurrentPosition.Y;
                 double currentCol = this.CurrentPosition.X;
 
-                for (int i = 0; i < Math.Abs(deltaRow) -1; i++)
+                for (int i = 0; i < Math.Abs(deltaRow) - 1; i++)
                 {
                     if (deltaRow < 0 && deltaCol < 0)
                     {
@@ -90,8 +89,6 @@ namespace BoardGame.UnitClasses
                                 return false;
                             }
                         }
-
-
                     }
                     else if (deltaRow < 0 && deltaCol > 0)
                     {
@@ -112,8 +109,6 @@ namespace BoardGame.UnitClasses
                                 return false;
                             }
                         }
-
-
                     }
                     else if (deltaRow > 0 && deltaCol > 0)
                     {
@@ -134,8 +129,6 @@ namespace BoardGame.UnitClasses
                                 return false;
                             }
                         }
-
-
                     }
                     else if (deltaRow > 0 && deltaCol < 0)
                     {
@@ -156,18 +149,13 @@ namespace BoardGame.UnitClasses
                                 return false;
                             }
                         }
-
-
                     }
-
                 }
 
                 return true;
             }
 
-
             return false;
         }
-                        
     }
 }

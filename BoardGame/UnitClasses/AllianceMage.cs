@@ -1,21 +1,19 @@
-﻿using System;
-using System.Linq;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media.Imaging;
-
-namespace BoardGame.UnitClasses
+﻿namespace BoardGame.UnitClasses
 {
-    class AllianceMage :RaceAlliance, IMoveable
+    using System;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Media.Imaging;
+
+    class AllianceMage : RaceAlliance, IMoveable
     {
         //Attack & Health start values
         private const int Attack = 4;
         private const int Health = 6;
 
         //Unit constructor
-        public AllianceMage(Point currentPosition) 
-            : base(UnitTypes.Mage, Health, Attack,
-                       0, true, currentPosition, false)
+        public AllianceMage(Point currentPosition) : base(UnitTypes.Mage, Health, Attack,
+        0, true, currentPosition, false)
         {
             this.SmallImage = new Image();
             this.BigImage = new Image();
@@ -65,6 +63,5 @@ namespace BoardGame.UnitClasses
 
             return false;
         }
-        
     }
 }

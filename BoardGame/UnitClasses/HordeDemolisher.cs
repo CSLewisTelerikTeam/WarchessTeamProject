@@ -1,11 +1,10 @@
-﻿using System;
-using System.Linq;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media.Imaging;
-
-namespace BoardGame.UnitClasses
+﻿namespace BoardGame.UnitClasses
 {
+    using System;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Media.Imaging;
+    
     class HordeDemolisher : RaceHorde
     {
         //Attack & Health start values
@@ -13,9 +12,8 @@ namespace BoardGame.UnitClasses
         private const int Health = 8;
 
         //Unit constructor
-        public HordeDemolisher(Point currentPosition)
-            : base(UnitTypes.Demolisher, Health, Attack,
-                       0, true, currentPosition, false)
+        public HordeDemolisher(Point currentPosition) : base(UnitTypes.Demolisher, Health, Attack,
+        0, true, currentPosition, false)
         {
             this.SmallImage = new Image();
             this.BigImage = new Image();
@@ -49,10 +47,8 @@ namespace BoardGame.UnitClasses
 
         public override bool IsClearWay(Point destination)
         {
-
             double deltaRow = destination.Y - this.CurrentPosition.Y;
             double deltaCol = destination.X - this.CurrentPosition.X;
-
 
             if (deltaCol == 0)
             {
@@ -85,8 +81,6 @@ namespace BoardGame.UnitClasses
                             return false;
                         }
                     }
-
-
                 }
 
                 return true;

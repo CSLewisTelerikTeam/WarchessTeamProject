@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
-using OOPGameWoWChess;
-using System.Windows.Media.Imaging;
-
-namespace BoardGame.UnitClasses
+﻿namespace BoardGame.UnitClasses
 {
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Media;
+    using System.Windows.Media.Imaging;
+
     //Abstract class Unit, parent for both races and all units. 
     //Unit class can't make any instances
     //Some comments added
@@ -23,18 +18,31 @@ namespace BoardGame.UnitClasses
 
         //Properties over private fields, in case need of data validation
         public UnitTypes Type { get; set; }
+
         public RaceTypes Race { get; set; }
-        public int HealthLevel { get; set;}
-        public int InitialHealthLevel { get; set;}
-        public int MaxHealthLevel { get; set;}
+
+        public int HealthLevel { get; set; }
+
+        public int InitialHealthLevel { get; set; }
+
+        public int MaxHealthLevel { get; set; }
+
         public int AttackLevel { get; set; }
+
         public int InitialAttackLevel { get; set; }
+
         public int MaxAttackLevel { get; set; }
+
         public int CounterAttackLevel { get; set; }
+
         public int Level { get; set; }
+
         public bool IsAlive { get; set; }
+
         public Point CurrentPosition { get; set; }
+
         public bool IsSelected { get; set; }
+
         public Image SmallImage
         {
             get
@@ -46,6 +54,7 @@ namespace BoardGame.UnitClasses
                 this.smallImage = value;
             }
         }
+
         public Image BigImage
         {
             get
@@ -85,7 +94,9 @@ namespace BoardGame.UnitClasses
 
         //Methods
         public abstract bool IsCorrectMove(Point destination);
+
         public abstract bool IsClearWay(Point destination);
+
         public bool IsSomeoneAtThisPosition(Point destination)
         {
             for (int i = 0; i < InitializedTeams.TeamsCount; i++)
@@ -98,9 +109,11 @@ namespace BoardGame.UnitClasses
             }
             return true;
         }
+
         public void Attack(Unit targetUnit, out bool successAttack)
         {
             successAttack = false;
+
             //Check if the aggresssor could reach the target
             if (this.IsCorrectMove(targetUnit.CurrentPosition) && this.IsClearWay(targetUnit.CurrentPosition))
             {
@@ -109,11 +122,11 @@ namespace BoardGame.UnitClasses
                 this.PlayAttackSound();
 
                 if (targetUnit.IsCorrectMove(this.CurrentPosition))
-                {                    
+                { 
                     this.HealthLevel -= targetUnit.CounterAttackLevel;                    
-                }                
+                }
 
-                if (this.HealthLevel <=0 && targetUnit.HealthLevel <=0)
+                if (this.HealthLevel <= 0 && targetUnit.HealthLevel <= 0)
                 {
                     this.PlayDieSound();
                     targetUnit.PlayDieSound();
@@ -166,12 +179,13 @@ namespace BoardGame.UnitClasses
 
                     this.CurrentPosition = new Point(-1, -1);
                 }
-                
             }
-
         }
+
         public abstract void PlayAttackSound();
+
         public abstract void PlaySelectSound();
+
         public abstract void PlayDieSound();
     }
 }

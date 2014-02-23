@@ -1,11 +1,10 @@
-﻿using System;
-using System.Linq;
-using System.Windows.Controls;
-using System.Windows.Media.Imaging;
-using System.Windows;
-
-namespace BoardGame.UnitClasses
+﻿namespace BoardGame.UnitClasses
 {
+    using System;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Media.Imaging;
+
     class AllianceKing : RaceAlliance, IMoveable
     {
         //Attack & Health start values
@@ -13,9 +12,8 @@ namespace BoardGame.UnitClasses
         private const int Health = 10;
 
         //Unit constructor
-        public AllianceKing(Point currentPosition)
-            : base(UnitTypes.King, Health, Attack,
-                       0, true, currentPosition, false)
+        public AllianceKing(Point currentPosition) : base(UnitTypes.King, Health, Attack,
+        0, true, currentPosition, false)
         {
             this.SmallImage = new Image();
             this.BigImage = new Image();
@@ -81,7 +79,7 @@ namespace BoardGame.UnitClasses
 
                 if (deltaCol < 0)
                 {
-                    for (double currentCol = this.CurrentPosition.X -1; currentCol > destination.X; currentCol--)
+                    for (double currentCol = this.CurrentPosition.X - 1; currentCol > destination.X; currentCol--)
                     {
                         foreach (var unit in InitializedTeams.AllianceTeam)
                         {
@@ -103,7 +101,6 @@ namespace BoardGame.UnitClasses
                     return true;
                 }
             }
-
             //Check vertical line if it's clear to move
             else if (deltaCol == 0)
             {
@@ -154,7 +151,6 @@ namespace BoardGame.UnitClasses
 
                     return true;
                 }
-
             }
             // Check diagonal line if it's clear to move
             else if (Math.Abs(deltaRow) == Math.Abs(deltaCol))
@@ -184,8 +180,6 @@ namespace BoardGame.UnitClasses
                                 return false;
                             }
                         }
-
-
                     }
                     else if (deltaRow < 0 && deltaCol > 0)
                     {
@@ -206,13 +200,12 @@ namespace BoardGame.UnitClasses
                                 return false;
                             }
                         }
-
-
                     }
                     else if (deltaRow > 0 && deltaCol > 0)
                     {
                         currentCol++;
                         currentRow++;
+                        
                         foreach (var unit in InitializedTeams.AllianceTeam)
                         {
                             if (currentRow == unit.CurrentPosition.Y && currentCol == unit.CurrentPosition.X)
@@ -228,13 +221,12 @@ namespace BoardGame.UnitClasses
                                 return false;
                             }
                         }
-
-
                     }
                     else if (deltaRow > 0 && deltaCol < 0)
                     {
                         currentCol--;
                         currentRow++;
+
                         foreach (var unit in InitializedTeams.AllianceTeam)
                         {
                             if (currentRow == unit.CurrentPosition.Y && currentCol == unit.CurrentPosition.X)
@@ -250,10 +242,7 @@ namespace BoardGame.UnitClasses
                                 return false;
                             }
                         }
-
-
                     }
-
                 }
 
                 return true;
@@ -283,8 +272,6 @@ namespace BoardGame.UnitClasses
             {
                 return false;
             }
-            
         }
-        
     }
 }

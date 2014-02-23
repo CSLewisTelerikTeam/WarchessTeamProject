@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-
-namespace BoardGame.UnitClasses
+﻿namespace BoardGame.UnitClasses
 {
+    using System.Windows;
+    
     //Interfaces describe the behavior of the units
     
     interface IMoveable
     {
         //Return true if trip to the destination position is possible
         bool IsCorrectMove(Point destination);
+
         bool IsClearWay(Point destination);
+
         bool IsSomeoneAtThisPosition(Point destination);
     }
 
@@ -30,7 +27,9 @@ namespace BoardGame.UnitClasses
     interface ISound
     {
         void PlayAttackSound();
+
         void PlaySelectSound();
+
         void PlayDieSound();
     }
 }

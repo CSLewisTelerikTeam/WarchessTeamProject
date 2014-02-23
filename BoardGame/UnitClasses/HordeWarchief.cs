@@ -1,11 +1,10 @@
-﻿using System;
-using System.Linq;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media.Imaging;
-
-namespace BoardGame.UnitClasses
+﻿namespace BoardGame.UnitClasses
 {
+    using System;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Media.Imaging;
+    
     class HordeWarchief : RaceHorde
     {
         //Attack & Health start values
@@ -13,9 +12,8 @@ namespace BoardGame.UnitClasses
         private const int Health = 10;
 
         //Unit constructor
-        public HordeWarchief(Point currentPosition)
-            : base(UnitTypes.Warchief, Health, Attack,
-                       0, true, currentPosition, false)
+        public HordeWarchief(Point currentPosition) : base(UnitTypes.Warchief, Health, Attack,
+        0, true, currentPosition, false)
         {
             this.SmallImage = new Image();
             this.BigImage = new Image();
@@ -103,7 +101,6 @@ namespace BoardGame.UnitClasses
                     return true;
                 }
             }
-
             //Check vertical line if it's clear to move
             else if (deltaCol == 0)
             {
@@ -154,7 +151,6 @@ namespace BoardGame.UnitClasses
 
                     return true;
                 }
-
             }
             // Check diagonal line if it's clear to move
             else if (Math.Abs(deltaRow) == Math.Abs(deltaCol))
@@ -184,8 +180,6 @@ namespace BoardGame.UnitClasses
                                 return false;
                             }
                         }
-
-
                     }
                     else if (deltaRow < 0 && deltaCol > 0)
                     {
@@ -206,8 +200,6 @@ namespace BoardGame.UnitClasses
                                 return false;
                             }
                         }
-
-
                     }
                     else if (deltaRow > 0 && deltaCol > 0)
                     {
@@ -228,8 +220,6 @@ namespace BoardGame.UnitClasses
                                 return false;
                             }
                         }
-
-
                     }
                     else if (deltaRow > 0 && deltaCol < 0)
                     {
@@ -250,10 +240,7 @@ namespace BoardGame.UnitClasses
                                 return false;
                             }
                         }
-
-
                     }
-
                 }
 
                 return true;
@@ -283,7 +270,6 @@ namespace BoardGame.UnitClasses
             {
                 return false;
             }
-
         }
     }
 }

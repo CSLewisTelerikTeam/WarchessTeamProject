@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows;
-
-namespace BoardGame.UnitClasses
+﻿namespace BoardGame.UnitClasses
 {
+    using System.Collections.Generic;
+    using System.Windows;
+    
     class InitializedTeams
     {
         public const int TeamsCount = 16;

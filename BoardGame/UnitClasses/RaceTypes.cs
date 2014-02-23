@@ -1,4 +1,8 @@
-﻿public enum RaceTypes
+﻿namespace BoardGame.UnitClasses
 {
-    Alliance, Horde
+    public enum RaceTypes
+    {
+        Alliance,
+        Horde
+    }
 }
