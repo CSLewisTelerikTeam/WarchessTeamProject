@@ -1,4 +1,9 @@
-﻿public enum FieldTypes
+﻿namespace BoardGame.SecretFieldClasses
 {
-    HelpfulField, HarmfulField, NeutralField
+    public enum FieldTypes
+    {
+        HelpfulField,
+        HarmfulField,
+        NeutralField
+    }
 }

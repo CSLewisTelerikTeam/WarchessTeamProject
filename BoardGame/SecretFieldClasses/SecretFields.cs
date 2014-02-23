@@ -1,6 +1,21 @@
-﻿public enum SecretFields
+﻿namespace BoardGame.SecretFieldClasses
 {
-    RandomTeleport, Toughness, ExposedWeakness, Exhaust, Fury, TimeWrap, 
-    DarkHole, Heal, Equality, Meteor, KenovsBaneOfDoom, KostovsBlessingOfWisdom, 
-    MinkovsCurseOfWeakness, GeorgievsShoutOfStrength, BlessingOfGodTelerik 
+    public enum SecretFields
+    {
+        RandomTeleport,
+        Toughness,
+        ExposedWeakness,
+        Exhaust,
+        Fury,
+        TimeWrap, 
+        DarkHole,
+        Heal,
+        Equality,
+        Meteor,
+        KenovsBaneOfDoom,
+        KostovsBlessingOfWisdom, 
+        MinkovsCurseOfWeakness,
+        GeorgievsShoutOfStrength,
+        BlessingOfGodTelerik 
+    }
 }

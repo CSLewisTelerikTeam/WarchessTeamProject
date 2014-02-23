@@ -1,17 +1,18 @@
-﻿using BoardGame.UnitClasses;
-using OOPGameWoWChess;
-using System;
-using System.Linq;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media.Imaging;
-
-namespace BoardGame.SecretFieldClasses
+﻿namespace BoardGame.SecretFieldClasses
 {
+    using BoardGame.UnitClasses;
+    using OOPGameWoWChess;
+    using System;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Media.Imaging;
+    
     public abstract class SecretField : ISecret
     {
         public FieldTypes Type { get; set; }
+
         public SecretFields SecretFieldName { get; set; }
+
         public Point CurrentPosition { get; set; }
 
         public static string smallImgPath = System.IO.Path.GetFullPath(@"..\..\Resources\Other_graphics\secret_field_small.png");
@@ -62,7 +63,6 @@ namespace BoardGame.SecretFieldClasses
             {
                 Unit randomUnit = MainWindow.GetUnitOnPosition(new Point(col, row));
                 secret = GetRandomSecret();
-
 
                 if (randomUnit == null)
                 {

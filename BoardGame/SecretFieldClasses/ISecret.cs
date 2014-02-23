@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-
-namespace BoardGame.SecretFieldClasses
+﻿namespace BoardGame.SecretFieldClasses
 {
     interface ISecret
     {

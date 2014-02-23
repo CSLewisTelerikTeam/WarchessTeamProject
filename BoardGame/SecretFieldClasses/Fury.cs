@@ -1,13 +1,12 @@
-﻿using System;
-using System.Linq;
-using BoardGame.UnitClasses;
-
-namespace BoardGame.SecretFieldClasses
+﻿namespace BoardGame.SecretFieldClasses
 {
+    using BoardGame.UnitClasses;
+    
     class Fury : HelpfulField
     {
         public Fury() : base(SecretFields.Fury)
         {
+
         }
 
         public override void OpenSecret(Unit target)

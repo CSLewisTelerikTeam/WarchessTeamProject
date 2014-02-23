@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-
-namespace BoardGame
+﻿namespace BoardGame
 {
+    using System;
+    using System.Windows;
+    using System.Windows.Controls;
+
     public static class ConvertPixelsToRowCol
     {
         //GeDynamicRowCol is to get the row and col after first move
@@ -19,8 +15,8 @@ namespace BoardGame
             newPoint = new Point();
             
             double total;
-
-            if (mousePos.X >=0)
+            
+            if (mousePos.X >= 0)
             {
                 newPoint.X = -1;
                 total = 0;
@@ -28,10 +24,12 @@ namespace BoardGame
                 for (int i = unitX; i < 8; i++)
                 {
                     ColumnDefinition clm = @this.ColumnDefinitions[i];
+
                     if (mousePos.X < total)
                     {
                         break;
                     }
+
                     newPoint.X++;
                     total += clm.ActualWidth;
                 }
@@ -44,16 +42,18 @@ namespace BoardGame
                 for (int i = unitX; i >= 0; i--)
                 {
                     ColumnDefinition clm = @this.ColumnDefinitions[i];
+
                     if (mousePos.X >= total)
                     {
                         break;
                     }
+
                     newPoint.X--;
                     total -= clm.ActualWidth;
                 }
             }
 
-            if (mousePos.Y >=0)
+            if (mousePos.Y >= 0)
             {
                 newPoint.Y = -1;
                 total = 0;
@@ -61,10 +61,12 @@ namespace BoardGame
                 for (int i = unitY; i < 8; i++)
                 {
                     RowDefinition rowDef = @this.RowDefinitions[i];
+
                     if (mousePos.Y < total)
                     {
                         break;
                     }
+
                     newPoint.Y++;
                     total += rowDef.ActualHeight;
                 }
@@ -77,10 +79,12 @@ namespace BoardGame
                 for (int i = unitY; i >= 0; i--)
                 {
                     RowDefinition rowDef = @this.RowDefinitions[i];
+
                     if (mousePos.Y >= total)
                     {
                         break;
                     }
+
                     newPoint.Y--;
                     total -= rowDef.ActualHeight;
                 }
@@ -91,8 +95,8 @@ namespace BoardGame
         public static void GetRowColumn(this Grid @this, Point mousePos, out Point newPoint)
         {
             newPoint = new Point();
-
             newPoint.X = -1;
+
             double total = 0;
             
             foreach (ColumnDefinition clm in @this.ColumnDefinitions)
@@ -101,9 +105,11 @@ namespace BoardGame
                 {
                     break;
                 }
+
                 newPoint.X++;
                 total += clm.ActualWidth;
             }
+
             newPoint.Y = -1;
             total = 0;
 
@@ -113,6 +119,7 @@ namespace BoardGame
                 {
                     break;
                 }
+                
                 newPoint.Y++;
                 total += rowDef.ActualHeight;
             }

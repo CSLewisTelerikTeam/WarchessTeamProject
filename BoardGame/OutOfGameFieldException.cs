@@ -4,13 +4,13 @@
 
     public class OutOfGameFieldException<T> : ApplicationException
     {
-        private T minRow;
+        //private T minRow;
 
-        private T maxRow;
+        //private T maxRow;
 
-        private T minCol;
+        //private T minCol;
 
-        private T maxCol;
+        //private T maxCol;
 
         public OutOfGameFieldException(T minRow, T maxRow, T minCol, T maxCol)
         {
