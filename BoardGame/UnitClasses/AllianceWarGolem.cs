@@ -3,19 +3,18 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
-using OOPGameWoWChess;
 
 namespace BoardGame.UnitClasses
 {
     class AllianceWarGolem : RaceAlliance, IMoveable
     {
         //Attack & Health start values
-        public const int InitialAttackLevel = 6;
-        public const int InitialHealthLevel = 8;
+        private const int Attack = 6;
+        private const int Health = 8;
 
         //Unit constructor
         public AllianceWarGolem(Point currentPosition)
-            : base(UnitTypes.WarGolem, InitialHealthLevel, InitialAttackLevel, InitialAttackLevel / 2,
+            : base(UnitTypes.WarGolem, Health, Attack,
                        0, true, currentPosition, false)
         {
             this.SmallImage = new Image();

@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
@@ -12,12 +9,12 @@ namespace BoardGame.UnitClasses
     class HordeCommander : RaceHorde
     {
         //Attack & Health start values
-        public const int InitialAttackLevel = 6;
-        public const int InitialHealthLevel = 6;
+        private const int Attack = 6;
+        private const int Health = 6;
 
         //Unit constructor
         public HordeCommander(Point currentPosition)
-            : base(UnitTypes.Commander, InitialHealthLevel, InitialAttackLevel, InitialAttackLevel / 2,
+            : base(UnitTypes.Commander, Health, Attack,
                        0, true, currentPosition, false)
         {
             this.SmallImage = new Image();

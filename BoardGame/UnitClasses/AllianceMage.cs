@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
@@ -12,12 +9,12 @@ namespace BoardGame.UnitClasses
     class AllianceMage :RaceAlliance, IMoveable
     {
         //Attack & Health start values
-        public const int InitialAttackLevel = 4;
-        public const int InitialHealthLevel = 6;
+        private const int Attack = 4;
+        private const int Health = 6;
 
         //Unit constructor
         public AllianceMage(Point currentPosition) 
-            : base(UnitTypes.Mage, InitialHealthLevel, InitialAttackLevel, InitialAttackLevel / 2,
+            : base(UnitTypes.Mage, Health, Attack,
                        0, true, currentPosition, false)
         {
             this.SmallImage = new Image();

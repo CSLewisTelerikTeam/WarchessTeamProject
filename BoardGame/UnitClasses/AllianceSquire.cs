@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
@@ -12,12 +9,12 @@ namespace BoardGame.UnitClasses
     class AllianceSquire : RaceAlliance
     {
         //Attack & Health start values
-        public const int InitialAttackLevel = 4;
-        public const int InitialHealthLevel = 4;
+        private const int Attack = 4;
+        private const int Health = 4;
 
         //Unit constructor
         public AllianceSquire(Point currentPosition)
-            : base(UnitTypes.Squire, InitialHealthLevel, InitialAttackLevel, InitialAttackLevel / 2,
+            : base(UnitTypes.Squire, Health, Attack,
                        0, true, currentPosition, false)
         {
             this.SmallImage = new Image();

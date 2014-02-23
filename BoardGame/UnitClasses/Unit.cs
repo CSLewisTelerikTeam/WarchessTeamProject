@@ -16,9 +16,7 @@ namespace BoardGame.UnitClasses
     //Some other comment
     public abstract class Unit : IMoveable, IAttacking, ISound
     {
-        //Private Fields 
-        private double healthLevel;
-        private double attackLevel;        
+        //Private Fields     
         private Image smallImage;
         private Image bigImage;
         protected MediaPlayer playSound = new MediaPlayer();
@@ -26,17 +24,13 @@ namespace BoardGame.UnitClasses
         //Properties over private fields, in case need of data validation
         public UnitTypes Type { get; set; }
         public RaceTypes Race { get; set; }
-        public double HealthLevel
-        {
-            get {return this.healthLevel;}
-            set {this.healthLevel = value; }
-        }
-        public double AttackLevel
-        {
-            get { return this.attackLevel; }
-            set { this.attackLevel = value; }
-        }
-        public double CounterAttackLevel { get; set; }
+        public int HealthLevel { get; set;}
+        public int InitialHealthLevel { get; set;}
+        public int MaxHealthLevel { get; set;}
+        public int AttackLevel { get; set; }
+        public int InitialAttackLevel { get; set; }
+        public int MaxAttackLevel { get; set; }
+        public int CounterAttackLevel { get; set; }
         public int Level { get; set; }
         public bool IsAlive { get; set; }
         public Point CurrentPosition { get; set; }
@@ -65,15 +59,24 @@ namespace BoardGame.UnitClasses
         }
 
         //Constructors
-        public Unit(UnitTypes type, RaceTypes race, double healthLevel,
-            double attackLevel, double counterAttackLevel, int level,
-            bool isAlive, Point currentPosition, bool isSelected)
+        public Unit(UnitTypes type, RaceTypes race,
+            int initialHealthLevel, int initialAttackLevel,
+            int level, bool isAlive, Point currentPosition, bool isSelected)
         {
             this.Type = type;
             this.Race = race;
-            this.HealthLevel = healthLevel;
-            this.AttackLevel = attackLevel;
-            this.CounterAttackLevel = counterAttackLevel;
+
+            //Current health level, initial health level and max health level are the same int the initialization
+            this.HealthLevel = initialHealthLevel;
+            this.InitialHealthLevel = initialHealthLevel;
+            this.MaxHealthLevel = initialHealthLevel;
+            
+            //Current attack level, initial attack level and max attack level are the same int the initialization
+            this.AttackLevel = initialAttackLevel;
+            this.InitialAttackLevel = initialAttackLevel;
+            this.MaxAttackLevel = initialAttackLevel;
+            this.CounterAttackLevel = initialAttackLevel / 2;
+
             this.Level = level;
             this.IsAlive = isAlive;
             this.CurrentPosition = currentPosition;
@@ -129,7 +132,13 @@ namespace BoardGame.UnitClasses
                 {
                     targetUnit.PlayDieSound();
                     targetUnit.IsAlive = false;
+
+                    //Level up the selected unit and at the same time up its attack and health
                     this.Level++;
+                    this.MaxAttackLevel++;
+                    this.AttackLevel++;
+                    this.MaxHealthLevel++;
+                    this.HealthLevel++;
 
                     targetUnit.SmallImage.Source = new BitmapImage();
                     (targetUnit.SmallImage.Parent as Border).Background = null;
@@ -144,8 +153,13 @@ namespace BoardGame.UnitClasses
                 if (this.HealthLevel <= 0)
                 {
                     this.PlayDieSound();
-
+                    
+                    //Level up the selected unit and at the same time up its attack and health
                     targetUnit.Level++;
+                    targetUnit.MaxAttackLevel++;
+                    targetUnit.AttackLevel++;
+                    targetUnit.MaxHealthLevel++;
+                    targetUnit.HealthLevel++;
 
                     this.SmallImage.Source = new BitmapImage();
                     (this.SmallImage.Parent as Border).Background = null;

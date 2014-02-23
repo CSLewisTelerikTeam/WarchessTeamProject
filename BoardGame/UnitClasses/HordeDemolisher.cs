@@ -9,12 +9,12 @@ namespace BoardGame.UnitClasses
     class HordeDemolisher : RaceHorde
     {
         //Attack & Health start values
-        public const int InitialAttackLevel = 6;
-        public const int InitialHealthLevel = 8;
+        private const int Attack = 6;
+        private const int Health = 8;
 
         //Unit constructor
         public HordeDemolisher(Point currentPosition)
-            : base(UnitTypes.Demolisher, InitialHealthLevel, InitialAttackLevel, InitialAttackLevel / 2,
+            : base(UnitTypes.Demolisher, Health, Attack,
                        0, true, currentPosition, false)
         {
             this.SmallImage = new Image();

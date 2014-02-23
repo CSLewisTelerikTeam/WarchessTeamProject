@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using OOPGameWoWChess;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
-using System.Windows.Input;
 using System.Windows;
 
 namespace BoardGame.UnitClasses
@@ -13,12 +9,12 @@ namespace BoardGame.UnitClasses
     class AllianceKing : RaceAlliance, IMoveable
     {
         //Attack & Health start values
-        public const int InitialAttackLevel = 8;
-        public const int InitialHealthLevel = 10;
+        private const int Attack = 8;
+        private const int Health = 10;
 
         //Unit constructor
         public AllianceKing(Point currentPosition)
-            : base(UnitTypes.King, InitialHealthLevel, InitialAttackLevel, InitialAttackLevel / 2,
+            : base(UnitTypes.King, Health, Attack,
                        0, true, currentPosition, false)
         {
             this.SmallImage = new Image();

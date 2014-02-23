@@ -1,27 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
-using System.Windows.Input;
-using System.Windows.Media;
 
 namespace BoardGame.UnitClasses
 {
     class AllianceCaptain : RaceAlliance, IMoveable
     {        
         //Attack & Health start values
-        public const int InitialAttackLevel = 6;
-        public const int InitialHealthLevel = 6;
-
-        
+        private const int Attack = 6;
+        private const int Health = 6;
 
         //Unit constructor
         public AllianceCaptain(Point currentPosition) 
-                : base(UnitTypes.Captain, InitialHealthLevel, InitialAttackLevel, InitialAttackLevel / 2,
+                : base(UnitTypes.Captain, Health, Attack,
                        0, true, currentPosition, false)
         {
             this.SmallImage = new Image();

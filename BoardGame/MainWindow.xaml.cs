@@ -84,12 +84,7 @@ namespace OOPGameWoWChess
             }
             else
             {
-                this.BigCardImage.Source = null;
-
-                this.Health.Text = "";
-                this.Damage.Text = "";
-                this.Defence.Text = "";
-                this.Level.Text = "";
+                ClearRightSidebar();
             }
             
             DownLightPossibleMoves();
@@ -335,6 +330,16 @@ namespace OOPGameWoWChess
             //Deselect the selected unit
             SelectedUnit.IsSelected = false;
             isSomeUnitSelected = false;
+        }
+
+        private void ClearRightSidebar()
+        {
+            this.BigCardImage.Source = null;
+
+            this.Health.Text = "";
+            this.Damage.Text = "";
+            this.Defence.Text = "";
+            this.Level.Text = "";
         }
 
         private void SetTurn()

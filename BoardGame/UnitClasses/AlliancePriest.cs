@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
@@ -12,12 +9,13 @@ namespace BoardGame.UnitClasses
     class AlliancePriest : RaceAlliance, IHealing
     {
         //Attack & Health start values
-        public const int InitialAttackLevel = 0;
-        public const int InitialHealthLevel = 12;
+        private const int Attack = 0;
+        private const int Health = 12;
 
         //Unit constructor
-        public AlliancePriest(Point currentPosition) : base(UnitTypes.Priest, InitialHealthLevel, InitialAttackLevel, InitialAttackLevel / 2,
-        0, true, currentPosition, false)
+        public AlliancePriest(Point currentPosition) 
+            : base(UnitTypes.Priest, Health, Attack,
+                   0, true, currentPosition, false)
         {
             this.SmallImage = new Image();
             this.BigImage = new Image();
@@ -65,23 +63,45 @@ namespace BoardGame.UnitClasses
             if (this.HealthLevel > 0)
             {
                 //Increase target unit's health level
-                //if the priest has 1 health, he cant restore 2 health
+                //if the priest has 1 health, he can't restore 2 health
                 if (this.HealthLevel == 1)
                 {
-                    //if (objectToHeal.HealthLevel + 1 >= objectToHeal.InitialHealthLevel)
-                    //{
-                    //    objectToHeal = objectToHeal.InitialHealth;
-                    //}
-                    objectToHeal.HealthLevel++;
+                    if (objectToHeal.HealthLevel == objectToHeal.MaxHealthLevel)
+                    {
+                        return;
+                    }
+
+                    if ((objectToHeal.HealthLevel + 1) > objectToHeal.MaxHealthLevel)
+                    {
+                        objectToHeal.HealthLevel = objectToHeal.MaxHealthLevel;
+                    }
+                    else
+                    {
+                        objectToHeal.HealthLevel++;
+                    }
+                    
                     this.HealthLevel -= 1;
                 }
                 else
                 {
-                    objectToHeal.HealthLevel += 2;
-                    this.HealthLevel -= 2;
+                    if (objectToHeal.HealthLevel == objectToHeal.MaxHealthLevel)
+                    {
+                        return;
+                    }
+
+                    if ((objectToHeal.HealthLevel + 2) > objectToHeal.MaxHealthLevel)
+                    {
+                        objectToHeal.HealthLevel = objectToHeal.MaxHealthLevel;
+                        this.HealthLevel -= 1;
+                    }
+                    else
+                    {
+                        objectToHeal.HealthLevel += 2;
+                        this.HealthLevel -= 2;
+                    }
                 }
                 
-                //check if the priest is dead
+                //Check if the priest is dead
                 if (this.HealthLevel <= 0)
                 {
                     this.IsAlive = false;
