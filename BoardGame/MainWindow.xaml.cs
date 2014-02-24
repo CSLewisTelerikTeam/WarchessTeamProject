@@ -194,7 +194,7 @@ namespace OOPGameWoWChess
             image.ReleaseMouseCapture();
             isMouseCapture = false;
 
-            Point coordinates;
+            Point coordinates;            
 
             if (SelectedUnit != null)
             {
@@ -208,22 +208,30 @@ namespace OOPGameWoWChess
                 if (SelectedUnit.IsClearWay(new Point(coordinates.X, coordinates.Y)) &&
                     SelectedUnit.IsCorrectMove(new Point(coordinates.X, coordinates.Y)) &&
                     SelectedUnit.IsSomeoneAtThisPosition(new Point(coordinates.X, coordinates.Y)))
-                {
-                    //if (coordinates.X < 0 || coordinates.Y < 0)
-                    //{
-                    //    throw new OutOfGameFieldException<string>("");
-                    //}
+                {                    
                     try
                     {
+                        if (coordinates.X < 0 || coordinates.X > 7 || 
+                            coordinates.Y <0 || coordinates.Y > 7)
+                        {
+                            throw new OutOfGameFieldException();
+                        }
                         Grid.SetRow(border, (int)coordinates.Y);
                         Grid.SetColumn(border, (int)coordinates.X);
                     }
-                    catch (OutOfGameFieldException<string> ex)
+                    catch (OutOfGameFieldException)
                     {
-                        
-                        throw;
-                    }
-                    
+                        translateTransform = new TranslateTransform();
+
+                        translateTransform.X = 0;
+                        translateTransform.Y = 0;
+
+                        mouseXOffset = 0;
+                        mouseYOffset = 0;
+
+                        image.RenderTransform = translateTransform;            
+                        return;
+                    }                    
 
                     //Change the selected unit current position if the unit can move on that position
                     SelectedUnit.CurrentPosition = new Point(coordinates.X, coordinates.Y);
