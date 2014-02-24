@@ -38,10 +38,12 @@ namespace OOPGameWoWChess
         private bool isSomeUnitSelected;
         private Border selectedBorder;
         private static bool HordeTurn = true;
+        private RaceTypes winner;
         
         private void Image_MouseEnter(object sender, MouseEventArgs e)
         {
             //Get the hovered unit
+
             Image image = (Image)sender;
             Border border = (Border)image.Parent;
             Grid grid = (Grid)border.Parent;
@@ -207,8 +209,21 @@ namespace OOPGameWoWChess
                     SelectedUnit.IsCorrectMove(new Point(coordinates.X, coordinates.Y)) &&
                     SelectedUnit.IsSomeoneAtThisPosition(new Point(coordinates.X, coordinates.Y)))
                 {
-                    Grid.SetRow(border, (int)coordinates.Y);
-                    Grid.SetColumn(border, (int)coordinates.X);
+                    //if (coordinates.X < 0 || coordinates.Y < 0)
+                    //{
+                    //    throw new OutOfGameFieldException<string>("");
+                    //}
+                    try
+                    {
+                        Grid.SetRow(border, (int)coordinates.Y);
+                        Grid.SetColumn(border, (int)coordinates.X);
+                    }
+                    catch (OutOfGameFieldException<string> ex)
+                    {
+                        
+                        throw;
+                    }
+                    
 
                     //Change the selected unit current position if the unit can move on that position
                     SelectedUnit.CurrentPosition = new Point(coordinates.X, coordinates.Y);
@@ -264,6 +279,11 @@ namespace OOPGameWoWChess
             if (SelectedUnit.GetType().BaseType.Name != targetUnit.GetType().BaseType.Name)
             {
                 SelectedUnit.Attack(targetUnit, out successAttack);
+                bool isGameOver = IsGameOver();
+                if (isGameOver)
+                {
+                    GameOver(winner);
+                }
             }
             else if (SelectedUnit.Type == UnitTypes.Shaman)
             {
@@ -288,6 +308,130 @@ namespace OOPGameWoWChess
             {
                 DeselectUnit();
                 SetTurn();
+            }
+        }
+        
+        private void WinButton_MouseEnter(object sender, MouseEventArgs e)
+        {
+            string replacedPath = (sender as Image).Source.ToString().Replace("unhover", "hover");
+            (sender as Image).Source = new BitmapImage(new Uri(replacedPath, UriKind.Absolute));
+        }
+
+        private void WinButton_MouseLeave(object sender, MouseEventArgs e)
+        {
+            string replacedPath = (sender as Image).Source.ToString().Replace("hover", "unhover");
+            (sender as Image).Source = new BitmapImage(new Uri(replacedPath, UriKind.Absolute));
+        }
+
+        private void WinButton_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (((sender as Image).Parent as Border).Name == "PlayAgain")
+            {
+                //Canvas.SetZIndex(this.WinnerScreen, 0);
+                //
+                //InitializeUnits();//Some method to reset the parameters and start the game again
+            }
+            else if (((sender as Image).Parent as Border).Name == "Quit")
+            {
+                Environment.Exit(0);
+            }
+        }
+
+        private void GameOver(RaceTypes winner)
+        {
+            Image playAgainBtn = new Image();
+            var path = System.IO.Path.GetFullPath(@"..\..\Resources\Other_graphics\playagain_unhover.png");
+            playAgainBtn.Source = new BitmapImage(new Uri(path, UriKind.Absolute));
+            this.PlayAgain.Child = playAgainBtn;
+            this.PlayAgain.Child.MouseEnter += new MouseEventHandler(WinButton_MouseEnter);
+            this.PlayAgain.Child.MouseLeave += new MouseEventHandler(WinButton_MouseLeave);
+            this.PlayAgain.Child.MouseLeftButtonDown += new MouseButtonEventHandler(WinButton_MouseLeftButtonDown);
+
+            Image quitButton = new Image();
+            path = System.IO.Path.GetFullPath(@"..\..\Resources\Other_graphics\button_exit_unhover.png");
+            quitButton.Source = new BitmapImage(new Uri(path, UriKind.Absolute));
+            this.Quit.Child = quitButton;
+            this.Quit.Child.MouseEnter += new MouseEventHandler(WinButton_MouseEnter);
+            this.Quit.Child.MouseLeave += new MouseEventHandler(WinButton_MouseLeave);
+            this.Quit.Child.MouseLeftButtonDown += new MouseButtonEventHandler(WinButton_MouseLeftButtonDown);
+
+            Canvas.SetZIndex(this.WinnerScreen, 1);
+
+            ImageBrush img = new ImageBrush();
+
+            if (winner == RaceTypes.Alliance)
+            {
+                path = System.IO.Path.GetFullPath(@"..\..\Resources\Other_graphics\alliance_wins.png");
+                img.ImageSource = new BitmapImage(new Uri(path, UriKind.Absolute));
+                this.WinnerScreen.Background = img;
+                backgroundMusic.Stop();
+                path = System.IO.Path.GetFullPath(@"..\..\Resources\Alliance\alliance_wins.mp3");
+                backgroundMusic.Open(new Uri(path));
+                backgroundMusic.Play();
+                    
+            }
+            else if (winner == RaceTypes.Horde)
+            {
+                path = System.IO.Path.GetFullPath(@"..\..\Resources\Other_graphics\horde_wins.png");
+                img.ImageSource = new BitmapImage(new Uri(path, UriKind.Absolute));
+                this.WinnerScreen.Background = img;
+                backgroundMusic.Stop();
+                path = System.IO.Path.GetFullPath(@"..\..\Resources\Horde\horde_wins.mp3");
+                backgroundMusic.Open(new Uri(path));
+                backgroundMusic.Play();
+            }
+            else
+            {
+                path = System.IO.Path.GetFullPath(@"..\..\Resources\Other_graphics\draw.png");
+                img.ImageSource = new BitmapImage(new Uri(path, UriKind.Absolute));
+                this.WinnerScreen.Background = img;
+                backgroundMusic.Stop();
+                path = System.IO.Path.GetFullPath(@"..\..\Resources\Unit_Sounds\draw.mp3");
+                backgroundMusic.Open(new Uri(path));
+                backgroundMusic.Play();
+            }
+            
+        }
+
+        private bool IsGameOver()
+        {
+            bool isAllianceWinner = false;
+            bool isHordeWinner = false;
+
+            if (!InitializedTeams.AllianceTeam[14].IsAlive && !InitializedTeams.AllianceTeam[15].IsAlive)
+            {
+                isHordeWinner = true;
+            }
+
+            if (!InitializedTeams.HordeTeam[14].IsAlive && !InitializedTeams.HordeTeam[15].IsAlive)
+            {
+                isAllianceWinner = true;
+            }
+
+            if (isAllianceWinner)
+            {
+                if (isHordeWinner)
+                {
+                    winner = RaceTypes.Hybrid;
+                    return true;
+                }
+                else
+                {
+                    winner = RaceTypes.Alliance;
+                    return true;
+                }
+            }
+            else
+            {
+                if (isHordeWinner)
+                {
+                    winner = RaceTypes.Horde;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
 

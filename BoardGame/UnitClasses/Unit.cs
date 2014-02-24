@@ -138,6 +138,10 @@
                     this.SmallImage.Source = new BitmapImage();
                     (targetUnit.SmallImage.Parent as Border).Background = null;
                     this.CurrentPosition = new Point(-1, -1);
+
+                    this.IsAlive = false;
+                    targetUnit.IsAlive = false;
+
                     return;                        
                 }
 
@@ -166,6 +170,7 @@
                 if (this.HealthLevel <= 0)
                 {
                     this.PlayDieSound();
+                    this.IsAlive = false;
                     
                     //Level up the selected unit and at the same time up its attack and health
                     targetUnit.Level++;

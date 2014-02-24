@@ -3,22 +3,31 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Width="1024" Height="768"
         WindowStyle="None" WindowState="Maximized">
-    
-    
+
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="110*"/>
-            <ColumnDefinition Width="38*"/>
-        </Grid.ColumnDefinitions>
 
-
-        <Grid Grid.Row="0" Grid.Column="0"
-              Name="Playfield" ShowGridLines="False"
-              Width="760" Height="760">
+        <Canvas Name="WinnerScreen">
+            <Border Name="PlayAgain" Canvas.Top="350" Width="260" Height="70">
+                <Image></Image>
+            </Border>
+            <Border Name="Quit" Canvas.Top="350" Canvas.Left="760" Width="260" Height="70">
+                <Image></Image>
+            </Border>
+        </Canvas>
+    
+        <Grid Name="Main">
             <Grid.RowDefinitions>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="110*"/>
+                <ColumnDefinition Width="38*"/>
+            </Grid.ColumnDefinitions>
+            
+            <Grid Grid.Row="0" Grid.Column="0"
+                  Name="Playfield" ShowGridLines="False"
+                  Width="760" Height="760">
+                <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
@@ -28,7 +37,7 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
+                <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -38,604 +47,605 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            
-            <Border Grid.Row="0" Grid.Column="0" 
-                    Name="Secret">
-                <Image MouseEnter="Image_MouseEnter" 
-                       MouseLeave="Image_MouseLeave"></Image>
-            </Border>
-
-            <Border Grid.Row="0" Grid.Column="0" 
-                    BorderThickness="1">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="0" Grid.Column="1" 
-                    BorderThickness="1">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="0" Grid.Column="2" 
-                    BorderThickness="1">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="0" Grid.Column="3" 
-                    BorderThickness="1">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="0" Grid.Column="4" 
-                    BorderThickness="1">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="0" Grid.Column="5" 
-                    BorderThickness="1">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="0" Grid.Column="6" 
-                    BorderThickness="1">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="0" Grid.Column="7" 
-                    BorderThickness="1">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="1" Grid.Column="0" 
-                    BorderThickness="1">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="1" Grid.Column="1" 
-                    BorderThickness="1">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="1" Grid.Column="2" 
-                    BorderThickness="1">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="1" Grid.Column="3" 
-                    BorderThickness="1">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="1" Grid.Column="4" 
-                    BorderThickness="1">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="1" Grid.Column="5" 
-                    BorderThickness="1">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="1" Grid.Column="6" 
-                    BorderThickness="1">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="1" Grid.Column="7" 
-                    BorderThickness="1">
-                <Image></Image>
-            </Border>
-            
-            <Border Grid.Row="2" Grid.Column="0" 
-                    BorderThickness="1"
-                    Name="Unit20">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="2" Grid.Column="1" 
-                    BorderThickness="1"
-                    Name="Unit21">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="2" Grid.Column="2" 
-                    BorderThickness="1"
-                    Name="Unit22">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="2" Grid.Column="3" 
-                    BorderThickness="1"
-                    Name="Unit23">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="2" Grid.Column="4" 
-                    BorderThickness="1"
-                    Name="Unit24">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="2" Grid.Column="5" 
-                    BorderThickness="1"
-                    Name="Unit25">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="2" Grid.Column="6" 
-                    BorderThickness="1"
-                    Name="Unit26">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="2" Grid.Column="7" 
-                    BorderThickness="1"
-                    Name="Unit27">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="3" Grid.Column="0" 
-                    BorderThickness="1"                    
-                    Name="Unit30">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="3" Grid.Column="1" 
-                    BorderThickness="1"
-                    Name="Unit31">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="3" Grid.Column="2" 
-                    BorderThickness="1"
-                    Name="Unit32">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="3" Grid.Column="3" 
-                    BorderThickness="1"
-                    Name="Unit33">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="3" Grid.Column="4" 
-                    BorderThickness="1"
-                    Name="Unit34">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="3" Grid.Column="5" 
-                    BorderThickness="1"
-                    Name="Unit35">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="3" Grid.Column="6" 
-                    BorderThickness="1"
-                    Name="Unit36">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="3" Grid.Column="7" 
-                    BorderThickness="1"
-                    Name="Unit37">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="4" Grid.Column="0" 
-                    BorderThickness="1"
-                    Name="Unit40">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="4" Grid.Column="1" 
-                    BorderThickness="1"
-                    Name="Unit41">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="4" Grid.Column="2" 
-                    BorderThickness="1"
-                    Name="Unit42">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="4" Grid.Column="3" 
-                    BorderThickness="1"
-                    Name="Unit43">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="4" Grid.Column="4" 
-                    BorderThickness="1"
-                    Name="Unit44">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="4" Grid.Column="5" 
-                    BorderThickness="1"
-                    Name="Unit45">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="4" Grid.Column="6" 
-                    BorderThickness="1"
-                    Name="Unit46">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="4" Grid.Column="7" 
-                    BorderThickness="1"
-                    Name="Unit47">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="5" Grid.Column="0" 
-                    BorderThickness="1"
-                    Name="Unit50">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="5" Grid.Column="1" 
-                    BorderThickness="1"
-                    Name="Unit51">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="5" Grid.Column="2" 
-                    BorderThickness="1"
-                    Name="Unit52">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="5" Grid.Column="3" 
-                    BorderThickness="1"
-                    Name="Unit53">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="5" Grid.Column="4" 
-                    BorderThickness="1"
-                    Name="Unit54">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="5" Grid.Column="5" 
-                    BorderThickness="1"
-                    Name="Unit55">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="5" Grid.Column="6" 
-                    BorderThickness="1"
-                    Name="Unit56">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="5" Grid.Column="7" 
-                    BorderThickness="1"
-                    Name="Unit57">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="6" Grid.Column="0" 
-                    BorderThickness="1">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="6" Grid.Column="1" 
-                    BorderThickness="1">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="6" Grid.Column="2" 
-                    BorderThickness="1">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="6" Grid.Column="3" 
-                    BorderThickness="1">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="6" Grid.Column="4" 
-                    BorderThickness="1">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="6" Grid.Column="5" 
-                    BorderThickness="1">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="6" Grid.Column="6" 
-                    BorderThickness="1">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="6" Grid.Column="7" 
-                    BorderThickness="1">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="6" Grid.Column="0" 
-                    BorderThickness="1"
-                    Name="Unit60">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="6" Grid.Column="1" 
-                    BorderThickness="1"
-                    Name="Unit61">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="6" Grid.Column="2" 
-                    BorderThickness="1"
-                    Name="Unit62">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="6" Grid.Column="3" 
-                    BorderThickness="1"
-                    Name="Unit63">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="6" Grid.Column="4" 
-                    BorderThickness="1"
-                    Name="Unit64">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="6" Grid.Column="5" 
-                    BorderThickness="1"
-                    Name="Unit65">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="6" Grid.Column="6" 
-                    BorderThickness="1"
-                    Name="Unit66">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="6" Grid.Column="7" 
-                    BorderThickness="1"
-                    Name="Unit67">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="7" Grid.Column="0" 
-                    BorderThickness="1">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="7" Grid.Column="1" 
-                    BorderThickness="1">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="7" Grid.Column="2" 
-                    BorderThickness="1">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="7" Grid.Column="3" 
-                    BorderThickness="1">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="7" Grid.Column="4" 
-                    BorderThickness="1">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="7" Grid.Column="5" 
-                    BorderThickness="1">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="7" Grid.Column="6" 
-                    BorderThickness="1">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="7" Grid.Column="7" 
-                    BorderThickness="1">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="7" Grid.Column="0" 
-                    BorderThickness="1"
-                    Name="Unit70">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="7" Grid.Column="1" 
-                    BorderThickness="1"
-                    Name="Unit71">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="7" Grid.Column="2" 
-                    BorderThickness="1"
-                    Name="Unit72">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="7" Grid.Column="3" 
-                    BorderThickness="1"
-                    Name="Unit73">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="7" Grid.Column="4" 
-                    BorderThickness="1"
-                    Name="Unit74">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="7" Grid.Column="5" 
-                    BorderThickness="1"
-                    Name="Unit75">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="7" Grid.Column="6" 
-                    BorderThickness="1"
-                    Name="Unit76">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="7" Grid.Column="7" 
-                    BorderThickness="1"
-                    Name="Unit77">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="0" Grid.Column="0" 
-                    BorderThickness="1"
-                    Name="Unit00">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="0" Grid.Column="1" 
-                    BorderThickness="1"
-                    Name="Unit01">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="0" Grid.Column="2" 
-                    BorderThickness="1"
-                    Name="Unit02">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="0" Grid.Column="3" 
-                    BorderThickness="1"
-                    Name="Unit03">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="0" Grid.Column="4" 
-                    BorderThickness="1"
-                    Name="Unit04">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="0" Grid.Column="5" 
-                    BorderThickness="1"
-                    Name="Unit05">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="0" Grid.Column="6" 
-                    BorderThickness="1"
-                    Name="Unit06">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="0" Grid.Column="7" 
-                    BorderThickness="1"
-                    Name="Unit07">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="1" Grid.Column="0" 
-                    BorderThickness="1"
-                    Name="Unit10">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="1" Grid.Column="1" 
-                    BorderThickness="1"
-                    Name="Unit11">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="1" Grid.Column="2" 
-                    BorderThickness="1"
-                    Name="Unit12">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="1" Grid.Column="3" 
-                    BorderThickness="1"
-                    Name="Unit13">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="1" Grid.Column="4" 
-                    BorderThickness="1"
-                    Name="Unit14">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="1" Grid.Column="5" 
-                    BorderThickness="1"
-                    Name="Unit15">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="1" Grid.Column="6" 
-                    BorderThickness="1"
-                    Name="Unit16">
-                <Image></Image>
-            </Border>
-
-            <Border Grid.Row="1" Grid.Column="7" 
-                    BorderThickness="1"
-                    Name="Unit17">
-                <Image></Image>
-            </Border>
-
-        </Grid>
-
-        <Grid  Grid.Row="0" Grid.Column="1" Name="Right_Sidebar">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="4*"/>
-                <RowDefinition Height="2*"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-
-            <Canvas Grid.Row="0" Name="BigCard">
-                <StackPanel Name="HoveredUnitInfo">
-                    <Image Name="BigCardImage" Width="250"></Image>
-                    
-                    <StackPanel Name="Stats">
-                         <TextBlock Name="Damage"
-                               HorizontalAlignment="Center"
-                               FontFamily="../Resources/Font/#Lifecraft" 
-                               Foreground="White"
-                               FontWeight="Bold" 
-                               FontSize="50"></TextBlock>
-                        <TextBlock Name="Health"
-                               HorizontalAlignment="Center"
-                               FontFamily="../Resources/Font/#Lifecraft"
-                               Foreground="BurlyWood"
-                               FontWeight="Bold" 
-                               FontSize="50"></TextBlock>
-                        <TextBlock Name="Defence"
-                               HorizontalAlignment="Center"
-                               FontFamily="../Resources/Font/#Lifecraft"
-                               Foreground="Peru"
-                               FontWeight="Bold" 
-                               FontSize="50"></TextBlock>
-                        <TextBlock Name="Level" 
-                               HorizontalAlignment="Center"
-                               FontFamily="../Resources/Font/#Lifecraft" 
-                               Foreground="Goldenrod"
-                                   
-                               FontWeight="Bold" 
-                               FontSize="50"></TextBlock>
-                    </StackPanel>
-                </StackPanel>
                 
-                <Image Name="RaceTurn" Width="150"
-                       Canvas.Top="520" Canvas.Left="50"></Image>
-            </Canvas>
+                <Border Grid.Row="0" Grid.Column="0" 
+                        Name="Secret">
+                    <Image MouseEnter="Image_MouseEnter" 
+                           MouseLeave="Image_MouseLeave"></Image>
+                </Border>
+
+                <Border Grid.Row="0" Grid.Column="0" 
+                        BorderThickness="1">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="0" Grid.Column="1" 
+                        BorderThickness="1">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="0" Grid.Column="2" 
+                        BorderThickness="1">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="0" Grid.Column="3" 
+                        BorderThickness="1">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="0" Grid.Column="4" 
+                        BorderThickness="1">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="0" Grid.Column="5" 
+                        BorderThickness="1">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="0" Grid.Column="6" 
+                        BorderThickness="1">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="0" Grid.Column="7" 
+                        BorderThickness="1">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="1" Grid.Column="0" 
+                        BorderThickness="1">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="1" Grid.Column="1" 
+                        BorderThickness="1">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="1" Grid.Column="2" 
+                        BorderThickness="1">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="1" Grid.Column="3" 
+                        BorderThickness="1">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="1" Grid.Column="4" 
+                        BorderThickness="1">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="1" Grid.Column="5" 
+                        BorderThickness="1">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="1" Grid.Column="6" 
+                        BorderThickness="1">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="1" Grid.Column="7" 
+                        BorderThickness="1">
+                    <Image></Image>
+                </Border>
+                
+                <Border Grid.Row="2" Grid.Column="0" 
+                        BorderThickness="1"
+                        Name="Unit20">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="2" Grid.Column="1" 
+                        BorderThickness="1"
+                        Name="Unit21">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="2" Grid.Column="2" 
+                        BorderThickness="1"
+                        Name="Unit22">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="2" Grid.Column="3" 
+                        BorderThickness="1"
+                        Name="Unit23">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="2" Grid.Column="4" 
+                        BorderThickness="1"
+                        Name="Unit24">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="2" Grid.Column="5" 
+                        BorderThickness="1"
+                        Name="Unit25">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="2" Grid.Column="6" 
+                        BorderThickness="1"
+                        Name="Unit26">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="2" Grid.Column="7" 
+                        BorderThickness="1"
+                        Name="Unit27">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="3" Grid.Column="0" 
+                        BorderThickness="1"                    
+                        Name="Unit30">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="3" Grid.Column="1" 
+                        BorderThickness="1"
+                        Name="Unit31">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="3" Grid.Column="2" 
+                        BorderThickness="1"
+                        Name="Unit32">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="3" Grid.Column="3" 
+                        BorderThickness="1"
+                        Name="Unit33">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="3" Grid.Column="4" 
+                        BorderThickness="1"
+                        Name="Unit34">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="3" Grid.Column="5" 
+                        BorderThickness="1"
+                        Name="Unit35">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="3" Grid.Column="6" 
+                        BorderThickness="1"
+                        Name="Unit36">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="3" Grid.Column="7" 
+                        BorderThickness="1"
+                        Name="Unit37">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="4" Grid.Column="0" 
+                        BorderThickness="1"
+                        Name="Unit40">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="4" Grid.Column="1" 
+                        BorderThickness="1"
+                        Name="Unit41">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="4" Grid.Column="2" 
+                        BorderThickness="1"
+                        Name="Unit42">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="4" Grid.Column="3" 
+                        BorderThickness="1"
+                        Name="Unit43">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="4" Grid.Column="4" 
+                        BorderThickness="1"
+                        Name="Unit44">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="4" Grid.Column="5" 
+                        BorderThickness="1"
+                        Name="Unit45">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="4" Grid.Column="6" 
+                        BorderThickness="1"
+                        Name="Unit46">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="4" Grid.Column="7" 
+                        BorderThickness="1"
+                        Name="Unit47">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="5" Grid.Column="0" 
+                        BorderThickness="1"
+                        Name="Unit50">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="5" Grid.Column="1" 
+                        BorderThickness="1"
+                        Name="Unit51">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="5" Grid.Column="2" 
+                        BorderThickness="1"
+                        Name="Unit52">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="5" Grid.Column="3" 
+                        BorderThickness="1"
+                        Name="Unit53">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="5" Grid.Column="4" 
+                        BorderThickness="1"
+                        Name="Unit54">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="5" Grid.Column="5" 
+                        BorderThickness="1"
+                        Name="Unit55">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="5" Grid.Column="6" 
+                        BorderThickness="1"
+                        Name="Unit56">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="5" Grid.Column="7" 
+                        BorderThickness="1"
+                        Name="Unit57">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="6" Grid.Column="0" 
+                        BorderThickness="1">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="6" Grid.Column="1" 
+                        BorderThickness="1">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="6" Grid.Column="2" 
+                        BorderThickness="1">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="6" Grid.Column="3" 
+                        BorderThickness="1">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="6" Grid.Column="4" 
+                        BorderThickness="1">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="6" Grid.Column="5" 
+                        BorderThickness="1">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="6" Grid.Column="6" 
+                        BorderThickness="1">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="6" Grid.Column="7" 
+                        BorderThickness="1">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="6" Grid.Column="0" 
+                        BorderThickness="1"
+                        Name="Unit60">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="6" Grid.Column="1" 
+                        BorderThickness="1"
+                        Name="Unit61">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="6" Grid.Column="2" 
+                        BorderThickness="1"
+                        Name="Unit62">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="6" Grid.Column="3" 
+                        BorderThickness="1"
+                        Name="Unit63">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="6" Grid.Column="4" 
+                        BorderThickness="1"
+                        Name="Unit64">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="6" Grid.Column="5" 
+                        BorderThickness="1"
+                        Name="Unit65">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="6" Grid.Column="6" 
+                        BorderThickness="1"
+                        Name="Unit66">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="6" Grid.Column="7" 
+                        BorderThickness="1"
+                        Name="Unit67">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="7" Grid.Column="0" 
+                        BorderThickness="1">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="7" Grid.Column="1" 
+                        BorderThickness="1">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="7" Grid.Column="2" 
+                        BorderThickness="1">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="7" Grid.Column="3" 
+                        BorderThickness="1">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="7" Grid.Column="4" 
+                        BorderThickness="1">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="7" Grid.Column="5" 
+                        BorderThickness="1">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="7" Grid.Column="6" 
+                        BorderThickness="1">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="7" Grid.Column="7" 
+                        BorderThickness="1">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="7" Grid.Column="0" 
+                        BorderThickness="1"
+                        Name="Unit70">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="7" Grid.Column="1" 
+                        BorderThickness="1"
+                        Name="Unit71">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="7" Grid.Column="2" 
+                        BorderThickness="1"
+                        Name="Unit72">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="7" Grid.Column="3" 
+                        BorderThickness="1"
+                        Name="Unit73">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="7" Grid.Column="4" 
+                        BorderThickness="1"
+                        Name="Unit74">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="7" Grid.Column="5" 
+                        BorderThickness="1"
+                        Name="Unit75">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="7" Grid.Column="6" 
+                        BorderThickness="1"
+                        Name="Unit76">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="7" Grid.Column="7" 
+                        BorderThickness="1"
+                        Name="Unit77">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="0" Grid.Column="0" 
+                        BorderThickness="1"
+                        Name="Unit00">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="0" Grid.Column="1" 
+                        BorderThickness="1"
+                        Name="Unit01">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="0" Grid.Column="2" 
+                        BorderThickness="1"
+                        Name="Unit02">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="0" Grid.Column="3" 
+                        BorderThickness="1"
+                        Name="Unit03">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="0" Grid.Column="4" 
+                        BorderThickness="1"
+                        Name="Unit04">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="0" Grid.Column="5" 
+                        BorderThickness="1"
+                        Name="Unit05">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="0" Grid.Column="6" 
+                        BorderThickness="1"
+                        Name="Unit06">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="0" Grid.Column="7" 
+                        BorderThickness="1"
+                        Name="Unit07">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="1" Grid.Column="0" 
+                        BorderThickness="1"
+                        Name="Unit10">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="1" Grid.Column="1" 
+                        BorderThickness="1"
+                        Name="Unit11">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="1" Grid.Column="2" 
+                        BorderThickness="1"
+                        Name="Unit12">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="1" Grid.Column="3" 
+                        BorderThickness="1"
+                        Name="Unit13">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="1" Grid.Column="4" 
+                        BorderThickness="1"
+                        Name="Unit14">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="1" Grid.Column="5" 
+                        BorderThickness="1"
+                        Name="Unit15">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="1" Grid.Column="6" 
+                        BorderThickness="1"
+                        Name="Unit16">
+                    <Image></Image>
+                </Border>
+
+                <Border Grid.Row="1" Grid.Column="7" 
+                        BorderThickness="1"
+                        Name="Unit17">
+                    <Image></Image>
+                </Border>
+
+            </Grid>
+
+            <Grid  Grid.Row="0" Grid.Column="1" Name="Right_Sidebar">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="4*"/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Canvas Grid.Row="0" Name="BigCard">
+                    <StackPanel Name="HoveredUnitInfo">
+                        <Image Name="BigCardImage" Width="250"></Image>
+                        
+                        <StackPanel Name="Stats">
+                             <TextBlock Name="Damage"
+                                   HorizontalAlignment="Center"
+                                   FontFamily="../Resources/Font/#Lifecraft" 
+                                   Foreground="White"
+                                   FontWeight="Bold" 
+                                   FontSize="50"></TextBlock>
+                            <TextBlock Name="Health"
+                                   HorizontalAlignment="Center"
+                                   FontFamily="../Resources/Font/#Lifecraft"
+                                   Foreground="BurlyWood"
+                                   FontWeight="Bold" 
+                                   FontSize="50"></TextBlock>
+                            <TextBlock Name="Defence"
+                                   HorizontalAlignment="Center"
+                                   FontFamily="../Resources/Font/#Lifecraft"
+                                   Foreground="Peru"
+                                   FontWeight="Bold" 
+                                   FontSize="50"></TextBlock>
+                            <TextBlock Name="Level" 
+                                   HorizontalAlignment="Center"
+                                   FontFamily="../Resources/Font/#Lifecraft" 
+                                   Foreground="Goldenrod"
+                                       
+                                   FontWeight="Bold" 
+                                   FontSize="50"></TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                    
+                    <Image Name="RaceTurn" Width="150"
+                           Canvas.Top="520" Canvas.Left="50"></Image>
+                </Canvas>
+            </Grid>
         </Grid>
     </Grid>
 </Window>

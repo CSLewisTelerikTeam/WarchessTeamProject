@@ -207,7 +207,11 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="Resources\Unit_Sounds\draw.mp3" />
+    <Content Include="Resources\Unit_Sounds\Secret\secret_reveal.mp3" />
     <Resource Include="Resources\Alliance\alliance_turn.png" />
+    <Content Include="Resources\Alliance\alliance_wins.mp3" />
+    <Resource Include="Resources\Alliance\alliance_wins.png" />
     <Content Include="Resources\Background_music\background_music.mp3" />
     <Content Include="Resources\Background_music\start_menu_music.mp3" />
     <Resource Include="Resources\Other_graphics\backtomenu_hover.png" />
@@ -216,6 +220,13 @@
     <Resource Include="Resources\Horde\horde_turn.png" />
     <Resource Include="Resources\Other_graphics\secret_field_big.png" />
     <Resource Include="Resources\Other_graphics\secret_field_small.png" />
+    <Content Include="Resources\Horde\horde_wins.mp3" />
+    <Resource Include="Resources\Horde\horde_wins.png" />
+    <Resource Include="Resources\Other_graphics\alliance_wins.png" />
+    <Resource Include="Resources\Other_graphics\draw.png" />
+    <Resource Include="Resources\Other_graphics\horde_wins.png" />
+    <Resource Include="Resources\Other_graphics\playagain_hover.png" />
+    <Resource Include="Resources\Other_graphics\playagain_unhover.png" />
     <Content Include="Resources\Unit_Sounds\Alliance\Captain_Attack.mp3" />
     <Content Include="Resources\Unit_Sounds\Alliance\Captain_Death.mp3" />
     <Content Include="Resources\Unit_Sounds\Alliance\Captain_Select.mp3" />
