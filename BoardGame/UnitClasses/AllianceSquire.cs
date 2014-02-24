@@ -5,7 +5,7 @@
     using System.Windows.Controls;
     using System.Windows.Media.Imaging;
 
-    class AllianceSquire : RaceAlliance
+    class AllianceSquire : RaceAlliance, IMoveable
     {
         //Attack & Health start values
         private const int Attack = 4;

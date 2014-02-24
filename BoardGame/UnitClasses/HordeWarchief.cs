@@ -5,7 +5,7 @@
     using System.Windows.Controls;
     using System.Windows.Media.Imaging;
     
-    class HordeWarchief : RaceHorde
+    class HordeWarchief : RaceHorde, IMoveable
     {
         //Attack & Health start values
         private const int Attack = 8;

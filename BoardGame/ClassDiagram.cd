@@ -1,0 +1,256 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BoardGame.UnitClasses.Unit" Collapsed="true">
+    <Position X="10.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>SQAAAAAAUBAAEACAAAAoAAAAIIAIAgAFAYAAAAAAcAI=</HashCode>
+      <FileName>UnitClasses\Unit.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BoardGame.UnitClasses.RaceHorde" Collapsed="true">
+    <Position X="4.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UnitClasses\RaceHorde.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BoardGame.UnitClasses.RaceAlliance" Collapsed="true">
+    <Position X="15.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UnitClasses\RaceAlliance.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BoardGame.UnitClasses.AllianceCaptain" Collapsed="true">
+    <Position X="13" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAUAAAAACAAAAAAAAAAIAAAAAAAAAAAAAAYAA=</HashCode>
+      <FileName>UnitClasses\AllianceCaptain.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BoardGame.UnitClasses.AllianceKing" Collapsed="true">
+    <Position X="14.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAUAAAAACAAAAAAAAAAIAAAAAAAAAAAAAAYAA=</HashCode>
+      <FileName>UnitClasses\AllianceKing.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BoardGame.UnitClasses.AllianceMage" Collapsed="true">
+    <Position X="16.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAUAAAAACAAAAAAAAAAIAAAAAAAAAAAAAAYAA=</HashCode>
+      <FileName>UnitClasses\AllianceMage.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BoardGame.UnitClasses.AlliancePriest" Collapsed="true">
+    <Position X="18.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAUAAAAACAAAAAAAAAAIAAAAAAAAAAAAAAYAA=</HashCode>
+      <FileName>UnitClasses\AlliancePriest.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BoardGame.UnitClasses.AllianceSquire" Collapsed="true">
+    <Position X="20" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAUAAAAACAAAAAAAAAAIAAAAAAAAAAAAAAYAA=</HashCode>
+      <FileName>UnitClasses\AllianceSquire.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BoardGame.UnitClasses.AllianceWarGolem" Collapsed="true">
+    <Position X="11.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAUAAAAACAAAAAAAAAAIAAAAAAAAAAAAAAYAA=</HashCode>
+      <FileName>UnitClasses\AllianceWarGolem.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BoardGame.UnitClasses.HordeCommander" Collapsed="true">
+    <Position X="9.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAUAAAAACAAAAAAAAAAIAAAAAAAAAAAAAAYAA=</HashCode>
+      <FileName>UnitClasses\HordeCommander.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BoardGame.UnitClasses.HordeDemolisher" Collapsed="true">
+    <Position X="7.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAUAAAAACAAAAAAAAAAIAAAAAAAAAAAAAAYAA=</HashCode>
+      <FileName>UnitClasses\HordeDemolisher.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BoardGame.UnitClasses.HordeGrunt" Collapsed="true">
+    <Position X="5.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAUAAAAACAAAAAAAAAAIAAAAAAAAAAAAAAYAA=</HashCode>
+      <FileName>UnitClasses\HordeGrunt.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BoardGame.UnitClasses.HordeShaman" Collapsed="true">
+    <Position X="4" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAUAAAAACAAAAAAAAAAIAAAAAAAAAAAAAAYAA=</HashCode>
+      <FileName>UnitClasses\HordeShaman.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BoardGame.UnitClasses.HordeWarchief" Collapsed="true">
+    <Position X="0.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAUAAAAACAAAAAAAAAAIAAAAAAAAAAAAAAYAA=</HashCode>
+      <FileName>UnitClasses\HordeWarchief.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BoardGame.UnitClasses.HordeWarlock" Collapsed="true">
+    <Position X="2.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAUAAAAACAAAAAAAAAAIAAAAAAAAAAAAAAYAA=</HashCode>
+      <FileName>UnitClasses\HordeWarlock.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BoardGame.OutOfGameFieldException&lt;T&gt;" Collapsed="true">
+    <Position X="0.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAACAAEAAAAAEAAIAAAAAIAAAAAA=</HashCode>
+      <FileName>OutOfGameFieldException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BoardGame.ConvertPixelsToRowCol" Collapsed="true">
+    <Position X="0.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAIAAAIAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ConvertPixelsToRowCol.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BoardGame.SecretFieldClasses.Exhaust" Collapsed="true">
+    <Position X="4" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SecretFieldClasses\Exhaust.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BoardGame.SecretFieldClasses.ExposedWeakness" Collapsed="true">
+    <Position X="6" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SecretFieldClasses\ExposedWeakness.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BoardGame.SecretFieldClasses.Fury" Collapsed="true">
+    <Position X="10" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SecretFieldClasses\Fury.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BoardGame.SecretFieldClasses.HelpfulField" Collapsed="true">
+    <Position X="8" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SecretFieldClasses\HelpfulField.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BoardGame.SecretFieldClasses.InitializedSecrets" Collapsed="true">
+    <Position X="4" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SecretFieldClasses\InitializedSecrets.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BoardGame.SecretFieldClasses.NeutralField" Collapsed="true">
+    <Position X="6" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SecretFieldClasses\NeutralField.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BoardGame.SecretFieldClasses.SecretField" Collapsed="true">
+    <Position X="6" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAIABAAAAAAAEAAAgIgAAAQAAAAAAAAA=</HashCode>
+      <FileName>SecretFieldClasses\SecretField.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BoardGame.SecretFieldClasses.Toughness" Collapsed="true">
+    <Position X="8" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SecretFieldClasses\Toughness.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="BoardGame.UnitClasses.IMoveable" Collapsed="true">
+    <Position X="24" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQBAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UnitClasses\Interfaces.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BoardGame.UnitClasses.IAttacking" Collapsed="true">
+    <Position X="24" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UnitClasses\Interfaces.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BoardGame.UnitClasses.IHealing" Collapsed="true">
+    <Position X="24" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UnitClasses\Interfaces.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BoardGame.UnitClasses.ISound" Collapsed="true">
+    <Position X="24" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYAA=</HashCode>
+      <FileName>UnitClasses\Interfaces.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BoardGame.SecretFieldClasses.ISecret" Collapsed="true">
+    <Position X="24" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SecretFieldClasses\ISecret.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="BoardGame.UnitClasses.UnitTypes" Collapsed="true">
+    <Position X="22" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAgAABAAAggAAAACBACAAAAgAAAAAAQQAAAIAIAIAA=</HashCode>
+      <FileName>UnitClasses\UnitTypes.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="BoardGame.UnitClasses.RaceTypes" Collapsed="true">
+    <Position X="22" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>UnitClasses\RaceTypes.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="BoardGame.SecretFieldClasses.FieldTypes" Collapsed="true">
+    <Position X="22" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAAEAAAAAAAQAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SecretFieldClasses\FieldTypes.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="BoardGame.SecretFieldClasses.SecretFields" Collapsed="true">
+    <Position X="22" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAIAAEEAADAAAEQIEAAAAAAAEgAAAQAAAAUAAA=</HashCode>
+      <FileName>SecretFieldClasses\SecretFields.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
