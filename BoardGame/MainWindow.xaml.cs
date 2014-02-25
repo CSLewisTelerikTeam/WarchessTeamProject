@@ -28,7 +28,7 @@ namespace OOPGameWoWChess
             DrawSecret();
             ChooseTurn();
         }
-
+          
         private bool isMouseCapture;
         private double mouseXOffset;
         private double mouseYOffset;
@@ -224,9 +224,30 @@ namespace OOPGameWoWChess
                         DrawSecret();
                     }
 
-                    Grid.SetRow(border, (int)coordinates.Y);
-                    Grid.SetColumn(border, (int)coordinates.X);
+                    try
+                    {
+                        if (coordinates.X < 0 || coordinates.X > 7 || 
+                            coordinates.Y <0 || coordinates.Y > 7)
+                        {
+                            throw new OutOfGameFieldException();
+                        }
+                        Grid.SetRow(border, (int)coordinates.Y);
+                        Grid.SetColumn(border, (int)coordinates.X);
+                    }
+                    catch (OutOfGameFieldException)
+                    {
+                        translateTransform = new TranslateTransform();
 
+                        translateTransform.X = 0;
+                        translateTransform.Y = 0;
+
+                        mouseXOffset = 0;
+                        mouseYOffset = 0;
+
+                        image.RenderTransform = translateTransform;            
+                        return;
+                    }
+                    
                     DeselectUnit();
 
                     DownLightPossibleMoves();
@@ -429,7 +450,7 @@ namespace OOPGameWoWChess
         }
 
         private void DrawSecretInfo(SecretField secret)
-        {
+            {
             SetSecretInfo();
             RemoveSecretInfo();
         }
@@ -471,7 +492,7 @@ namespace OOPGameWoWChess
 
             secretField = (Border)this.Playfield.FindName("Unit" + secret.CurrentPosition.Y + secret.CurrentPosition.X);
             secretField.Child = secret.SmallImage;
-        }
+            }
 
         private void ResetState()
         {
@@ -542,7 +563,7 @@ namespace OOPGameWoWChess
             this.Back.Child.MouseEnter += new MouseEventHandler(WinButton_MouseEnter);
             this.Back.Child.MouseLeave += new MouseEventHandler(WinButton_MouseLeave);
             this.Back.Child.MouseLeftButtonDown += new MouseButtonEventHandler(WinButton_MouseLeftButtonDown);
-            
+
             Canvas.SetZIndex(this.WinnerScreen, 10);
 
             ImageBrush img = new ImageBrush();

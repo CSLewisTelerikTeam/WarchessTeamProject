@@ -118,10 +118,10 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="BoardGame.OutOfGameFieldException&lt;T&gt;" Collapsed="true">
+  <Class Name="BoardGame.OutOfGameFieldException" Collapsed="true">
     <Position X="0.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAACAAEAAAAAEAAIAAAAAIAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAA=</HashCode>
       <FileName>OutOfGameFieldException.cs</FileName>
     </TypeIdentifier>
   </Class>
