@@ -147,14 +147,14 @@
     </TypeIdentifier>
   </Class>
   <Class Name="BoardGame.SecretFieldClasses.Fury" Collapsed="true">
-    <Position X="10" Y="6.25" Width="1.5" />
+    <Position X="10" Y="8" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>SecretFieldClasses\Fury.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BoardGame.SecretFieldClasses.HelpfulField" Collapsed="true">
-    <Position X="8" Y="4.75" Width="1.5" />
+    <Position X="8" Y="7.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>SecretFieldClasses\HelpfulField.cs</FileName>
@@ -183,7 +183,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="BoardGame.SecretFieldClasses.Toughness" Collapsed="true">
-    <Position X="8" Y="6.25" Width="1.5" />
+    <Position X="8" Y="8.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>SecretFieldClasses\Toughness.cs</FileName>
@@ -231,10 +231,10 @@
       <FileName>UnitClasses\UnitTypes.cs</FileName>
     </TypeIdentifier>
   </Enum>
-  <Enum Name="BoardGame.UnitClasses.RaceTypes" Collapsed="true">
+  <Enum Name="RaceTypes" Collapsed="true">
     <Position X="22" Y="1.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAQAAAAAAgAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
       <FileName>UnitClasses\RaceTypes.cs</FileName>
     </TypeIdentifier>
   </Enum>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -8,6 +9,8 @@ using System.Windows.Media.Imaging;
 using BoardGame.SecretFieldClasses;
 using BoardGame.UnitClasses;
 using BoardGame;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace OOPGameWoWChess
 {
@@ -22,11 +25,10 @@ namespace OOPGameWoWChess
             LoadBackgroundImage();
             LoadBackgroundMusic();
             InitializeUnits();
-            InitializeSecret();
-            SecretField.GenerateSecret(this, secret);
-            SetTurn();
+            DrawSecret();
+            ChooseTurn();
         }
-          
+
         private bool isMouseCapture;
         private double mouseXOffset;
         private double mouseYOffset;
@@ -37,13 +39,14 @@ namespace OOPGameWoWChess
         public static SecretField secret;
         private bool isSomeUnitSelected;
         private Border selectedBorder;
-        private static bool HordeTurn = true;
+        private bool isTurnSelected;
+        private static bool turn = false;
         private RaceTypes winner;
+        private bool isFirstSecret = true;
         
         private void Image_MouseEnter(object sender, MouseEventArgs e)
         {
             //Get the hovered unit
-
             Image image = (Image)sender;
             Border border = (Border)image.Parent;
             Grid grid = (Grid)border.Parent;
@@ -108,9 +111,9 @@ namespace OOPGameWoWChess
 
             SelectedUnit = GetUnitOnMousePosition(e.GetPosition(grid), grid);
 
-            RaceTypes RaceTurn = HordeTurn ? RaceTypes.Horde : RaceTypes.Alliance;
+            RaceTypes RaceTurn = turn ? RaceTypes.Horde : RaceTypes.Alliance;
 
-            if (SelectedUnit.Race != RaceTurn)
+            if (!isTurnSelected || SelectedUnit.Race != RaceTurn)
             {
                 SelectedUnit = null;
                 return;
@@ -209,22 +212,6 @@ namespace OOPGameWoWChess
                     SelectedUnit.IsCorrectMove(new Point(coordinates.X, coordinates.Y)) &&
                     SelectedUnit.IsSomeoneAtThisPosition(new Point(coordinates.X, coordinates.Y)))
                 {
-                    //if (coordinates.X < 0 || coordinates.Y < 0)
-                    //{
-                    //    throw new OutOfGameFieldException<string>("");
-                    //}
-                    try
-                    {
-                        Grid.SetRow(border, (int)coordinates.Y);
-                        Grid.SetColumn(border, (int)coordinates.X);
-                    }
-                    catch (OutOfGameFieldException<string> ex)
-                    {
-                        
-                        throw;
-                    }
-                    
-
                     //Change the selected unit current position if the unit can move on that position
                     SelectedUnit.CurrentPosition = new Point(coordinates.X, coordinates.Y);
 
@@ -232,8 +219,13 @@ namespace OOPGameWoWChess
                     if (secret.CurrentPosition == SelectedUnit.CurrentPosition)
                     {
                         secret.OpenSecret(SelectedUnit);
-                        SecretField.GenerateSecret(this, secret);
+                        secret.RevealSound();
+                        DrawSecretInfo(secret);
+                        DrawSecret();
                     }
+
+                    Grid.SetRow(border, (int)coordinates.Y);
+                    Grid.SetColumn(border, (int)coordinates.X);
 
                     DeselectUnit();
 
@@ -325,37 +317,233 @@ namespace OOPGameWoWChess
 
         private void WinButton_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (((sender as Image).Parent as Border).Name == "PlayAgain")
+            if (((sender as Image).Parent as Border).Name == "Back")
             {
-                //Canvas.SetZIndex(this.WinnerScreen, 0);
-                //
-                //InitializeUnits();//Some method to reset the parameters and start the game again
+                backgroundMusic.Stop();
+                ResetState();
+                var startScreen = new StartScreen();
+                startScreen.Owner = this.Owner;
+                startScreen.Show();
+                this.Close();
             }
-            else if (((sender as Image).Parent as Border).Name == "Quit")
+            else if (((sender as Image).Parent as Border).Name == "HordeButton")
             {
-                Environment.Exit(0);
+                isTurnSelected = true;
+                turn = false;
+                ChangeRaceChooseToRace();
+
+                Task.Factory.StartNew(() =>
+                {
+                    MediaPlayer hordeChoose = new MediaPlayer();
+                    var path = System.IO.Path.GetFullPath(@"..\..\Resources\Unit_Sounds\Horde\horde_choose.mp3");
+                    hordeChoose.Open(new Uri(path));
+                    hordeChoose.Play();
+                });
+
+                SetTurn();
             }
+            else if (((sender as Image).Parent as Border).Name == "AllianceButton")
+            {
+                isTurnSelected = true;
+                turn = true;
+                ChangeRaceChooseToRace();
+
+                Task.Factory.StartNew(() =>
+                {
+                    MediaPlayer allianceChoose = new MediaPlayer();
+                    var path = System.IO.Path.GetFullPath(@"..\..\Resources\Unit_Sounds\Alliance\alliance_choose.mp3");
+                    allianceChoose.Open(new Uri(path));
+                    allianceChoose.Play();
+                });
+
+                SetTurn();
+            }
+        }
+
+        private void ChooseTurn()
+        {
+            //Initialize the buttons and the zIndex of the Canvas
+            Image hordeButton = new Image();
+            var path = System.IO.Path.GetFullPath(@"..\..\Resources\Other_graphics\button_horde_unhover.png");
+            hordeButton.Source = new BitmapImage(new Uri(path, UriKind.Absolute));
+            this.HordeButton.Child = hordeButton;
+            this.HordeButton.Child.MouseEnter += new MouseEventHandler(WinButton_MouseEnter);
+            this.HordeButton.Child.MouseLeave += new MouseEventHandler(WinButton_MouseLeave);
+            this.HordeButton.Child.MouseLeftButtonDown += new MouseButtonEventHandler(WinButton_MouseLeftButtonDown);
+
+            Image allianceButton = new Image();
+            path = System.IO.Path.GetFullPath(@"..\..\Resources\Other_graphics\button_alliance_unhover.png");
+            allianceButton.Source = new BitmapImage(new Uri(path, UriKind.Absolute));
+            this.AllianceButton.Child = allianceButton;
+            this.AllianceButton.Child.MouseEnter += new MouseEventHandler(WinButton_MouseEnter);
+            this.AllianceButton.Child.MouseLeave += new MouseEventHandler(WinButton_MouseLeave);
+            this.AllianceButton.Child.MouseLeftButtonDown += new MouseButtonEventHandler(WinButton_MouseLeftButtonDown);
+        }
+
+        private void ChangeRaceChooseToRace()
+        { 
+            this.ChooseText.Text = "";
+            this.HordeButton.Child = new Image();
+            this.AllianceButton.Child = new Image();
+            Canvas.SetZIndex(this.ChooseRaceTurn, -10);
+            this.ChooseRaceTurn = new Canvas();
+        }
+
+        private void SetSecretInfo()
+        {
+            Canvas.SetZIndex(this.SecretInfo, 100);
+            ImageBrush img = new ImageBrush();
+            string path;
+
+            if (secret.SecretFieldName == SecretFields.KenovsBaneOfDoom)
+            {
+                path = System.IO.Path.GetFullPath(@"..\..\Resources\Other_graphics\secret_revealed_baneofdoom.png");
+                img.ImageSource = new BitmapImage(new Uri(path, UriKind.Absolute));
+                this.SecretInfo.Background = img;
+            }
+            else if (secret.SecretFieldName == SecretFields.KostovsBlessingOfWisdom)
+            {
+                path = System.IO.Path.GetFullPath(@"..\..\Resources\Other_graphics\secret_revealed_blessingofwisdom.png");
+                img.ImageSource = new BitmapImage(new Uri(path, UriKind.Absolute));
+                this.SecretInfo.Background = img;
+            }
+            else if (secret.SecretFieldName == SecretFields.MinkovsCurseOfWeakness)
+            {
+                path = System.IO.Path.GetFullPath(@"..\..\Resources\Other_graphics\secret_revealed_curseofweakness.png");
+                img.ImageSource = new BitmapImage(new Uri(path, UriKind.Absolute));
+                this.SecretInfo.Background = img;
+            }
+            else if (secret.SecretFieldName == SecretFields.GeorgievsShoutOfStrength)
+            {
+                path = System.IO.Path.GetFullPath(@"..\..\Resources\Other_graphics\secret_revealed_shoutofstrength.png");
+                img.ImageSource = new BitmapImage(new Uri(path, UriKind.Absolute));
+                this.SecretInfo.Background = img;
+            }
+        }
+
+        private async void RemoveSecretInfo()
+        {
+            await Task.Delay(TimeSpan.FromSeconds(3));
+            this.SecretInfo.Background = new ImageBrush();
+            Canvas.SetZIndex(this.SecretInfo, 0);
+        }
+
+        private void DrawSecretInfo(SecretField secret)
+        {
+            SetSecretInfo();
+            RemoveSecretInfo();
+        }
+  
+        private void DrawSecret()
+        {
+            int secretX;
+            int secretY;
+
+            if (secret != null)
+            {
+                secretX = (int)secret.CurrentPosition.X;
+                secretY = (int)secret.CurrentPosition.Y;
+            }
+            else
+            {
+                secretX = 0;
+                secretY = 0;
+            }
+
+            InitializeSecret();
+
+            secret.CurrentPosition = new Point(secretX, secretY);
+
+            Border secretField;
+            if (isFirstSecret)
+            {
+                isFirstSecret = false;
+                secretField = (Border)this.Playfield.FindName("Unit20");
+                secretField.Child = null;
+            }
+            else
+            {
+                secretField = (Border)this.Playfield.FindName("Unit" + secret.CurrentPosition.Y + secret.CurrentPosition.X);
+                secretField.Child = null;
+            }
+
+            secret = SecretField.GenerateSecret();
+
+            secretField = (Border)this.Playfield.FindName("Unit" + secret.CurrentPosition.Y + secret.CurrentPosition.X);
+            secretField.Child = secret.SmallImage;
+        }
+
+        private void ResetState()
+        {
+            foreach (var item in this.Playfield.Children)
+            {
+                (item as Border).Child = new Image();
+            }
+
+            SelectedUnit = null;
+            secret = null;
+
+            InitializedTeams.AllianceTeam = new List<RaceAlliance>
+            {
+                new AllianceSquire(new Point(0, 6)),
+                new AllianceSquire(new Point(1, 6)),
+                new AllianceSquire(new Point(2, 6)),
+                new AllianceSquire(new Point(3, 6)),
+                new AllianceSquire(new Point(4, 6)),
+                new AllianceSquire(new Point(5, 6)),
+                new AllianceSquire(new Point(6, 6)),
+                new AllianceSquire(new Point(7, 6)),
+                new AllianceMage(new Point(1, 7)),
+                new AllianceMage(new Point(6, 7)),
+                new AllianceCaptain(new Point(2, 7)),
+                new AllianceCaptain(new Point(5, 7)),
+                new AllianceWarGolem(new Point(0, 7)),
+                new AllianceWarGolem(new Point(7, 7)),
+                new AlliancePriest(new Point(3, 7)),
+                new AllianceKing(new Point(4, 7)),
+            };
+
+            InitializedTeams.HordeTeam = new List<RaceHorde>
+            {
+                new HordeGrunt(new Point(0, 1)),
+                new HordeGrunt(new Point(1, 1)),
+                new HordeGrunt(new Point(2, 1)),
+                new HordeGrunt(new Point(3, 1)),
+                new HordeGrunt(new Point(4, 1)),
+                new HordeGrunt(new Point(5, 1)),
+                new HordeGrunt(new Point(6, 1)),
+                new HordeGrunt(new Point(7, 1)),
+                new HordeWarlock(new Point(1, 0)),
+                new HordeWarlock(new Point(6, 0)),
+                new HordeCommander(new Point(2, 0)),
+                new HordeCommander(new Point(5, 0)),
+                new HordeDemolisher(new Point(0, 0)),
+                new HordeDemolisher(new Point(7, 0)),
+                new HordeShaman(new Point(3, 0)),
+                new HordeWarchief(new Point(4, 0)),
+            };
+
+            isMouseCapture = false;
+            mouseXOffset = 0;
+            mouseYOffset = 0;
+            translateTransform = new TranslateTransform();
+            backgroundMusic = new MediaPlayer();
+            isSomeUnitSelected = false;
+            selectedBorder = new Border();
+            turn = true;
         }
 
         private void GameOver(RaceTypes winner)
         {
             Image playAgainBtn = new Image();
-            var path = System.IO.Path.GetFullPath(@"..\..\Resources\Other_graphics\playagain_unhover.png");
+            var path = System.IO.Path.GetFullPath(@"..\..\Resources\Other_graphics\backtomenu_unhover.png");
             playAgainBtn.Source = new BitmapImage(new Uri(path, UriKind.Absolute));
-            this.PlayAgain.Child = playAgainBtn;
-            this.PlayAgain.Child.MouseEnter += new MouseEventHandler(WinButton_MouseEnter);
-            this.PlayAgain.Child.MouseLeave += new MouseEventHandler(WinButton_MouseLeave);
-            this.PlayAgain.Child.MouseLeftButtonDown += new MouseButtonEventHandler(WinButton_MouseLeftButtonDown);
-
-            Image quitButton = new Image();
-            path = System.IO.Path.GetFullPath(@"..\..\Resources\Other_graphics\button_exit_unhover.png");
-            quitButton.Source = new BitmapImage(new Uri(path, UriKind.Absolute));
-            this.Quit.Child = quitButton;
-            this.Quit.Child.MouseEnter += new MouseEventHandler(WinButton_MouseEnter);
-            this.Quit.Child.MouseLeave += new MouseEventHandler(WinButton_MouseLeave);
-            this.Quit.Child.MouseLeftButtonDown += new MouseButtonEventHandler(WinButton_MouseLeftButtonDown);
-
-            Canvas.SetZIndex(this.WinnerScreen, 1);
+            this.Back.Child = playAgainBtn;
+            this.Back.Child.MouseEnter += new MouseEventHandler(WinButton_MouseEnter);
+            this.Back.Child.MouseLeave += new MouseEventHandler(WinButton_MouseLeave);
+            this.Back.Child.MouseLeftButtonDown += new MouseButtonEventHandler(WinButton_MouseLeftButtonDown);
+            
+            Canvas.SetZIndex(this.WinnerScreen, 10);
 
             ImageBrush img = new ImageBrush();
 
@@ -368,7 +556,6 @@ namespace OOPGameWoWChess
                 path = System.IO.Path.GetFullPath(@"..\..\Resources\Alliance\alliance_wins.mp3");
                 backgroundMusic.Open(new Uri(path));
                 backgroundMusic.Play();
-                    
             }
             else if (winner == RaceTypes.Horde)
             {
@@ -390,7 +577,6 @@ namespace OOPGameWoWChess
                 backgroundMusic.Open(new Uri(path));
                 backgroundMusic.Play();
             }
-            
         }
 
         private bool IsGameOver()
@@ -437,8 +623,8 @@ namespace OOPGameWoWChess
 
         private void HighLightPossibleEnemy(object sender, Unit HoveredUnit)
         {
-            if (SelectedUnit != null &&
-                ((SelectedUnit.Race == RaceTypes.Horde && HordeTurn) || (SelectedUnit.Race == RaceTypes.Alliance && !HordeTurn)) &&
+            if ((SelectedUnit != null && HoveredUnit != null) &&
+                ((SelectedUnit.Race == RaceTypes.Horde && turn) || (SelectedUnit.Race == RaceTypes.Alliance && !turn)) &&
                 (SelectedUnit.Race != HoveredUnit.Race) &&
                 SelectedUnit.IsCorrectMove(HoveredUnit.CurrentPosition) &&
                 SelectedUnit.IsClearWay(HoveredUnit.CurrentPosition))
@@ -512,7 +698,7 @@ namespace OOPGameWoWChess
 
         private void SetTurn()
         {
-            HordeTurn = !HordeTurn;
+            turn = !turn;
 
             var allianceLogoPath = System.IO.Path.GetFullPath(@"..\..\Resources\Alliance\alliance_turn.png");
             var hordeLogoPath = System.IO.Path.GetFullPath(@"..\..\Resources\Horde\horde_turn.png");
@@ -520,7 +706,10 @@ namespace OOPGameWoWChess
             BitmapImage allianceLogo = new BitmapImage(new Uri(allianceLogoPath, UriKind.Absolute));
             BitmapImage hordeLogo = new BitmapImage(new Uri(hordeLogoPath, UriKind.Absolute));
 
-            this.RaceTurn.Source = HordeTurn ? hordeLogo : allianceLogo;
+            if (isTurnSelected)
+            {
+                this.RaceTurn.Source = turn ? hordeLogo : allianceLogo;
+            }
         }
 
         public void SetRightSidebarStats(Unit hoveredUnit)
@@ -681,6 +870,14 @@ namespace OOPGameWoWChess
             unitField.Child = (InitializedTeams.HordeTeam[14]).SmallImage;
             unitField = (Border)this.Playfield.FindName("Unit04");
             unitField.Child = (InitializedTeams.HordeTeam[15]).SmallImage;
+
+            foreach (var secret in InitializedSecrets.Secrets)
+            {
+                secret.SmallImage.MouseEnter += new MouseEventHandler(Image_MouseEnter);
+                secret.SmallImage.MouseLeave += new MouseEventHandler(Image_MouseLeave);
+                var secField = (Border)this.Playfield.FindName("Unit20");
+                secField.Child = (InitializedSecrets.Secrets[0]).SmallImage;
+            }
         }
         
         private void InitializeSecret()

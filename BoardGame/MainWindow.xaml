@@ -1,19 +1,21 @@
 ﻿<Window x:Class="OOPGameWoWChess.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Width="1024" Height="768"
+        Width="1024" Height="768" Name="MainWind"
         WindowStyle="None" WindowState="Maximized">
 
     <Grid>
 
+        <Canvas Name="SecretInfo">
+        </Canvas>
+        
         <Canvas Name="WinnerScreen">
-            <Border Name="PlayAgain" Canvas.Top="350" Width="260" Height="70">
-                <Image></Image>
-            </Border>
-            <Border Name="Quit" Canvas.Top="350" Canvas.Left="760" Width="260" Height="70">
+            <Border Name="Back" Canvas.Top="350" Width="260" Height="70">
                 <Image></Image>
             </Border>
         </Canvas>
+        
+        
     
         <Grid Name="Main">
             <Grid.RowDefinitions>
@@ -48,12 +50,6 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
                 
-                <Border Grid.Row="0" Grid.Column="0" 
-                        Name="Secret">
-                    <Image MouseEnter="Image_MouseEnter" 
-                           MouseLeave="Image_MouseLeave"></Image>
-                </Border>
-
                 <Border Grid.Row="0" Grid.Column="0" 
                         BorderThickness="1">
                     <Image></Image>
@@ -636,14 +632,32 @@
                                    HorizontalAlignment="Center"
                                    FontFamily="../Resources/Font/#Lifecraft" 
                                    Foreground="Goldenrod"
-                                       
                                    FontWeight="Bold" 
                                    FontSize="50"></TextBlock>
                         </StackPanel>
                     </StackPanel>
                     
+                    
                     <Image Name="RaceTurn" Width="150"
                            Canvas.Top="520" Canvas.Left="50"></Image>
+                    
+                    <Canvas Name="ChooseRaceTurn" Width="150" Height="100"
+                           Canvas.Top="520" Canvas.Left="50">
+
+                        <TextBlock Name="ChooseText" HorizontalAlignment="Center"
+                                   FontFamily="../Resources/Font/#Lifecraft" 
+                                   Foreground="Goldenrod"
+                                   FontWeight="Bold" 
+                                   FontSize="35">Choose race:</TextBlock>
+                        <Border Name="HordeButton" Width="150" Canvas.Top="50">
+                            <Image></Image>
+                        </Border>
+                        <Border Name="AllianceButton"  Width="150" Canvas.Top="100">
+                            <Image></Image>
+                        </Border>
+                        
+                    </Canvas>
+                    
                 </Canvas>
             </Grid>
         </Grid>

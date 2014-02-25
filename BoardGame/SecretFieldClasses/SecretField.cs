@@ -1,5 +1,6 @@
 ﻿namespace BoardGame.SecretFieldClasses
 {
+    using System.Windows.Media;
     using BoardGame.UnitClasses;
     using OOPGameWoWChess;
     using System;
@@ -13,33 +14,16 @@
 
         public SecretFields SecretFieldName { get; set; }
 
+        private MediaPlayer playSound = new MediaPlayer();
+
         public Point CurrentPosition { get; set; }
 
         public static string smallImgPath = System.IO.Path.GetFullPath(@"..\..\Resources\Other_graphics\secret_field_small.png");
         public static string bigImgPath = System.IO.Path.GetFullPath(@"..\..\Resources\Other_graphics\secret_field_big.png");
+        
+        public Image SmallImage { get; set; }
 
-        //private Image smallImage = new Image();
-        //private Image bigImage = new Image();
-
-        //public static Image SmallImage 
-        //{
-        //    get 
-        //    { 
-        //        this.smallImage.Source = new BitmapImage(new Uri(smallImgPath, UriKind.Absolute));
-        //        return this.smallImage;
-        //    }
-        //    private set;
-        //}
-
-        //public static Image BigImage 
-        //{
-        //    get 
-        //    { 
-        //        this.bigImage.Source = new BitmapImage(new Uri(bigImgPath, UriKind.Absolute));
-        //        return this.bigImage;
-        //    }
-        //    private set;
-        //}
+        public Image BigImage { get; set; }
 
         //Constructors
         public SecretField(FieldTypes type, SecretFields secretFieldName)
@@ -49,43 +33,51 @@
         }
         
         //Methods
-        public static void GenerateSecret(MainWindow window, SecretField secret)
+        public static SecretField GenerateSecret()
         {
             Random rnd = new Random();
+            SecretField randSecret = GetRandomSecret();
 
             int col = rnd.Next(7);
-            int row = rnd.Next(7);
-            
-            Border brd = window.Secret;
+            int row = rnd.Next(2, 6);
+
+            Border brd = new Border();
+            brd.Child = new Image();
             (brd.Child as Image).Source = new BitmapImage(new Uri(smallImgPath, UriKind.Absolute));
 
             while (true)
             {
                 Unit randomUnit = MainWindow.GetUnitOnPosition(new Point(col, row));
-                secret = GetRandomSecret();
 
                 if (randomUnit == null)
                 {
                     Grid.SetRow(brd, row);
                     Grid.SetColumn(brd, col);
 
-                    secret.CurrentPosition = new Point(col, row);
-                    break;
+                    randSecret.CurrentPosition = new Point(col, row);
+                    return randSecret;
                 }
 
                 col = rnd.Next(7);
-                row = rnd.Next(7);
+                row = rnd.Next(2, 6);
             }
         }
   
         public static SecretField GetRandomSecret()
         {
             Random rnd = new Random();
-            int indexOfSecret = rnd.Next(4);
-
+            int indexOfSecret = rnd.Next(InitializedSecrets.Secrets.Count);
+            
             return InitializedSecrets.Secrets[indexOfSecret];
         }
 
         public abstract void OpenSecret(Unit target);
+
+        public void RevealSound()
+        {
+            var path = System.IO.Path.GetFullPath(@"..\..\Resources\Unit_Sounds\Secret\secret_reveal.mp3");
+            playSound.Open(new Uri(path));
+            playSound.Play();
+        }
     }
 }

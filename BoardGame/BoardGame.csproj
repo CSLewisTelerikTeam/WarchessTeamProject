@@ -78,10 +78,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="OutOfGameFieldException.cs" />
-    <Compile Include="SecretFieldClasses\Exhaust.cs" />
-    <Compile Include="SecretFieldClasses\ExposedWeakness.cs" />
+    <Compile Include="SecretFieldClasses\CurseOfWeakness.cs" />
+    <Compile Include="SecretFieldClasses\BaneOfDoom.cs" />
     <Compile Include="SecretFieldClasses\FieldTypes.cs" />
-    <Compile Include="SecretFieldClasses\Fury.cs" />
+    <Compile Include="SecretFieldClasses\ShoutOfStrength.cs" />
     <Compile Include="SecretFieldClasses\HarmfulField.cs" />
     <Compile Include="SecretFieldClasses\HelpfulField.cs" />
     <Compile Include="SecretFieldClasses\InitializedSecrets.cs" />
@@ -89,7 +89,7 @@
     <Compile Include="SecretFieldClasses\NeutralField.cs" />
     <Compile Include="SecretFieldClasses\SecretField.cs" />
     <Compile Include="SecretFieldClasses\SecretFields.cs" />
-    <Compile Include="SecretFieldClasses\Toughness.cs" />
+    <Compile Include="SecretFieldClasses\BlessingOfWisdom.cs" />
     <Compile Include="StartScreen.xaml.cs">
       <DependentUpon>StartScreen.xaml</DependentUpon>
     </Compile>

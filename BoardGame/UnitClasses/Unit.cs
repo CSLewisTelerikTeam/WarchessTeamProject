@@ -7,13 +7,9 @@
 
     //Abstract class Unit, parent for both races and all units. 
     //Unit class can't make any instances
-    //Some comments added
-    //Some other comment
     public abstract class Unit : IMoveable, IAttacking, ISound
     {
         //Private Fields     
-        private Image smallImage;
-        private Image bigImage;
         protected MediaPlayer playSound = new MediaPlayer();
 
         //Properties over private fields, in case need of data validation
@@ -43,29 +39,9 @@
 
         public bool IsSelected { get; set; }
 
-        public Image SmallImage
-        {
-            get
-            {
-                return this.smallImage;
-            }
-            set
-            {
-                this.smallImage = value;
-            }
-        }
+        public Image SmallImage { get; set; }
 
-        public Image BigImage
-        {
-            get
-            {
-                return this.bigImage;
-            }
-            set
-            {
-                this.bigImage = value;
-            }
-        }
+        public Image BigImage { get; set; }
 
         //Constructors
         public Unit(UnitTypes type, RaceTypes race,

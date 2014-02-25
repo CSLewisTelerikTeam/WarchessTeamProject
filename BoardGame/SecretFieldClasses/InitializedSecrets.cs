@@ -10,10 +10,10 @@
         {
             InitializedSecrets.Secrets = new List<SecretField> 
             {
-                new Fury(),
-                new Toughness(),
-                new Exhaust(),
-                new ExposedWeakness()
+                new ShoutOfStrength(),
+                new BlessingOfWisdom(),
+                new CurseOfWeakness(),
+                new BaneOfDoom()
             };
         }
     }
