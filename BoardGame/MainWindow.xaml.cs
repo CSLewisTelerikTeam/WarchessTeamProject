@@ -90,7 +90,7 @@ namespace OOPGameWoWChess
             {
                 this.BigCardImage.Source = SelectedUnit.BigImage.Source;
 
-                this.Health.Text = "Health: " + SelectedUnit.HealthLevel.ToString();
+                this.Health.Text = "Health: " + SelectedUnit.HealthLevel.ToString() + "/" + SelectedUnit.MaxHealthLevel.ToString();
                 this.Damage.Text = "Attack: " + SelectedUnit.AttackLevel.ToString();
                 this.Defence.Text = "Defence: " + SelectedUnit.CounterAttackLevel.ToString();
                 this.Level.Text = "Level: " + SelectedUnit.Level.ToString();
@@ -740,7 +740,7 @@ namespace OOPGameWoWChess
 
         public void SetRightSidebarStats(Unit hoveredUnit)
         {
-            this.Health.Text = "Health: " + hoveredUnit.HealthLevel.ToString();
+            this.Health.Text = "Health: " + hoveredUnit.HealthLevel.ToString() + "/" + hoveredUnit.MaxHealthLevel.ToString();
             this.Damage.Text = "Attack: " + hoveredUnit.AttackLevel.ToString();
             this.Defence.Text = "Defence: " + hoveredUnit.CounterAttackLevel.ToString();
             this.Level.Text = "Level: " + hoveredUnit.Level.ToString();
