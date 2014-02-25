@@ -185,14 +185,19 @@ namespace OOPGameWoWChess
 
         private void Image_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            if (translateTransform == null)
-            {
-                return;
-            }
-            
             Image image = (Image)sender;
             Border border = (Border)image.Parent;
             Grid grid = (Grid)border.Parent;
+
+            if (translateTransform == null)
+            {
+                if (isMouseCapture)
+                {
+                    isMouseCapture = false;
+                    image.ReleaseMouseCapture();
+                }
+                return;
+            }
 
             image.ReleaseMouseCapture();
             isMouseCapture = false;
