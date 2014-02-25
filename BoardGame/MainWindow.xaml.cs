@@ -92,7 +92,7 @@ namespace OOPGameWoWChess
 
                 this.Health.Text = "Health: " + SelectedUnit.HealthLevel.ToString() + "/" + SelectedUnit.MaxHealthLevel.ToString();
                 this.Damage.Text = "Attack: " + SelectedUnit.AttackLevel.ToString();
-                this.Defence.Text = "Defence: " + SelectedUnit.CounterAttackLevel.ToString();
+                this.Defence.Text = "Defense: " + SelectedUnit.CounterAttackLevel.ToString();
                 this.Level.Text = "Level: " + SelectedUnit.Level.ToString();
             }
             else
@@ -747,7 +747,7 @@ namespace OOPGameWoWChess
         {
             this.Health.Text = "Health: " + hoveredUnit.HealthLevel.ToString() + "/" + hoveredUnit.MaxHealthLevel.ToString();
             this.Damage.Text = "Attack: " + hoveredUnit.AttackLevel.ToString();
-            this.Defence.Text = "Defence: " + hoveredUnit.CounterAttackLevel.ToString();
+            this.Defence.Text = "Defense: " + hoveredUnit.CounterAttackLevel.ToString();
             this.Level.Text = "Level: " + hoveredUnit.Level.ToString();
         }
 
