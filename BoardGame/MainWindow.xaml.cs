@@ -444,7 +444,7 @@ namespace OOPGameWoWChess
 
         private async void RemoveSecretInfo()
         {
-            await Task.Delay(TimeSpan.FromSeconds(3));
+            await Task.Delay(TimeSpan.FromSeconds(5));
             this.SecretInfo.Background = new ImageBrush();
             Canvas.SetZIndex(this.SecretInfo, 0);
         }
