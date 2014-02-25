@@ -657,6 +657,11 @@ namespace OOPGameWoWChess
 
         private void HighLightPossibleObjectToHeal(object sender, Unit HoveredUnit)
         {
+            if (HoveredUnit == null)
+            {
+                return;
+            }
+
             if ((SelectedUnit.Race == HoveredUnit.Race) && HoveredUnit.HealthLevel < HoveredUnit.MaxHealthLevel)
             {
                 ((sender as Image).Parent as Border).BorderBrush = Brushes.DeepSkyBlue;
